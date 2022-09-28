@@ -5,7 +5,7 @@ Réalisation d'un jeu mono-utilisateur.
 # TP2 - Equipe
 
 | Nom |
-| ------ | ------ |
+| ------ |
 | Silvio BRANCATI |
 | Anthony BRIOT |
 | Arthur MOITRIER |
