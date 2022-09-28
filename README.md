@@ -14,4 +14,4 @@ Réalisation d'un jeu mono-utilisateur.
 
 # Liens 
 
-[Liste des fonctionnalités](https://docs.google.com/document/d/17_5gxepJezHioY37KhuQF2T5QffP5K3K8vd6nic-mLI/edit?usp=sharing)
+[Backlogs](https://docs.google.com/document/d/17_5gxepJezHioY37KhuQF2T5QffP5K3K8vd6nic-mLI/edit?usp=sharing)
