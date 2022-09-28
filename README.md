@@ -1,12 +1,17 @@
 # ACL2022
-Réalisation d'un jeu mono-utilisateur
 
-#TP2 - Equipe 1
+Réalisation d'un jeu mono-utilisateur.
 
-BRANCATI Silvio
+# TP2 - Equipe
 
-BRIOT Anthony
+| Nom |
+| ------ | ------ |
+| Silvio BRANCATI |
+| Anthony BRIOT |
+| Arthur MOITRIER |
+| Jacques SCHNEIDER |
 
-MOITRIER Arthur
 
-SCHNEIDER Jacques
+# Liens 
+
+[Liste des fonctionnalités](https://docs.google.com/document/d/17_5gxepJezHioY37KhuQF2T5QffP5K3K8vd6nic-mLI/edit?usp=sharing)
