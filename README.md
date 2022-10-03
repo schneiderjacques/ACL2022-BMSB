@@ -8,6 +8,7 @@ Réalisation d'un jeu mono-utilisateur.
 | ------ |
 | Silvio BRANCATI |
 | Anthony BRIOT |
+| Martin GURTNER |
 | Arthur MOITRIER |
 | Jacques SCHNEIDER |
 
