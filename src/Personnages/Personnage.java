@@ -35,7 +35,8 @@ public class Personnage {
     * @param x
      */
     public void moveX(int dir){
-        throw new Error("Not implemented yet");
+        //throw new Error("Not implemented yet");
+        this.x = this.x + dir; 
     }
 
 
@@ -44,7 +45,8 @@ public class Personnage {
     * @param y
      */
     public void moveY(int dir){
-        throw new Error("Not implemented yet");
+        //throw new Error("Not implemented yet");
+         this.y = this.y + dir; 
     }
 
     /*
@@ -53,7 +55,9 @@ public class Personnage {
     * @param dirY
      */
     public void move(int dirX, int dirY){
-        throw new Error("Not implemented yet");
+        //throw new Error("Not implemented yet");
+        moveX(dirX);
+        moveY(dirY);
     }
 
     /*
@@ -61,6 +65,20 @@ public class Personnage {
      */
     public void attaque(){
         throw new Error("Not implemented yet");
+    }
+
+    /*
+     * Getter de la position X du personnage 
+     */
+    public int getX(){
+        return x; 
+    }
+
+    /*
+     * Getter de la position Y du personnage
+     */
+    public int getY(){
+        return y; 
     }
 
 }
