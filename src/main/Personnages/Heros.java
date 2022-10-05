@@ -1,4 +1,4 @@
-package src.Personnages;
+package main.Personnages;
 
 /*
 * Class représentant le héros du jeu que l'on contrôle
