@@ -2,6 +2,8 @@ package main.Principale;
 
 import main.Personnages.Heros;
 
+import java.io.FileNotFoundException;
+
 /*
 * Class représentant le jeu en lui même
 * @author ????
@@ -17,10 +19,10 @@ public class Jeu {
     /*
     * Constructeur du jeu
      */
-    public Jeu(){
+    public Jeu() throws FileNotFoundException {
 
         //Création du labyrinthe
-        this.labyrinthe = new Labyrinthe(10, 10);
+        this.labyrinthe = new Labyrinthe("src/resources/lab_1.txt");
         //Création du Heros
         this.heros = new Heros(0, 0, 100, 10);
     }

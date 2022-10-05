@@ -1,10 +1,16 @@
+import main.Principale.Labyrinthe;
 import org.junit.*;
+
+import java.io.FileNotFoundException;
+
 import static org.junit.Assert.assertEquals;
 
 public class LabyrintheTest {
 
     @Test
-    public void testLabyrinthe() {
-        assertEquals(0, 0);
+    public void createLabyrinthe() throws FileNotFoundException {
+        Labyrinthe l = new Labyrinthe("src/test/resources/lab_test_1.txt");
+        assertEquals(10, l.getLongueur());
+        assertEquals(10, l.getLargeur());
     }
 }
