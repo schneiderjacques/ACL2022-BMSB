@@ -1,6 +1,6 @@
-package src;
+package main;
 
-import src.Principale.Jeu;
+import main.Principale.Jeu;
 
 /*
 * Class principale du projet

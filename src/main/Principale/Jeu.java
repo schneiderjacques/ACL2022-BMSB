@@ -1,6 +1,6 @@
-package src.Principale;
+package main.Principale;
 
-import src.Personnages.Heros;
+import main.Personnages.Heros;
 
 /*
 * Class représentant le jeu en lui même

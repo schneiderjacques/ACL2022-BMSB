@@ -1,4 +1,4 @@
-package src.Principale;
+package main.Principale;
 
 /*
 * Class représentant le labynthe du jeu
