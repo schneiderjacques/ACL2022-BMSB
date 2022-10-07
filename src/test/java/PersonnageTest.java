@@ -7,9 +7,9 @@ import static org.junit.Assert.assertEquals;
 public class PersonnageTest {
 
     public static void testPXY(int x, int y, Personnage p){
-        System.out.println("Avant : "+p.getX()+" ; "+p.getY());
+        System.out.println("Avant : "+p.toString());
         p.move(x, y);
-        System.out.println("Avant : "+p.getX()+" ; "+p.getY());
+        System.out.println("Avant : "+p.toString());
     }
 
     @Test
@@ -19,7 +19,7 @@ public class PersonnageTest {
         testPXY(0, 1, p);
         testPXY(0, -1, p);
         testPXY(-1, 0, p);
-        assertEquals(p, p);
+
     }
     
 }

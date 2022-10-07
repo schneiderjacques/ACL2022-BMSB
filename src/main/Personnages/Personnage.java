@@ -81,4 +81,19 @@ public class Personnage {
         return y; 
     }
 
+    public int getPDV(){
+        return pdv; 
+    }
+
+    public int getPDA(){
+        return pda; 
+    }
+
+    public String toString(){
+        return "personnage : \n"+
+        "Vie : "+getPDV()+"\n"+
+        "Attaque : "+getPDA()+"\n"+
+        "Position : "+getX()+";"+getY()+"\n\n"; 
+    }
+
 }
