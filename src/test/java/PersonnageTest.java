@@ -2,7 +2,7 @@ package src.test.java;
 
 import org.junit.*;
 
-import main.Personnages.Personnage;
+import src.main.Personnages.Personnage;
 
 import static org.junit.Assert.assertEquals;
 

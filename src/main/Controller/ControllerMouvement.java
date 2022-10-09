@@ -1,7 +1,7 @@
-package main.Controller;
+package src.main.Controller;
 
-import main.Personnages.Heros;
-import main.Principale.Jeu;
+import src.main.Personnages.Heros;
+import src.main.Principale.Jeu;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

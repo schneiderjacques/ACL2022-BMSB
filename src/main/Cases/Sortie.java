@@ -1,4 +1,4 @@
-package main.Cases;
+package src.main.Cases;
 
 /*
  * Class représentant la sortie du labyrinthe
