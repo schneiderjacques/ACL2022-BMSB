@@ -1,4 +1,6 @@
-import main.Principale.Labyrinthe;
+package src.test.java;
+
+import src.main.Principale.Labyrinthe;
 import org.junit.*;
 
 import java.io.FileNotFoundException;

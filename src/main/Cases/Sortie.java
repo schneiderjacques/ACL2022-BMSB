@@ -1,16 +1,16 @@
 package main.Cases;
 
 /*
-* Class représentant une case sol du labyrinthe
-* author Anthony Briot
+ * Class représentant la sortie du labyrinthe
+ * @author Anthony Briot
  */
-public class Sol extends Case {
+public class Sortie extends Case {
     /*
-    * Constructeur de la case sol
+    * Constructeur de la case sortie
     * @param x : emplacement de la case en X
     * @param y : emplacement de la case en Y
      */
-    public Sol() {
+    public Sortie() {
         //Initialisation des attributs
         super(false);
     }

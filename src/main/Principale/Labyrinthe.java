@@ -67,10 +67,10 @@ public class Labyrinthe {
                 // Création de la case
                 switch (c) {
                     case 'M':
-                        this.labyrinthe[index][i] = new Mur(index, i);
+                        this.labyrinthe[index][i] = new Mur(true);
                         break;
                     case 'V':
-                        this.labyrinthe[index][i] = new Sol(index, i);
+                        this.labyrinthe[index][i] = new Sol();
                         break;
                 }
             }

@@ -1,6 +1,7 @@
 package main.Principale;
 
 import main.Personnages.Heros;
+import main.Principale.Labyrinthe;
 
 import java.io.FileNotFoundException;
 
@@ -25,6 +26,14 @@ public class Jeu {
         this.labyrinthe = new Labyrinthe("src/resources/lab_1.txt");
         //Création du Heros
         this.heros = new Heros(0, 0, 100, 10);
+    }
+
+    /*
+    * Getter du Heros
+    * @return Heros
+     */
+    public Heros getHeros() {
+        return this.heros;
     }
 
 }

@@ -2,7 +2,7 @@ package main.Cases;
 
 /*
 * Class représentant les murs du labyrinthe
-* @author ????
+* @author Anthony Briot
  */
 public class Mur extends Case {
     /*
@@ -10,8 +10,8 @@ public class Mur extends Case {
     * @param x : emplacement de la case en X
     * @param y : emplacement de la case en Y
      */
-    public Mur(int x, int y) {
+    public Mur(boolean collision) {
         //Initialisation des attributs
-        super(x, y, true);
+        super(collision);
     }
 }

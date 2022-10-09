@@ -1,3 +1,5 @@
+package src.test.java;
+
 import org.junit.*;
 
 import main.Personnages.Personnage;

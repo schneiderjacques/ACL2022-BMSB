@@ -1,6 +1,6 @@
-package main;
+package src.main;
 
-import main.Principale.Jeu;
+import src.main.Principale.Jeu;
 
 import java.io.FileNotFoundException;
 
