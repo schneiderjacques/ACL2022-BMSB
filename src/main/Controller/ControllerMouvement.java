@@ -36,7 +36,7 @@ public class ControllerMouvement implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        Case c;
+        Case c = null;
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
                 c = this.jeu.getLabyrinthe().getCase(this.heros.getX(), this.heros.getY() - 1);
@@ -75,6 +75,10 @@ public class ControllerMouvement implements KeyListener {
                 }
                 break;
         }
+
+        //Temporaire
+        System.out.println("Vos nouvelles coordonnées : " + this.heros.getX() + ";" + this.heros.getY());
+        jeu.getLabyrinthe().printMap(this.heros);
     }
 
     @Override

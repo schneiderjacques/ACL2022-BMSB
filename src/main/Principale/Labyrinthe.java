@@ -3,6 +3,8 @@ package main.Principale;
 import main.Cases.Case;
 import main.Cases.Mur;
 import main.Cases.Sol;
+import main.Personnages.Heros;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -107,5 +109,23 @@ public class Labyrinthe {
      * @param y entier représentant l'axe des Y du labyrinthe
      * @return CASE[][]
      */
-    public Case getCase(int x, int y){ return this.labyrinthe[x][y]; }
+    public Case getCase(int x, int y){ return this.labyrinthe[y][x]; }
+    /**
+     * Print labyrinthe temporaire
+     * @return System.out.println()
+     */
+    public void printMap(Heros h){
+        for (int i = 0 ; i < this.getLongueur() ; i++){
+            for (int j = 0; j < this.getLargeur() ; j++){
+                if (h.getX() == j && h.getY() == i){
+                    System.out.print("P");
+                    continue;
+                }
+                Case c = this.getCase(j,i);
+                System.out.print(c.getClass().getSimpleName().charAt(0));
+
+            }
+            System.out.print("\n");
+        }
+    }
 }
