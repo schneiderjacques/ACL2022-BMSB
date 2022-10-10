@@ -1,27 +1,56 @@
 package test.java;
 
+import main.Controller.ControllerMouvement;
+import main.Principale.Jeu;
 import org.junit.*;
 
-import main.Personnages.Personnage;
+import main.Personnages.Heros;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
 
 import static org.junit.Assert.assertEquals;
 
 public class PersonnageTest {
 
-    public static void testPXY(int x, int y, Personnage p){
-        System.out.println("Avant : "+p.toString());
-        p.move(x, y);
-        System.out.println("Avant : "+p.toString());
-    }
-
+    /**
+     * Test de déplacement du personnage
+     */
     @Test
     public void testPersonnage(){
-        Personnage p = new Personnage(0, 0, 0, 0); 
-        testPXY(1, 0, p);
-        testPXY(0, 1, p);
-        testPXY(0, -1, p);
-        testPXY(-1, 0, p);
+        Heros h = new Heros();
+        //Test génération du personnage au coordonnées (1;1)
+        assertEquals(1, h.getX());
+        assertEquals(1, h.getY());
 
+        // Test de la méthode moveX
+        h.moveX(1);
+        assertEquals(2, h.getX());
+        h.moveX(-1);
+        assertEquals(1, h.getX());
+
+        // Test de la méthode moveY
+        h.moveY(1);
+        assertEquals(2, h.getY());
+        h.moveY(-1);
+        assertEquals(1, h.getY());
     }
-    
+
+    /**
+     * Test de déplacement du personnage avec le clavier (avec le controlleur) et collisions
+     * @throws FileNotFoundException
+     */
+    @Test
+    public void movePlayerInWall() throws FileNotFoundException {
+        Jeu jeu = new Jeu();
+        jeu.getHeros().move(1,1);
+        ControllerMouvement cm = new ControllerMouvement(jeu);
+        Button a = new Button("click");
+        KeyEvent key = new KeyEvent(a, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
+        cm.keyPressed(key);
+        Assert.assertEquals(jeu.getHeros().getY(), 1); //Le héros doit rester en position 1 - 1 car au dessus de lui se trouve un mur
+        Assert.assertNotEquals(jeu.getHeros().getY(), 0);
+    }
+
 }
