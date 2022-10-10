@@ -1,8 +1,8 @@
-package src.main.Principale;
+package main.Principale;
 
-import src.main.Cases.Case;
-import src.main.Cases.Mur;
-import src.main.Cases.Sol;
+import main.Cases.Case;
+import main.Cases.Mur;
+import main.Cases.Sol;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;

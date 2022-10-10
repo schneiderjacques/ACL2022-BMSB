@@ -1,7 +1,7 @@
-package src.test.java;
+package test.java;
 
 import org.junit.*;
-import src.main.Cases.Mur;
+import main.Cases.Mur;
 
 import static org.junit.Assert.*;
 

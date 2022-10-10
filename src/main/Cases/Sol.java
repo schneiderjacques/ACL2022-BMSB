@@ -1,4 +1,4 @@
-package src.main.Cases;
+package main.Cases;
 
 /*
 * Class représentant une case sol du labyrinthe

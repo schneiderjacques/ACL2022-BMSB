@@ -1,4 +1,4 @@
-package src.main.Cases;
+package main.Cases;
 
 /*
 * Class représentant les murs du labyrinthe

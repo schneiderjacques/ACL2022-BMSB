@@ -1,4 +1,4 @@
-package src.main.Personnages;
+package main.Personnages;
 
 /*
 * Class représentant un personnage du jeu

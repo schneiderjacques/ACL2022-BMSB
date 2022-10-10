@@ -1,8 +1,8 @@
-package src.test.java;
+package test.java;
 
 import org.junit.*;
 
-import src.main.Personnages.Personnage;
+import main.Personnages.Personnage;
 
 import static org.junit.Assert.assertEquals;
 

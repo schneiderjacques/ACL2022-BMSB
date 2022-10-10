@@ -1,7 +1,7 @@
-package src.main.Principale;
+package main.Principale;
 
-import src.main.Personnages.Heros;
-import src.main.Principale.Labyrinthe;
+import main.Personnages.Heros;
+import main.Principale.Labyrinthe;
 
 import java.io.FileNotFoundException;
 
