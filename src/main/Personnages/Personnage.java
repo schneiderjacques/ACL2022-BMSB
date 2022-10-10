@@ -4,16 +4,16 @@ package main.Personnages;
 * Class représentant un personnage du jeu
 * @author ????
  */
-public class Personnage {
+public abstract class Personnage {
 
     //Position du personnage en X
     private int x;
     //Position du personnage en Y
     private int y;
     //Vie du personnage
-    private int pdv;
+    private double pdv;
     //Force du personnage
-    private int pda;
+    private double pda;
 
     /*
     * Constructeur du personnage
@@ -22,7 +22,7 @@ public class Personnage {
     * @param pdv : points de vie
     * @param pda : points d'attaque
      */
-    public Personnage(int x, int y, int pdv, int pda){
+    public Personnage(int x, int y, double pdv, double pda){
         //Initialisation des attributs
         this.x = x;
         this.y = y;
@@ -68,7 +68,8 @@ public class Personnage {
     }
 
     /*
-     * Getter de la position X du personnage 
+     * Getter de la position X du personnage
+     * @return x
      */
     public int getX(){
         return x; 
@@ -76,19 +77,32 @@ public class Personnage {
 
     /*
      * Getter de la position Y du personnage
+     * @return y
      */
     public int getY(){
         return y; 
     }
 
-    public int getPDV(){
+    /**
+     * getteur de la vie du personnage
+     * @return pdv
+     */
+    public double getPDV(){
         return pdv; 
     }
 
-    public int getPDA(){
+    /**
+     * getteur de la force du personnage
+     * @return pda
+     */
+    public double getPDA(){
         return pda; 
     }
 
+    /**
+     * toString
+     * @return String
+     */
     public String toString(){
         return "personnage : \n"+
         "Vie : "+getPDV()+"\n"+

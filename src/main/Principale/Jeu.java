@@ -25,7 +25,7 @@ public class Jeu {
         //Création du labyrinthe
         this.labyrinthe = new Labyrinthe("src/resources/lab_1.txt");
         //Création du Heros
-        this.heros = new Heros(0, 0, 100, 10);
+        this.heros = new Heros();
     }
 
     /*
