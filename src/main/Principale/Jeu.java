@@ -36,4 +36,6 @@ public class Jeu {
         return this.heros;
     }
 
+    public Labyrinthe getLabyrinthe() { return this.labyrinthe; }
+
 }

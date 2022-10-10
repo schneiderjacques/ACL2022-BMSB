@@ -5,7 +5,6 @@ import main.Cases.Mur;
 import main.Cases.Sol;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -101,4 +100,12 @@ public class Labyrinthe {
     public int getLargeur() {
         return LARGEUR;
     }
+
+    /**
+     * Getter Case
+     * @param x entier représentant l'axe des X du labyrinthe
+     * @param y entier représentant l'axe des Y du labyrinthe
+     * @return CASE[][]
+     */
+    public Case getCase(int x, int y){ return this.labyrinthe[x][y]; }
 }

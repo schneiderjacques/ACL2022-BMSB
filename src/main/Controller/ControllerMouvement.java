@@ -1,14 +1,16 @@
 package main.Controller;
 
+import main.Cases.Case;
 import main.Personnages.Heros;
 import main.Principale.Jeu;
+import main.Principale.Labyrinthe;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /*
-* Controlleur qui permet de gérer les mouvements du joueur
-* @author Anthony Briot
+ * Controlleur qui permet de gérer les mouvements du joueur
+ * @author Anthony Briot
  */
 public class ControllerMouvement implements KeyListener {
 
@@ -18,7 +20,7 @@ public class ControllerMouvement implements KeyListener {
     private Heros heros;
 
     /*
-    * Constructeur du controlleur
+     * Constructeur du controlleur
      */
     public ControllerMouvement(Jeu jeu) {
         //On initialise le jeu
@@ -34,22 +36,43 @@ public class ControllerMouvement implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        Case c;
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                heros.moveY(-1);
-                System.out.println("UP");
+                c = this.jeu.getLabyrinthe().getCase(this.heros.getX(), this.heros.getY() - 1);
+                if (!c.getCollision()) {
+                    heros.moveY(-1);
+                    System.out.println("UP");
+                } else {
+                    System.out.println("Impossible d'avancer");
+                }
                 break;
             case KeyEvent.VK_DOWN:
-                heros.moveY(1);
-                System.out.println("DOWN");
+                c = this.jeu.getLabyrinthe().getCase(this.heros.getX(), this.heros.getY() + 1);
+                if (!c.getCollision()) {
+                    heros.moveY(1);
+                    System.out.println("DOWN");
+                } else {
+                    System.out.println("Impossible d'avancer");
+                }
                 break;
             case KeyEvent.VK_LEFT:
-                heros.moveX(-1);
-                System.out.println("LEFT");
+                c = this.jeu.getLabyrinthe().getCase(this.heros.getX() - 1, this.heros.getY());
+                if (!c.getCollision()) {
+                    heros.moveX(-1);
+                    System.out.println("LEFT");
+                } else {
+                    System.out.println("Impossible d'avancer");
+                }
                 break;
             case KeyEvent.VK_RIGHT:
-                heros.moveX(1);
-                System.out.println("RIGHT");
+                c = this.jeu.getLabyrinthe().getCase(this.heros.getX() + 1, this.heros.getY());
+                if (!c.getCollision()) {
+                    heros.moveX(1);
+                    System.out.println("RIGHT");
+                } else {
+                    System.out.println("Impossible d'avancer");
+                }
                 break;
         }
     }
