@@ -7,6 +7,10 @@ import java.io.FileNotFoundException;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Class de test du labyrinthe
+ * @author Silvio Brancati
+ */
 public class LabyrintheTest {
 
     @Test

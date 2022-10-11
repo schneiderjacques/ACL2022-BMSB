@@ -12,6 +12,10 @@ import java.io.FileNotFoundException;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Class de test du labyrinthe
+ * @author Martin Gurtner, Arthur Moitrier
+ */
 public class PersonnageTest {
 
     /**

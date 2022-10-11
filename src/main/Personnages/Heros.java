@@ -24,4 +24,12 @@ public class Heros extends Personnage {
     public Heros(int x, int y, double pdv, double pda) {
         super(1, 1, 10, 0.5);
     }
+
+    /**
+     * Getter du type de personnage
+     * @return type de personnage
+     */
+    public String getType() {
+        return "Heros";
+    }
 }

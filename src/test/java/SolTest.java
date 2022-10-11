@@ -5,6 +5,10 @@ import main.Cases.Sol;
 
 import static org.junit.Assert.*;
 
+/**
+ * Class de test du sol
+ * @author Anthony Briot
+ */
 public class SolTest {
 
     @Test

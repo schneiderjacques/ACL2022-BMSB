@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 /*
 * Class principale du projet
-* @author ????
+* @author Jacques Schneider
  */
 public class Main {
 

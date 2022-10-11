@@ -5,6 +5,10 @@ import main.Cases.Sortie;
 
 import static org.junit.Assert.*;
 
+/**
+ * Class de test de la sortie
+ * @author Anthony Briot
+ */
 public class SortieTest {
 
     @Test

@@ -5,6 +5,10 @@ import main.Cases.Mur;
 
 import static org.junit.Assert.*;
 
+/**
+ * Class de test du mur
+ * @author Anthony Briot
+ */
 public class MurTest {
 
     @Test

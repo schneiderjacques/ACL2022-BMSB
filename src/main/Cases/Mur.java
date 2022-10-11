@@ -14,4 +14,12 @@ public class Mur extends Case {
         //Initialisation des attributs
         super(collision);
     }
+
+    /**
+     * Getter du type de case
+     * @return type de case
+     */
+    public String getType() {
+        return "Mur";
+    }
 }

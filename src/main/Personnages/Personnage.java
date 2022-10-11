@@ -2,7 +2,7 @@ package main.Personnages;
 
 /*
 * Class représentant un personnage du jeu
-* @author ????
+* @author Martin Gurtner
  */
 public abstract class Personnage {
 
@@ -98,6 +98,12 @@ public abstract class Personnage {
     public double getPDA(){
         return pda; 
     }
+
+    /**
+     * Getter du type de personnage
+     * @return type de personnage
+     */
+    public abstract String getType();
 
     /**
      * toString

@@ -14,4 +14,12 @@ public class Sortie extends Case {
         //Initialisation des attributs
         super(false);
     }
+
+    /**
+     * Getter du type de case
+     * @return type de case
+     */
+    public String getType() {
+        return "Sortie";
+    }
 }

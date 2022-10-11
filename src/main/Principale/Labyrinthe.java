@@ -104,6 +104,14 @@ public class Labyrinthe {
     }
 
     /**
+     * Getter labyrinthe
+     * @return labyrinthe
+     */
+    public Case[][] getLabyrinthe() {
+        return labyrinthe;
+    }
+
+    /**
      * Getter Case
      * @param x entier représentant l'axe des X du labyrinthe
      * @param y entier représentant l'axe des Y du labyrinthe
