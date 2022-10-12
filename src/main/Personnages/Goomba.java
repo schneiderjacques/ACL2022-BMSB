@@ -11,8 +11,8 @@ public class Goomba extends Monstre {
     }
 
     @Override
-    public void move() {
-
+    public void moveRandom() {
+        throw new Error("Not yet implemented");
     }
 
     @Override

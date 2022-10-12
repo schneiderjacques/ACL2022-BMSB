@@ -10,9 +10,9 @@ public class Mur extends Case {
     * @param x : emplacement de la case en X
     * @param y : emplacement de la case en Y
      */
-    public Mur(boolean collision) {
+    public Mur(boolean collision, int x, int y) {
         //Initialisation des attributs
-        super(collision);
+        super(collision, x, y);
     }
 
     /**

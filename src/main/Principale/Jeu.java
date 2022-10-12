@@ -1,8 +1,5 @@
 package main.Principale;
 
-import main.Personnages.Heros;
-import main.Principale.Labyrinthe;
-
 import java.io.FileNotFoundException;
 
 /*
@@ -12,30 +9,20 @@ import java.io.FileNotFoundException;
 public class Jeu {
 
     //Labyritnhe du jeu en cours
-    private Labyrinthe labyrinthe;
-
-    //Personnage du jeu en cours
-    private Heros heros;
+    private Tour tour;
 
     /*
     * Constructeur du jeu
      */
     public Jeu() throws FileNotFoundException {
-
         //Création du labyrinthe
-        this.labyrinthe = new Labyrinthe("src/resources/lab_1.txt");
-        //Création du Heros
-        this.heros = new Heros();
+        this.tour = new Tour();
     }
 
-    /*
-    * Getter du Heros
-    * @return Heros
+    /**
+     * Getter de la tour
+     * @return Tour
      */
-    public Heros getHeros() {
-        return this.heros;
-    }
-
-    public Labyrinthe getLabyrinthe() { return this.labyrinthe; }
+    public Tour getTour() { return this.tour; }
 
 }

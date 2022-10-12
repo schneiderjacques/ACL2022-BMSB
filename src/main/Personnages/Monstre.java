@@ -20,5 +20,5 @@ public abstract class Monstre extends Personnage {
     /*
      * Méthode permettant de déplacer le monstre
      */
-    public abstract void move();
+    public abstract void moveRandom();
 }

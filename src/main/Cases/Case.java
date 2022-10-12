@@ -6,6 +6,11 @@ package main.Cases;
  */
 public abstract class Case {
 
+    //Position de la case en X
+    private int x;
+
+    //Position de la case en Y
+    private int y;
 
     //le joueur entre en collision avec la case ou non
     private boolean collision;
@@ -14,8 +19,10 @@ public abstract class Case {
     * Constructeur de la classe Case
     * @param collision : le joueur entre en collision avec la case ou non
      */
-    public Case(boolean collision){
+    public Case(boolean collision, int x, int y){
         //Initialisation des attributs
+        this.x = x;
+        this.y = y;
         this.collision = collision;
     }
 

@@ -31,39 +31,25 @@ public abstract class Personnage {
     }
 
     /*
-    * Méthode permettant de déplacer le personnage en X
-    * @param x
-     */
-    public void moveX(int dir){
-        //throw new Error("Not implemented yet");
-        this.x = this.x + dir; 
-    }
-
-
-    /*
-    * Méthode permettant de déplacer le personnage en Y
-    * @param y
-     */
-    public void moveY(int dir){
-        //throw new Error("Not implemented yet");
-        this.y = this.y + dir;
-    }
-
-    /*
     * Méthode permettant de déplacer le personnage
     * @param dirX
     * @param dirY
      */
-    public void move(int dirX, int dirY){
-        //throw new Error("Not implemented yet");
-        moveX(dirX);
-        moveY(dirY);
+    public void move(char axe, int dir){
+        switch (axe){
+            case 'X':
+                this.x += dir;
+                break;
+            case 'Y':
+                this.y += dir;
+                break;
+        }
     }
 
     /*
     * Méthode qui permet d'attaquer les personnages en face du personnage
      */
-    public void attaque(){
+    public void attack(){
         throw new Error("Not implemented yet");
     }
 
@@ -97,6 +83,22 @@ public abstract class Personnage {
      */
     public double getPDA(){
         return pda; 
+    }
+
+    /**
+     * Setter de la position X du personnage
+     * @param x
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    /**
+     * Setter de la position Y du personnage
+     * @param y
+     */
+    public void setY(int y) {
+        this.y = y;
     }
 
     /**

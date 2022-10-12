@@ -13,8 +13,8 @@ public class MurTest {
 
     @Test
     public void createMur() {
-        Mur m = new Mur(true);
-        Mur m2 = new Mur(false);
+        Mur m = new Mur(true, 1,1);
+        Mur m2 = new Mur(false,1,1);
         assertFalse(m2.getCollision());
         assertTrue(m.getCollision());
     }

@@ -12,7 +12,15 @@ Réalisation d'un jeu mono-utilisateur.
 | Arthur MOITRIER |
 | Jacques SCHNEIDER |
 
+# Exécution
+
+Compiler le projet depuis le dossier `src` : 
+
+```bash
+javac */*.java
+java main/Main
+```
 
 # Liens 
 
-[Backlogs](https://docs.google.com/document/d/17_5gxepJezHioY37KhuQF2T5QffP5K3K8vd6nic-mLI/edit?usp=sharing)
+[Carnet de bord](https://docs.google.com/document/d/17_5gxepJezHioY37KhuQF2T5QffP5K3K8vd6nic-mLI/edit?usp=sharing)

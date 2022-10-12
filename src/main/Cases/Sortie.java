@@ -10,9 +10,9 @@ public class Sortie extends Case {
     * @param x : emplacement de la case en X
     * @param y : emplacement de la case en Y
      */
-    public Sortie() {
+    public Sortie(int x, int y) {
         //Initialisation des attributs
-        super(false);
+        super(false, x, y);
     }
 
     /**

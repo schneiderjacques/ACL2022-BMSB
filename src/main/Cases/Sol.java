@@ -10,9 +10,9 @@ public class Sol extends Case {
     * @param x : emplacement de la case en X
     * @param y : emplacement de la case en Y
      */
-    public Sol() {
+    public Sol(int x, int y) {
         //Initialisation des attributs
-        super(false);
+        super(false, x, y);
     }
 
     /**

@@ -13,7 +13,7 @@ public class SolTest {
 
     @Test
     public void createSol() {
-        Sol s = new Sol();
+        Sol s = new Sol(1,1);
         assertFalse(s.getCollision());
     }
 }

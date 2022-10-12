@@ -29,15 +29,15 @@ public class PersonnageTest {
         assertEquals(1, h.getY());
 
         // Test de la méthode moveX
-        h.moveX(1);
+        h.move('X', 1);
         assertEquals(2, h.getX());
-        h.moveX(-1);
+        h.move('X', -1);
         assertEquals(1, h.getX());
 
         // Test de la méthode moveY
-        h.moveY(1);
+        h.move('Y', 1);
         assertEquals(2, h.getY());
-        h.moveY(-1);
+        h.move('Y', -1);
         assertEquals(1, h.getY());
     }
 
@@ -48,13 +48,12 @@ public class PersonnageTest {
     @Test
     public void movePlayerInWall() throws FileNotFoundException {
         Jeu jeu = new Jeu();
-        jeu.getHeros().move(1,1);
         ControllerMouvement cm = new ControllerMouvement(jeu);
         Button a = new Button("click");
         KeyEvent key = new KeyEvent(a, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
         cm.keyPressed(key);
-        Assert.assertEquals(jeu.getHeros().getY(), 1); //Le héros doit rester en position 1 - 1 car au dessus de lui se trouve un mur
-        Assert.assertNotEquals(jeu.getHeros().getY(), 0);
+        Assert.assertEquals(jeu.getTour().getHeros().getY(), 1); //Le héros doit rester en position 1 - 1 car au dessus de lui se trouve un mur
+        Assert.assertNotEquals(jeu.getTour().getHeros().getY(), 0);
     }
 
 }

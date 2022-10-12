@@ -13,7 +13,7 @@ public class SortieTest {
 
     @Test
     public void createSortie() {
-        Sortie s = new Sortie();
+        Sortie s = new Sortie(1,1);
         assertFalse(s.getCollision());
     }
 }
