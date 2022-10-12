@@ -51,13 +51,16 @@ public class Tour {
         // Chargement des niveaux
         this.currentLevel = 1;
         this.niveaux.addAll(list);
+        this.niveaux.get(this.niveaux.size() - 1).setLastLevel(true);
     }
 
     /**
      * Passer au niveau suivant de la tour
      */
     public void nextLevel() {
-        throw new Error("Not implemented yet");
+        if (this.currentLevel < this.niveaux.size()) {
+            this.currentLevel++;
+        }
     }
 
     public void moveHeros(char axe, int dir) {

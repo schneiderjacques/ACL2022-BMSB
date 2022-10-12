@@ -23,6 +23,9 @@ public class Niveau {
     // path du fichier contenant le labyrinthe
     private String path;
 
+    //Booleen true quand c'est le dernier niveau
+    private boolean lastLevel;
+
     //Tableau de cases représentant le niveau
     private Case[][] niveau;
 
@@ -36,6 +39,7 @@ public class Niveau {
      */
     public Niveau(String path) throws FileNotFoundException {
         this.path = path;
+        this.lastLevel = false;
 
         // Chargement du fichier
         this.loadFile();
@@ -134,6 +138,14 @@ public class Niveau {
     }
 
     /**
+     * Getter lastLevel
+     * @return lastLevel
+     */
+    public boolean isLastLevel() {
+        return lastLevel;
+    }
+
+    /**
      * Getter labyrinthe
      * @return labyrinthe
      */
@@ -168,5 +180,14 @@ public class Niveau {
             }
             System.out.print("\n");
         }
+    }
+
+    /**
+     * Setter lastLevel
+     * @param b
+     * Booleen
+     */
+    public void setLastLevel(boolean b) {
+        this.lastLevel = b;
     }
 }
