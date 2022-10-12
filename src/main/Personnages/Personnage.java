@@ -46,7 +46,7 @@ public abstract class Personnage {
      */
     public void moveY(int dir){
         //throw new Error("Not implemented yet");
-         this.y = this.y + dir; 
+        this.y = this.y + dir;
     }
 
     /*
