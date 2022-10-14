@@ -1,16 +1,18 @@
 package main.Cases;
 
+import main.Personnages.Heros;
+
 /*
  * Class représentant la sortie du labyrinthe
  * @author Anthony Briot
  */
-public class Sortie extends Case {
+public class Exit extends Case {
     /*
-    * Constructeur de la case sortie
+    * Constructeur de la case exit
     * @param x : emplacement de la case en X
     * @param y : emplacement de la case en Y
      */
-    public Sortie(int x, int y) {
+    public Exit(int x, int y) {
         //Initialisation des attributs
         super(false, x, y);
     }
@@ -20,6 +22,11 @@ public class Sortie extends Case {
      * @return type de case
      */
     public String getType() {
-        return "Sortie";
+        return "Exit";
+    }
+
+    @Override
+    public void eventCollider(Heros h) {
+        System.out.println("Passage au prochain niveau !");
     }
 }

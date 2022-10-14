@@ -1,8 +1,6 @@
 package main.Principale;
 
-import main.Cases.Case;
-import main.Cases.Mur;
-import main.Cases.Sol;
+import main.Cases.*;
 import main.Personnages.Heros;
 import main.Personnages.Monstre;
 import main.Personnages.Personnage;
@@ -100,12 +98,33 @@ public class Niveau {
                 // Récupération de la case
                 char c = line.charAt(i);
                 // Création de la case
+                //M : Mur
+                //V : Vide (sol)
+                //S : Sortie
+                //K : Clé
+                //H : Heal (vie)
+                //D : Dégat
                 switch (c) {
                     case 'M':
                         this.niveau[index][i] = new Mur(true, index, i);
                         break;
                     case 'V':
                         this.niveau[index][i] = new Sol(index, i);
+                        break;
+                    case 'S':
+                        this.niveau[index][i] = new Exit(index, i);
+                        break;
+                    case 'K':
+                        this.niveau[index][i] = new Key(index, i);
+                        break;
+                    case 'T':
+                        this.niveau[index][i] = new Trappe(index, i);
+                        break;
+                    case 'H':
+                        this.niveau[index][i] = new Vie(index, i);
+                        break;
+                    case 'D':
+                        this.niveau[index][i] = new Degat(index, i);
                         break;
                 }
             }
@@ -175,11 +194,12 @@ public class Niveau {
                     continue;
                 }
                 Case c = this.getCase(j,i);
-                System.out.print(c.getClass().getSimpleName().charAt(0));
+                System.out.print(c.getType().charAt(0));
 
             }
             System.out.print("\n");
         }
+        System.out.println("===============");
     }
 
     /**

@@ -4,7 +4,7 @@ package main.Cases;
 * Class représentant une case du labyrinthe
 * @author Anthony Briot
  */
-public abstract class Case {
+public abstract class Case implements CaseInterface {
 
     //Position de la case en X
     private int x;
