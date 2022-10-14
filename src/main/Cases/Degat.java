@@ -1,6 +1,7 @@
 package main.Cases;
 
 import main.Personnages.Heros;
+import main.Principale.Tour;
 
 /**
  * Représente une case de dégat, lorsque le joueur marche dessus il subit des dégats
@@ -30,7 +31,7 @@ public class Degat extends Case{
     }
 
     @Override
-    public void eventCollider(Heros h) {
+    public void eventCollider(Tour t) {
         System.out.println("Votre héros a perdu de la vie !_!");
     }
 }

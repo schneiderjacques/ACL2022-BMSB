@@ -1,6 +1,7 @@
 package main.Cases;
 
 import main.Personnages.Heros;
+import main.Principale.Tour;
 
 /*
  * Class représentant la sortie du labyrinthe
@@ -26,7 +27,7 @@ public class Exit extends Case {
     }
 
     @Override
-    public void eventCollider(Heros h) {
+    public void eventCollider(Tour t) {
         System.out.println("Passage au prochain niveau !");
     }
 }

@@ -75,7 +75,7 @@ public class Tour {
      * On déclange l'effet de la case sur laquelle le joueur vient de se déplacer
      */
     public void triggerCaseEvent(){
-        this.getCurrentLevel().getCase(this.heros.getX(), this.heros.getY()).eventCollider(this.heros);
+        this.getCurrentLevel().getCase(this.heros.getX(), this.heros.getY()).eventCollider(this);
     }
 
 

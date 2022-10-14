@@ -1,6 +1,7 @@
 package main.Cases;
 
 import main.Personnages.Heros;
+import main.Principale.Tour;
 
 /*
 * Class représentant une case sol du labyrinthe
@@ -26,7 +27,7 @@ public class Sol extends Case {
     }
 
     @Override
-    public void eventCollider(Heros h) {
+    public void eventCollider(Tour t) {
         return;
     }
 }

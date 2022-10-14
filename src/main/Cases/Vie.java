@@ -1,6 +1,7 @@
 package main.Cases;
 
 import main.Personnages.Heros;
+import main.Principale.Tour;
 
 /**
  * Représente une case de vie, lorsque le joueur marche dessus il récupère de la vie
@@ -30,7 +31,7 @@ public class Vie extends Case{
     }
 
     @Override
-    public void eventCollider(Heros h) {
+    public void eventCollider(Tour t) {
         System.out.println("Votre héros a récupéré de la vie");
     }
 }

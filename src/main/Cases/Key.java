@@ -1,6 +1,7 @@
 package main.Cases;
 
 import main.Personnages.Heros;
+import main.Principale.Tour;
 
 /**
  * Représente la clé récupérée par le joueur permettant d'ouvrire la case sortie
@@ -30,7 +31,7 @@ public class Key extends Case{
     }
 
     @Override
-    public void eventCollider(Heros h) {
+    public void eventCollider(Tour t) {
         System.out.println("Votre héros vient de récupéré la clé de sortie");
     }
 }

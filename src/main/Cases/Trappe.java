@@ -1,6 +1,7 @@
 package main.Cases;
 
 import main.Personnages.Heros;
+import main.Principale.Tour;
 
 /**
  * Représente une case piège, lorsque le joueur marche dessus il est immobilisé 3 secondes
@@ -30,7 +31,7 @@ public class Trappe extends Case{
     }
 
     @Override
-    public void eventCollider(Heros h) {
+    public void eventCollider(Tour t) {
         System.out.println("Votre héros vient d'être piégé, il ne peut plus bouger pendant 3 secondes");
     }
 }
