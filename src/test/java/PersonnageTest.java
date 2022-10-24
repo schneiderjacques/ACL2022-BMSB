@@ -1,16 +1,16 @@
 package test.java;
 
-import main.Controller.ControllerMouvement;
-import main.Principale.Jeu;
-import org.junit.*;
+import static org.junit.Assert.assertEquals;
 
-import main.Personnages.Heros;
-
-import java.awt.*;
+import java.awt.Button;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.*; 
+
+import main.Controller.ControllerMouvement;
+import main.Personnages.Heros;
+import main.Principale.Jeu;
 
 /**
  * Class de test du labyrinthe
