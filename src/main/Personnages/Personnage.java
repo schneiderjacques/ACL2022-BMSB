@@ -39,12 +39,6 @@ public abstract class Personnage {
     public void moveX(int dir){
         //throw new Error("Not implemented yet");
         this.x = this.x + dir; 
-        if(dir > 0){
-            lm = "d"; 
-        }
-        if(dir < 0){
-            lm = "g"; 
-        }
     }
 
 
@@ -55,12 +49,6 @@ public abstract class Personnage {
     public void moveY(int dir){
         //throw new Error("Not implemented yet");
          this.y = this.y + dir; 
-         if(dir > 0){
-            lm = "h"; 
-         }
-         if(dir < 0){
-            lm = "b"; 
-         }
     }
 
     /*
@@ -72,6 +60,18 @@ public abstract class Personnage {
         //throw new Error("Not implemented yet");
         moveX(dirX);
         moveY(dirY);
+        if(dirX > 0 && dirY == 0){
+            lm = "d"; 
+        }
+        if(dirX < 0 && dirY == 0){
+            lm = "g"; 
+        }
+        if(dirX == 0 && dirY > 0){
+            lm = "h";
+        }
+        if(dirX == 0 && dirY < 0){
+            lm = "b";
+        }
     }
 
     /*
@@ -79,7 +79,12 @@ public abstract class Personnage {
      */
     public void attaque(Personnage adv){
         //throw new Error("Not implemented yet");
-
+        if((adv.getX() == getX()+1 && getLM() == "d") ||
+        (adv.getX() == getX()-1 && getLM() == "g") ||
+        (adv.getY() == getY()+1 && getLM() == "h") ||
+        (adv.getY() == getY()-1 && getLM() == "b")){
+            adv.recevoirDegats(getPDA());
+        }
     }
 
     /*
@@ -123,10 +128,10 @@ public abstract class Personnage {
      * @param pv
      */
     public void setPDV(double pv){
-        if(pv < 0){
-            pv = 0; 
-        }
         this.pdv = pv; 
+        if(getPDV() < 0){
+            pdv = 0; 
+        }
     }
 
     public void recevoirDegats(double degats){
