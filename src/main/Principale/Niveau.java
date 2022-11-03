@@ -216,4 +216,6 @@ public class Niveau {
     public void setLastLevel(boolean b) {
         this.lastLevel = b;
     }
+
+    public Tour getTour(){return this.tour;}
 }

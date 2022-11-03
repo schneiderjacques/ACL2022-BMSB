@@ -1,10 +1,14 @@
 package main.Personnages;
 
+import main.Principale.Niveau;
+
 /*
  * Class représentant un monstre du jeu
  * @author Arthur Moitrier
  */
 public abstract class Monstre extends Personnage {
+
+    private Niveau niveau;
 
     /*
      * Constructeur du monstre
@@ -15,6 +19,19 @@ public abstract class Monstre extends Personnage {
      */
     public Monstre(int x, int y, double pdv, double pda) {
         super(x, y, pdv, pda);
+    }
+
+    /*
+     * Constructeur du monstre
+     * @param x : position en X
+     * @param y : position en Y
+     * @param pdv : points de vie
+     * @param pda : points d'attaque
+     * @param n : niveau
+     */
+    public Monstre(int x, int y, double pdv, double pda, Niveau n) {
+        super(x, y, pdv, pda);
+        this.niveau = n;
     }
 
     /*
