@@ -1,5 +1,8 @@
 package main.Cases;
 
+import main.Personnages.Heros;
+import main.Principale.Tour;
+
 /*
 * Class représentant les murs du labyrinthe
 * @author Anthony Briot
@@ -21,5 +24,10 @@ public class Mur extends Case {
      */
     public String getType() {
         return "Mur";
+    }
+
+    @Override
+    public void eventCollider(Tour t) {
+        return;
     }
 }

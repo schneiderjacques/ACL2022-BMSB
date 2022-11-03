@@ -1,7 +1,8 @@
 package test.java;
 
+import main.Cases.Exit;
 import org.junit.*;
-import main.Cases.Sortie;
+import main.Cases.Exit;
 
 import static org.junit.Assert.*;
 
@@ -9,11 +10,11 @@ import static org.junit.Assert.*;
  * Class de test de la sortie
  * @author Anthony Briot
  */
-public class SortieTest {
+public class ExitTest {
 
     @Test
     public void createSortie() {
-        Sortie s = new Sortie(1,1);
+        Exit s = new Exit(1,1);
         assertFalse(s.getCollision());
     }
 }

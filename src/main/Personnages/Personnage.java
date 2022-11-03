@@ -14,6 +14,8 @@ public abstract class Personnage {
     private double pdv;
     //Force du personnage
     private double pda;
+    //Dernier mouvement du héros 
+    private String lm;  
 
     /*
     * Constructeur du personnage
@@ -31,26 +33,58 @@ public abstract class Personnage {
     }
 
     /*
+    * Méthode permettant de déplacer le personnage en X
+    * @param x
+     */
+    public void moveX(int dir){
+        //throw new Error("Not implemented yet");
+        this.x = this.x + dir; 
+    }
+
+
+    /*
+    * Méthode permettant de déplacer le personnage en Y
+    * @param y
+     */
+    public void moveY(int dir){
+        //throw new Error("Not implemented yet");
+         this.y = this.y + dir; 
+    }
+
+    /*
     * Méthode permettant de déplacer le personnage
     * @param dirX
     * @param dirY
      */
-    public void move(char axe, int dir){
-        switch (axe){
-            case 'X':
-                this.x += dir;
-                break;
-            case 'Y':
-                this.y += dir;
-                break;
+    public void move(int dirX, int dirY){
+        //throw new Error("Not implemented yet");
+        moveX(dirX);
+        moveY(dirY);
+        if(dirX > 0 && dirY == 0){
+            lm = "d"; 
+        }
+        if(dirX < 0 && dirY == 0){
+            lm = "g"; 
+        }
+        if(dirX == 0 && dirY > 0){
+            lm = "h";
+        }
+        if(dirX == 0 && dirY < 0){
+            lm = "b";
         }
     }
 
     /*
     * Méthode qui permet d'attaquer les personnages en face du personnage
      */
-    public void attack(){
-        throw new Error("Not implemented yet");
+    public void attaque(Personnage adv){
+        //throw new Error("Not implemented yet");
+        if((adv.getX() == getX()+1 && getLM() == "d") ||
+        (adv.getX() == getX()-1 && getLM() == "g") ||
+        (adv.getY() == getY()+1 && getLM() == "h") ||
+        (adv.getY() == getY()-1 && getLM() == "b")){
+            adv.recevoirDegats(getPDA());
+        }
     }
 
     /*
@@ -63,7 +97,7 @@ public abstract class Personnage {
 
     /*
      * Getter de la position Y du personnage
-     * @return y
+     * @return y 
      */
     public int getY(){
         return y; 
@@ -85,20 +119,27 @@ public abstract class Personnage {
         return pda; 
     }
 
-    /**
-     * Setter de la position X du personnage
-     * @param x
-     */
-    public void setX(int x) {
-        this.x = x;
+    public String getLM(){
+        return lm; 
     }
 
     /**
-     * Setter de la position Y du personnage
-     * @param y
+     * Setter de la vie du personnage. 
+     * @param pv
      */
-    public void setY(int y) {
-        this.y = y;
+    public void setPDV(double pv){
+        this.pdv = pv; 
+        if(getPDV() < 0){
+            pdv = 0; 
+        }
+    }
+
+    public void recevoirDegats(double degats){
+        setPDV(getPDV() - degats);
+    }
+
+    public boolean estVivant(){
+        return getPDV() != 0; 
     }
 
     /**

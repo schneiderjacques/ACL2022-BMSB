@@ -22,7 +22,8 @@ public class Heros extends Personnage {
      * @param pda : points d'attaque
      */
     public Heros(int x, int y, double pdv, double pda) {
-        super(1, 1, 10, 0.5);
+        //super(1, 1, 10, 0.5);
+        super(x,y,pdv,pda); 
     }
 
     /**
