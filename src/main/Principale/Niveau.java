@@ -30,14 +30,18 @@ public class Niveau {
     //Monstres du niveau
     private Set<Monstre> monstres;
 
+    //Tour du jeu
+    private Tour tour;
+
     /**
      * Constructeur du niveau
      * @param path
      *  Chemin du fichier contenant le niveau
      */
-    public Niveau(String path) throws FileNotFoundException {
+    public Niveau(String path, Tour t) throws FileNotFoundException {
         this.path = path;
         this.lastLevel = false;
+        this.tour = t;
 
         // Chargement du fichier
         this.loadFile();

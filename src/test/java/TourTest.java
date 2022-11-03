@@ -17,20 +17,23 @@ public class TourTest {
 
     @Test
     public void createTour() throws FileNotFoundException {
-        ArrayList list = new ArrayList<Niveau>();
-        list.add(new Niveau("src/test/resources/lab_test_1.txt"));
-        Tour t = new Tour(list);
+        ArrayList<Niveau> list = new ArrayList<Niveau>();
+        Tour t = new Tour();
+        list.add(new Niveau("src/test/resources/lab_test_1.txt", t));
+
+        t.loadNiveaux(list);
         assertEquals(10, t.getCurrentLevel().getLongueur());
         assertEquals(10, t.getCurrentLevel().getLargeur());
     }
 
     @Test
     public void nextLevel() throws FileNotFoundException {
-        ArrayList list = new ArrayList<Niveau>();
+        ArrayList<Niveau> list = new ArrayList<Niveau>();
+        Tour t = new Tour();
         for (int i = 1; i <= 3; i++) {
-            list.add(new Niveau("src/test/resources/lab_test_" + i + ".txt"));
+            list.add(new Niveau("src/test/resources/lab_test_" + i + ".txt", t));
         }
-        Tour t = new Tour(list);
+        t.loadNiveaux(list);
 
         for (int i = 1; i <= 2; i++) {
             assertEquals(10, t.getCurrentLevel().getLongueur());
