@@ -38,7 +38,8 @@ public abstract class Personnage {
      */
     public void moveX(int dir){
         //throw new Error("Not implemented yet");
-        this.x = this.x + dir; 
+        this.x = this.x + dir;
+        System.out.println("Le personnage se déplace en X de " + dir + " cases");
     }
 
 
@@ -48,28 +49,33 @@ public abstract class Personnage {
      */
     public void moveY(int dir){
         //throw new Error("Not implemented yet");
-         this.y = this.y + dir; 
+         this.y = this.y + dir;
+        System.out.println("Le personnage se déplace en Y de " + dir + " cases");
     }
 
     /*
     * Méthode permettant de déplacer le personnage
-    * @param dirX
-    * @param dirY
+    * @param axe
+    * @param dir
      */
-    public void move(int dirX, int dirY){
+    public void move(char axe, int dir){
         //throw new Error("Not implemented yet");
-        moveX(dirX);
-        moveY(dirY);
-        if(dirX > 0 && dirY == 0){
+        if (axe == 'X'){
+            this.moveX(dir);
+        }
+        else if (axe == 'Y'){
+            this.moveY(dir);
+        }
+        if(axe == 'X' && dir == 1){
             lm = "d"; 
         }
-        if(dirX < 0 && dirY == 0){
+        if(axe == 'X' && dir == -1){
             lm = "g"; 
         }
-        if(dirX == 0 && dirY > 0){
+        if(axe == 'Y' && dir == -1){
             lm = "h";
         }
-        if(dirX == 0 && dirY < 0){
+        if(axe == 'Y' && dir == 1){
             lm = "b";
         }
     }

@@ -34,20 +34,20 @@ public class PersonnageTest {
         Goomba g = new Goomba(0, 2, 10, 0);
 
         System.out.println(p.getX());
-        p.move(1, 0);
+        p.move('X', 1);
         p.attaque(d);
         System.out.println(p.getX());
         System.out.println(d.getPDV());
-        p.move(-2,0);
+            p.move('X', -2);
         p.attaque(g);
         System.out.println(g.getPDV());
-        p.move(1, 0);
-        p.move(0, -1);
+        p.move('X', 1);
+        p.move('Y', -1);
         p.attaque(h);
         p.attaque(b);
         System.out.println(h.getPDV());
         System.out.println(b.getPDV());
-        p.move(0, 2);
+        p.move('Y', 2);
         p.attaque(b);
         System.out.println(b.getPDV());
     }
