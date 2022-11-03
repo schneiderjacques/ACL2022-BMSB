@@ -4,13 +4,15 @@ import main.Cases.*;
 import main.Personnages.Heros;
 import main.Personnages.Monstre;
 import main.Personnages.Personnage;
+import main.Engine.GamePainter;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Niveau {
+public class Niveau implements GamePainter {
 
     //Longueur du labyrinthe
     private int longueur;
@@ -217,5 +219,30 @@ public class Niveau {
         this.lastLevel = b;
     }
 
+    /**
+     * Getter tour
+     * @return tour
+     */
     public Tour getTour(){return this.tour;}
+
+    /**
+     * Dessiner le niveau
+     * @param image
+     *            image sur laquelle dessiner
+     */
+    @Override
+    public void draw(BufferedImage image) {
+        for (int i = 0; i < this.getLongueur(); i++) {
+            for (int j = 0; j < this.getLargeur(); j++) {
+                this.niveau[i][j].draw(image);
+            }
+        }
+
+        // TODO : Dessiner les monstres
+        /**for (Monstre m : this.monstres) {
+            m.draw(image);
+        }**/
+
+        this.getTour().getHeros().draw(image);
+    }
 }

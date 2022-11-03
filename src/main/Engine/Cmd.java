@@ -1,4 +1,4 @@
-package main.engine;
+package main.Engine;
 
 /**
  * @author Horatiu Cirstea

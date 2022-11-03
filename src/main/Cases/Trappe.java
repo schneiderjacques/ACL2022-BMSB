@@ -3,6 +3,8 @@ package main.Cases;
 import main.Personnages.Heros;
 import main.Principale.Tour;
 
+import java.awt.*;
+
 /**
  * Représente une case piège, lorsque le joueur marche dessus il est immobilisé 3 secondes
  * @author Jacques Schneider
@@ -16,7 +18,7 @@ public class Trappe extends Case{
      */
     public Trappe(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y);
+        super(false, x, y, Color.darkGray);
     }
 
 

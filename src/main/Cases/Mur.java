@@ -3,6 +3,8 @@ package main.Cases;
 import main.Personnages.Heros;
 import main.Principale.Tour;
 
+import java.awt.*;
+
 /*
 * Class représentant les murs du labyrinthe
 * @author Anthony Briot
@@ -15,7 +17,7 @@ public class Mur extends Case {
      */
     public Mur(boolean collision, int x, int y) {
         //Initialisation des attributs
-        super(collision, x, y);
+        super(collision, x, y, Color.black);
     }
 
     /**

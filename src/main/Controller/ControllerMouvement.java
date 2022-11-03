@@ -1,11 +1,10 @@
 package main.Controller;
 
 import main.Principale.Jeu;
-import main.engine.Cmd;
-import main.engine.GameController;
+import main.Engine.Cmd;
+import main.Engine.GameController;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 /*
  * Controlleur qui permet de gérer les mouvements du joueur
@@ -72,5 +71,10 @@ public class ControllerMouvement implements GameController {
      */
     public Cmd getCommand() {
         return this.commandeEnCours;
+    }
+
+    @Override
+    public Jeu getJeu() {
+        return this.jeu;
     }
 }

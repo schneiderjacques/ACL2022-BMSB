@@ -3,8 +3,7 @@ package main;
 import main.Controller.ControllerMouvement;
 import main.Principale.Jeu;
 import main.Principale.Niveau;
-import main.engine.GameEngineGraphical;
-import main.model.JeuPainter;
+import main.Engine.GameEngineGraphical;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -42,11 +41,10 @@ public class Main {
 
         // creation du jeu particulier et de son afficheur
         Jeu game = new Jeu();
-        JeuPainter painter = new JeuPainter(jeu);
         ControllerMouvement controller = new ControllerMouvement(jeu);
 
         // classe qui lance le moteur de jeu generique
-        GameEngineGraphical engine = new GameEngineGraphical(game, painter, controller);
+        GameEngineGraphical engine = new GameEngineGraphical(game, jeu.getTour().getCurrentLevel(), controller);
         engine.run();
 
 

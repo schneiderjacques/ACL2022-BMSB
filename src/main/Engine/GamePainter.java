@@ -1,6 +1,4 @@
-package main.engine;
-
-import main.Principale.Jeu;
+package main.Engine;
 
 import java.awt.image.BufferedImage;
 
@@ -20,11 +18,5 @@ public interface GamePainter {
 	 *            image sur laquelle dessiner
 	 */
 	public abstract void draw(BufferedImage image);
-
-	public abstract int getWidth();
-
-	public abstract int getHeight();
-
-	public abstract Jeu getJeu();
 
 }

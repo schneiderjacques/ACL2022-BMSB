@@ -1,4 +1,6 @@
-package main.engine;
+package main.Engine;
+
+import main.Principale.Jeu;
 
 import java.awt.event.KeyListener;
 
@@ -17,5 +19,7 @@ public interface GameController extends KeyListener {
 	 * @return commande faite par le joueur
 	 */
 	public Cmd getCommand();
+
+	public Jeu getJeu();
 
 }

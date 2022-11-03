@@ -1,7 +1,7 @@
 package main.Principale;
 
-import main.engine.Cmd;
-import main.engine.Game;
+import main.Engine.Cmd;
+import main.Engine.Game;
 
 import java.io.FileNotFoundException;
 

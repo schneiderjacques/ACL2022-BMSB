@@ -3,6 +3,8 @@ package main.Cases;
 import main.Personnages.Heros;
 import main.Principale.Tour;
 
+import java.awt.*;
+
 /*
  * Class représentant la sortie du labyrinthe
  * @author Anthony Briot
@@ -15,7 +17,7 @@ public class Exit extends Case {
      */
     public Exit(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y);
+        super(false, x, y, Color.orange);
     }
 
     /**

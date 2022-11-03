@@ -3,6 +3,8 @@ package main.Cases;
 import main.Personnages.Heros;
 import main.Principale.Tour;
 
+import java.awt.*;
+
 /**
  * Représente une case de vie, lorsque le joueur marche dessus il récupère de la vie
  * @author Jacques Schneider
@@ -16,7 +18,7 @@ public class Vie extends Case{
      */
     public Vie(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y);
+        super(false, x, y, Color.green);
     }
 
 

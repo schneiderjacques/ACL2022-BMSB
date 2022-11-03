@@ -3,6 +3,8 @@ package main.Cases;
 import main.Personnages.Heros;
 import main.Principale.Tour;
 
+import java.awt.*;
+
 /*
 * Class représentant une case sol du labyrinthe
 * author Anthony Briot
@@ -15,7 +17,7 @@ public class Sol extends Case {
      */
     public Sol(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y);
+        super(false, x, y, Color.white);
     }
 
     /**

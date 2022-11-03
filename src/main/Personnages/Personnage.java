@@ -1,10 +1,15 @@
 package main.Personnages;
 
+import main.Engine.GamePainter;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 /*
 * Class représentant un personnage du jeu
 * @author Martin Gurtner
  */
-public abstract class Personnage {
+public abstract class Personnage implements GamePainter {
 
     //Position du personnage en X
     private int x;
@@ -15,7 +20,9 @@ public abstract class Personnage {
     //Force du personnage
     private double pda;
     //Dernier mouvement du héros 
-    private String lm;  
+    private String lm;
+    //Taille d'une case en pixels
+    private static final int TAILLE_CASE = 16*3;
 
     /*
     * Constructeur du personnage
@@ -33,6 +40,16 @@ public abstract class Personnage {
         this.lm = "b";
     }
 
+    /**
+     * Méthode de dessin du personnage dans le jeu
+     * @param im
+     *            image sur laquelle dessiner
+     */
+    public void draw(BufferedImage im) {
+        Graphics2D crayon = (Graphics2D) im.getGraphics();
+        crayon.setColor(Color.blue);
+        crayon.fillRect(x*TAILLE_CASE,y*TAILLE_CASE,TAILLE_CASE,TAILLE_CASE);
+    }
     /*
     * Méthode permettant de déplacer le personnage en X
     * @param x

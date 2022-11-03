@@ -54,7 +54,7 @@ public class Tour {
         if (this.niveaux.get(this.currentLevel-1).canMove(this.heros, axe, dir)) {
             this.heros.move(axe, dir);
         }
-        this.niveaux.get(currentLevel-1).printMap(this.getHeros());
+        //this.niveaux.get(currentLevel-1).printMap(this.getHeros());
     }
 
     /**

@@ -1,4 +1,4 @@
-package main.engine;
+package main.Engine;
 
 import javax.swing.JFrame;
 
@@ -28,7 +28,7 @@ public class GraphicalInterface  {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// attacher le panel contenant l'afficheur du game
-		this.panel=new DrawingPanel(gamePainter);
+		this.panel=new DrawingPanel(gamePainter, gameController.getJeu());
 		f.setContentPane(this.panel);
 
 		// attacher controller au panel du game

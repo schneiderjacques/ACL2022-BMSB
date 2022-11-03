@@ -1,4 +1,4 @@
-package main.engine;
+package main.Engine;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -33,14 +33,14 @@ public class DrawingPanel extends JPanel {
 	 */
 	private BufferedImage currentImage;
 
-	public int originalTileSize = 16; // 16x16 tile
-	public int scale = 3; //3x plus grand
+	public static int originalTileSize = 16; // 16x16 tile
+	public static int scale = 3; //3x plus grand
 
-	public final int tileSize = originalTileSize * scale; //48x48 tile
-	private final int maxScreenCol = 16; //Nombre de colonne maximum visible sur l'écran
-	private final int maxScreenRow = 12; //Nombre de ligne maximum visible sur l'écran
-	private final int screenWidth = tileSize * maxScreenCol;
-	private final int screenHeight = tileSize * maxScreenRow;
+	public static final int TILE_SIZE = originalTileSize * scale; //48x48 tile
+	private int maxScreenCol; //Nombre de colonne maximum visible sur l'écran
+	private int maxScreenRow; //Nombre de ligne maximum visible sur l'écran
+	private int screenWidth;
+	private int screenHeight;
 
 
 	//LEVEL SETTINGS
@@ -49,6 +49,7 @@ public class DrawingPanel extends JPanel {
 	private int maxLevelRow; //Nombre de ligne maximum dans le niveau
 	private int worldWidth; //Largeur du monde en pixel
 	private int worldHeight; //Hauteur du monde en pixel
+
 	private Jeu jeu;
 
 
@@ -63,21 +64,24 @@ public class DrawingPanel extends JPanel {
 	 * Panel associe. Les images stockent le painter et on demande au panel la
 	 * mise a jour quand le painter est fini
 	 */
-	public DrawingPanel(GamePainter painter) {
+	public DrawingPanel(GamePainter painter, Jeu jeu) {
 		super();
+		this.jeu = jeu;
+		this.maxScreenCol = jeu.getTour().getCurrentLevel().getLargeur();
+		this.maxScreenRow = jeu.getTour().getCurrentLevel().getLongueur();
+		this.screenWidth = TILE_SIZE * maxScreenCol;
+		this.screenHeight = TILE_SIZE * maxScreenRow;
 		this.width = this.screenWidth;
 		this.height = this.screenHeight;
 
-		// Récupère le jeu
-		jeu = painter.getJeu();
 		// Initialise les max
 		this.maxLevelCol = jeu.getTour().getCurrentLevel().getLargeur();
 		this.maxLevelRow = jeu.getTour().getCurrentLevel().getLongueur();
-		this.worldWidth = tileSize * maxLevelCol;
-		this.worldHeight = tileSize * maxLevelRow;
+		this.worldWidth = TILE_SIZE * maxLevelCol;
+		this.worldHeight = TILE_SIZE * maxLevelRow;
 
 
-		this.setPreferredSize(new Dimension(this.maxScreenCol * tileSize, this.maxScreenRow * tileSize));
+		this.setPreferredSize(new Dimension(this.maxScreenCol * TILE_SIZE, this.maxScreenRow * TILE_SIZE));
 		this.painter=painter;
 
 		// cree l'image buffer et son graphics
