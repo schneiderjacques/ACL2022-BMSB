@@ -21,4 +21,19 @@ public abstract class Monstre extends Personnage {
      * Méthode permettant de déplacer le monstre
      */
     public abstract void moveRandom();
+
+    public void attaque(Personnage adv){
+        if(((adv.getX() == getX()+1 && getLM() == "d") ||
+                (adv.getX() == getX()-1 && getLM() == "g") ||
+                (adv.getY() == getY()-1 && getLM() == "h") ||
+                (adv.getY() == getY()+1 && getLM() == "b" )) &&
+                !adv.beMonster()
+        ){
+            adv.recevoirDegats(getPDA());
+        }
+    }
+
+    public boolean beMonster(){
+        return true;
+    }
 }

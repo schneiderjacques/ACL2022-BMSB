@@ -30,6 +30,7 @@ public abstract class Personnage {
         this.y = y;
         this.pdv = pdv;
         this.pda = pda;
+        this.lm = "b";
     }
 
     /*
@@ -39,7 +40,7 @@ public abstract class Personnage {
     public void moveX(int dir){
         //throw new Error("Not implemented yet");
         this.x = this.x + dir;
-        System.out.println("Le personnage se déplace en X de " + dir + " cases");
+        //System.out.println("Le personnage se déplace en X de " + dir + " cases");
     }
 
 
@@ -49,8 +50,8 @@ public abstract class Personnage {
      */
     public void moveY(int dir){
         //throw new Error("Not implemented yet");
-         this.y = this.y + dir;
-        System.out.println("Le personnage se déplace en Y de " + dir + " cases");
+        this.y = this.y + dir;
+        //System.out.println("Le personnage se déplace en Y de " + dir + " cases");
     }
 
     /*
@@ -87,8 +88,8 @@ public abstract class Personnage {
         //throw new Error("Not implemented yet");
         if((adv.getX() == getX()+1 && getLM() == "d") ||
         (adv.getX() == getX()-1 && getLM() == "g") ||
-        (adv.getY() == getY()+1 && getLM() == "h") ||
-        (adv.getY() == getY()-1 && getLM() == "b")){
+        (adv.getY() == getY()-1 && getLM() == "h") ||
+        (adv.getY() == getY()+1 && getLM() == "b")){
             adv.recevoirDegats(getPDA());
         }
     }
@@ -163,6 +164,10 @@ public abstract class Personnage {
         "Vie : "+getPDV()+"\n"+
         "Attaque : "+getPDA()+"\n"+
         "Position : "+getX()+";"+getY()+"\n\n"; 
+    }
+
+    public boolean beMonster(){
+        return false;
     }
 
 }

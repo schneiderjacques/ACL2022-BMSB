@@ -33,23 +33,28 @@ public class PersonnageTest {
         Goomba b = new Goomba(2, 4, 10, 0); 
         Goomba g = new Goomba(0, 2, 10, 0);
 
-        System.out.println(p.getX());
         p.move('X', 1);
         p.attaque(d);
-        System.out.println(p.getX());
-        System.out.println(d.getPDV());
-            p.move('X', -2);
+        assertEquals("Le héro s'est deplacé à droite.", 3, p.getX());
+        assertEquals("Le monstre a perdu de points de vie.", 9, (int)d.getPDV());
+        p.move('X', -1);
+        p.move('X', -1);
         p.attaque(g);
-        System.out.println(g.getPDV());
+        assertEquals("Le monstre a perdu de points de vie.", 9, (int)g.getPDV());
         p.move('X', 1);
         p.move('Y', -1);
         p.attaque(h);
         p.attaque(b);
-        System.out.println(h.getPDV());
-        System.out.println(b.getPDV());
-        p.move('Y', 2);
+        assertEquals("Le monstre a perdu de points de vie.", 9, (int)h.getPDV());
+        assertEquals("Le monstre n'a pas perdu de points de vie.", 10, (int)b.getPDV());
+        p.move('Y', 1);
+        p.move('Y', 1);
         p.attaque(b);
-        System.out.println(b.getPDV());
+        assertEquals("Le monstre a perdu de points de vie.", 9, (int)b.getPDV());
+        p.move('X', 1);
+        p.move('Y', -1);
+        p.attaque(d);
+        assertEquals("Le monstre n'a perdu de points de vie.", 9, (int)d.getPDV());
     }
     /**
      * Test de déplacement du personnage

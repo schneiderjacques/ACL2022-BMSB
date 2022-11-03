@@ -78,6 +78,17 @@ public class Niveau {
     }
 
     /**
+     * Méthode autorisant ou non le déplacement d'un personnage
+     * @param m
+     *  Monstre à déplacer
+     * @return boolean
+     */
+    public void canAttack(Monstre m) {
+        Heros h = this.tour.getHeros();
+        m.attaque(h);
+    }
+
+    /**
      * Charge le labyrinthe depuis un fichier
      */
     private void loadFile() throws FileNotFoundException {
