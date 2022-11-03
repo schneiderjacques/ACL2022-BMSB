@@ -55,12 +55,11 @@ public class MonstreTest {
         Heros p = new Heros(2,3,10,1);
 
         g.move('X', 1);
-        g.attaque(h);
+        assertEquals(false, g.attaque(h));
         assertEquals(10, (int)h.getPDV());
         g.move('Y', 1);
-        g.attaque(p);
+        assertEquals(true, g.attaque(p));
         assertEquals(9, (int)p.getPDV());
-
         g.move('X', -1);
         g.move('X', 1);
         assertEquals(9, (int)p.getPDV());

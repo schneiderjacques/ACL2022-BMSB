@@ -22,7 +22,7 @@ public abstract class Monstre extends Personnage {
      */
     public abstract void moveRandom();
 
-    public void attaque(Personnage adv){
+    public boolean attaque(Personnage adv){
         if(((adv.getX() == getX()+1 && getLM() == "d") ||
                 (adv.getX() == getX()-1 && getLM() == "g") ||
                 (adv.getY() == getY()-1 && getLM() == "h") ||
@@ -30,7 +30,9 @@ public abstract class Monstre extends Personnage {
                 !adv.beMonster()
         ){
             adv.recevoirDegats(getPDA());
+            return true;
         }
+        return false;
     }
 
     public boolean beMonster(){

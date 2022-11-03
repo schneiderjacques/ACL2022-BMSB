@@ -84,14 +84,16 @@ public abstract class Personnage {
     /*
     * Méthode qui permet d'attaquer les personnages en face du personnage
      */
-    public void attaque(Personnage adv){
+    public boolean attaque(Personnage adv){
         //throw new Error("Not implemented yet");
         if((adv.getX() == getX()+1 && getLM() == "d") ||
         (adv.getX() == getX()-1 && getLM() == "g") ||
         (adv.getY() == getY()-1 && getLM() == "h") ||
         (adv.getY() == getY()+1 && getLM() == "b")){
             adv.recevoirDegats(getPDA());
+            return true;
         }
+        return false;
     }
 
     /*
