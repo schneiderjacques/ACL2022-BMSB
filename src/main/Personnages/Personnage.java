@@ -25,6 +25,8 @@ public abstract class Personnage implements GamePainter {
     private static final int TAILLE_CASE = 16*3;
     //Collision du personnage
     private boolean collision;
+    // Couleur du personnage
+    private Color color;
 
     /*
     * Constructeur du personnage
@@ -34,7 +36,7 @@ public abstract class Personnage implements GamePainter {
     * @param pdv : points de vie
     * @param pda : points d'attaque
      */
-    public Personnage(int x, int y, boolean col, double pdv, double pda){
+    public Personnage(int x, int y, boolean col, double pdv, double pda, Color color) {
         //Initialisation des attributs
         this.x = x;
         this.y = y;
@@ -42,6 +44,7 @@ public abstract class Personnage implements GamePainter {
         this.pda = pda;
         this.lm = "b";
         this.collision = col;
+        this.color = color;
     }
 
     /**
@@ -51,7 +54,7 @@ public abstract class Personnage implements GamePainter {
      */
     public void draw(BufferedImage im) {
         Graphics2D crayon = (Graphics2D) im.getGraphics();
-        crayon.setColor(Color.blue);
+        crayon.setColor(this.color);
         crayon.fillRect(x*TAILLE_CASE,y*TAILLE_CASE,TAILLE_CASE,TAILLE_CASE);
     }
     /*

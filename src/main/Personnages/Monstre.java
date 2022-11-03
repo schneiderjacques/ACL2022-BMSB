@@ -2,6 +2,7 @@ package main.Personnages;
 
 import main.Principale.Niveau;
 
+import java.awt.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -21,8 +22,8 @@ public abstract class Monstre extends Personnage {
      * @param pda : points d'attaque
      * @param n : niveau dans lequel se trouve le monstre
      */
-    public Monstre(int x, int y, boolean col, double pdv, double pda, Niveau n) {
-        super(x, y, col, pdv, pda);
+    public Monstre(int x, int y, boolean col, double pdv, double pda, Niveau n, Color color) {
+        super(x, y, col, pdv, pda, color);
         this.niveau = n;
         //move or attack every 5 seconds
     }

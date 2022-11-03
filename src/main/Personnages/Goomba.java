@@ -2,6 +2,8 @@ package main.Personnages;
 
 import main.Principale.Niveau;
 
+import java.awt.*;
+
 /*
  * Class représentant un personnage du jeu
  * @author Arthur Moitrier
@@ -14,7 +16,7 @@ public class Goomba extends Monstre {
      * @param y : position en Y
      * @param n : niveau dans lequel se trouve le monstre
      */
-    public Goomba(int x, int y, Niveau n) {super(x, y, true, 15, 2, n);}
+    public Goomba(int x, int y, Niveau n) {super(x, y, true, 15, 2, n, Color.pink);}
 
     @Override
     public String getType() {

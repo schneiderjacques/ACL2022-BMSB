@@ -12,6 +12,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Niveau implements GamePainter {
 
@@ -38,8 +39,8 @@ public class Niveau implements GamePainter {
 
     /**
      * Constructeur du niveau
-     * @param path
-     *  Chemin du fichier contenant le niveau
+     *
+     * @param path Chemin du fichier contenant le niveau
      */
     public Niveau(String path, Tour t) throws FileNotFoundException {
         this.path = path;
@@ -52,24 +53,22 @@ public class Niveau implements GamePainter {
 
 
         // Mise en place des threads pour chaque monstre
-        for(Monstre m : this.monstres){
+        for (Monstre m : this.monstres) {
             Runnable moveOrAttackMonster = () -> {
                 m.moveOrAttack();
                 this.printMap(this.tour.getHeros());
             };
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-            executor.scheduleAtFixedRate(moveOrAttackMonster, 0, 5, java.util.concurrent.TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(moveOrAttackMonster, 0, 500, TimeUnit.MILLISECONDS);
         }
     }
 
     /**
      * Méthode autorisant ou non le déplacement d'un personnage
-     * @param p
-     *  Personnage à déplacer
-     * @param axe
-     *  Axe de déplacement
-     * @param dir
-     *  Direction de déplacement
+     *
+     * @param p   Personnage à déplacer
+     * @param axe Axe de déplacement
+     * @param dir Direction de déplacement
      * @return boolean
      */
     public boolean canMove(Personnage p, char axe, int dir) {
@@ -84,30 +83,26 @@ public class Niveau implements GamePainter {
                 targetY += dir;
                 break;
         }
-        if (p.isCollision()){
-            if (!this.niveau[targetY][targetX].getCollision()) {
-                for(Monstre m : this.monstres){
-                    if(m.getX() == targetX && m.getY() == targetY){
-                        return false;
-                    }
-                }
-                if (this.tour.getHeros().getX() == targetX && this.tour.getHeros().getY() == targetY) {
+
+        if (!this.niveau[targetY][targetX].getCollision()) {
+            for (Monstre m : this.monstres) {
+                if (m.getX() == targetX && m.getY() == targetY) {
                     return false;
                 }
-                return true;
             }
-            return false;
-        }else{
-            if (!this.niveau[targetY][targetX].getCollision()) {
-                return true;
-            }else{
-                //Si la case est au bord du labyrinthe
-                if (targetX == 0 || targetX == this.longueur - 1 || targetY == 0 || targetY == this.largeur - 1) {
-                    return false;
-                }
-                return true;
+            if (this.tour.getHeros().getX() == targetX && this.tour.getHeros().getY() == targetY) {
+                return false;
             }
+            return true;
         }
+        if (!p.isCollision()) {
+            if (targetX == 0 || targetX == this.longueur - 1 || targetY == 0 || targetY == this.largeur - 1) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+
     }
 
     /**
@@ -179,6 +174,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter path
+     *
      * @return path
      */
     public String getPath() {
@@ -187,6 +183,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter LONGUEUR
+     *
      * @return LONGUEUR
      */
     public int getLongueur() {
@@ -195,6 +192,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter LARGEUR
+     *
      * @return LARGEUR
      */
     public int getLargeur() {
@@ -203,6 +201,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter lastLevel
+     *
      * @return lastLevel
      */
     public boolean isLastLevel() {
@@ -211,6 +210,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter labyrinthe
+     *
      * @return labyrinthe
      */
     public Case[][] getNiveau() {
@@ -219,41 +219,44 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter Case
+     *
      * @param x entier représentant l'axe des X du labyrinthe
      * @param y entier représentant l'axe des Y du labyrinthe
      * @return CASE[][]
      */
-    public Case getCase(int x, int y){ return this.niveau[y][x]; }
+    public Case getCase(int x, int y) {
+        return this.niveau[y][x];
+    }
 
     /**
      * Print labyrinthe temporaire
-     * @param h
-     * Heros du niveau
+     *
+     * @param h Heros du niveau
      * @return String
      */
-    public void printMap(Heros h){
+    public void printMap(Heros h) {
         System.out.println(this.getLargeur());
         System.out.println(this.getLongueur());
-        for (int i = 0 ; i < this.getLongueur() ; i++){
-            for (int j = 0; j < this.getLargeur() ; j++){
-                if (h.getX() == j && h.getY() == i){
+        for (int i = 0; i < this.getLongueur(); i++) {
+            for (int j = 0; j < this.getLargeur(); j++) {
+                if (h.getX() == j && h.getY() == i) {
                     System.out.print("P");
                     continue;
-                }else{
+                } else {
                     boolean isMonstre = false;
-                    for(Monstre m : this.monstres){
-                        if(m.getX() == j && m.getY() == i){
-                            if (m instanceof Boo){
+                    for (Monstre m : this.monstres) {
+                        if (m.getX() == j && m.getY() == i) {
+                            if (m instanceof Boo) {
                                 System.out.print("B");
-                            }else {
+                            } else {
                                 System.out.print("G");
                             }
                             isMonstre = true;
                         }
                     }
-                    if (isMonstre)continue;
+                    if (isMonstre) continue;
                 }
-                Case c = this.getCase(j,i);
+                Case c = this.getCase(j, i);
                 System.out.print(c.getType().charAt(0));
 
             }
@@ -264,8 +267,8 @@ public class Niveau implements GamePainter {
 
     /**
      * Setter lastLevel
-     * @param b
-     * Booleen
+     *
+     * @param b Booleen
      */
     public void setLastLevel(boolean b) {
         this.lastLevel = b;
@@ -273,14 +276,17 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter tour
+     *
      * @return tour
      */
-    public Tour getTour(){return this.tour;}
+    public Tour getTour() {
+        return this.tour;
+    }
 
     /**
      * Dessiner le niveau
-     * @param image
-     *            image sur laquelle dessiner
+     *
+     * @param image image sur laquelle dessiner
      */
     @Override
     public void draw(BufferedImage image) {
@@ -290,10 +296,9 @@ public class Niveau implements GamePainter {
             }
         }
 
-        // TODO : Dessiner les monstres
-        /**for (Monstre m : this.monstres) {
+        for (Monstre m : this.monstres) {
             m.draw(image);
-        }**/
+        }
 
         this.getTour().getHeros().draw(image);
     }

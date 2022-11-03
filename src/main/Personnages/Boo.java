@@ -2,6 +2,8 @@ package main.Personnages;
 
 import main.Principale.Niveau;
 
+import java.awt.*;
+
 /*
  * Class représentant un personnage du jeu
  * @author Arthur Moitrier
@@ -15,7 +17,7 @@ public class Boo extends Monstre{
      * @param n : niveau dans lequel se trouve le monstre
      */
     public Boo(int x, int y, Niveau n) {
-        super(x, y, false, 10, 1, n);
+        super(x, y, false, 10, 1, n, Color.MAGENTA);
     }
 
     @Override
