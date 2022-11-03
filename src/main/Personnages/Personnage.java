@@ -15,22 +15,26 @@ public abstract class Personnage {
     //Force du personnage
     private double pda;
     //Dernier mouvement du héros 
-    private String lm;  
+    private String lm;
+    //Collision du personnage
+    private boolean collision;
 
     /*
     * Constructeur du personnage
     * @param x : position en X
     * @param y : position en Y
+    * @param col : collision du personnage
     * @param pdv : points de vie
     * @param pda : points d'attaque
      */
-    public Personnage(int x, int y, double pdv, double pda){
+    public Personnage(int x, int y, boolean col, double pdv, double pda){
         //Initialisation des attributs
         this.x = x;
         this.y = y;
         this.pdv = pdv;
         this.pda = pda;
         this.lm = "b";
+        this.collision = col;
     }
 
     /*
@@ -85,7 +89,6 @@ public abstract class Personnage {
     * Méthode qui permet d'attaquer les personnages en face du personnage
      */
     public boolean attaque(Personnage adv){
-        //throw new Error("Not implemented yet");
         if((adv.getX() == getX()+1 && getLM() == "d") ||
         (adv.getX() == getX()-1 && getLM() == "g") ||
         (adv.getY() == getY()-1 && getLM() == "h") ||
@@ -170,6 +173,10 @@ public abstract class Personnage {
 
     public boolean beMonster(){
         return false;
+    }
+
+    public boolean isCollision() {
+        return collision;
     }
 
 }

@@ -11,7 +11,7 @@ public class Heros extends Personnage {
      * Le héros commence toujours aux coordonnées (1,1) avec 10 points de vie et 0.5 points d'attaque
      */
     public Heros() {
-        super(1, 1, 10, 0.5);
+        super(1, 1, true, 10, 0.5);
     }
 
     /**
@@ -23,7 +23,7 @@ public class Heros extends Personnage {
      */
     public Heros(int x, int y, double pdv, double pda) {
         //super(1, 1, 10, 0.5);
-        super(x,y,pdv,pda); 
+        super(x,y,true, pdv,pda);
     }
 
     /**

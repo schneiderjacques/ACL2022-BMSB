@@ -1,14 +1,15 @@
 package main.Principale;
 
 import main.Cases.*;
-import main.Personnages.Heros;
-import main.Personnages.Monstre;
-import main.Personnages.Personnage;
+import main.Personnages.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class Niveau {
 
@@ -42,9 +43,21 @@ public class Niveau {
         this.path = path;
         this.lastLevel = false;
         this.tour = t;
+        this.monstres = new HashSet<>();
 
         // Chargement du fichier
         this.loadFile();
+
+
+        // Mise en place des threads pour chaque monstre
+        for(Monstre m : this.monstres){
+            Runnable moveOrAttackMonster = () -> {
+                m.moveOrAttack();
+                this.printMap(this.tour.getHeros());
+            };
+            ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+            executor.scheduleAtFixedRate(moveOrAttackMonster, 0, 5, java.util.concurrent.TimeUnit.SECONDS);
+        }
     }
 
     /**
@@ -69,12 +82,30 @@ public class Niveau {
                 targetY += dir;
                 break;
         }
-
-        if (!this.niveau[targetY][targetX].getCollision()) {
-            return true;
+        if (p.isCollision()){
+            if (!this.niveau[targetY][targetX].getCollision()) {
+                for(Monstre m : this.monstres){
+                    if(m.getX() == targetX && m.getY() == targetY){
+                        return false;
+                    }
+                }
+                if (this.tour.getHeros().getX() == targetX && this.tour.getHeros().getY() == targetY) {
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }else{
+            if (!this.niveau[targetY][targetX].getCollision()) {
+                return true;
+            }else{
+                //Si la case est au bord du labyrinthe
+                if (targetX == 0 || targetX == this.longueur - 1 || targetY == 0 || targetY == this.largeur - 1) {
+                    return false;
+                }
+                return true;
+            }
         }
-
-        return false;
     }
 
     /**
@@ -129,6 +160,14 @@ public class Niveau {
                         break;
                     case 'D':
                         this.niveau[index][i] = new Degat(index, i);
+                        break;
+                    case 'B':
+                        this.monstres.add(new Boo(index, i, this));
+                        this.niveau[index][i] = new Sol(index, i);
+                        break;
+                    case 'G':
+                        this.monstres.add(new Goomba(index, i, this));
+                        this.niveau[index][i] = new Sol(index, i);
                         break;
                 }
             }
@@ -198,6 +237,19 @@ public class Niveau {
                 if (h.getX() == j && h.getY() == i){
                     System.out.print("P");
                     continue;
+                }else{
+                    boolean isMonstre = false;
+                    for(Monstre m : this.monstres){
+                        if(m.getX() == j && m.getY() == i){
+                            if (m instanceof Boo){
+                                System.out.print("B");
+                            }else {
+                                System.out.print("G");
+                            }
+                            isMonstre = true;
+                        }
+                    }
+                    if (isMonstre)continue;
                 }
                 Case c = this.getCase(j,i);
                 System.out.print(c.getType().charAt(0));
