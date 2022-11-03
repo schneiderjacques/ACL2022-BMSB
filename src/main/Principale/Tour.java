@@ -23,7 +23,7 @@ public class Tour {
     /**
      * Constructeur de la tour
      */
-    public Tour() throws FileNotFoundException {
+    public Tour() {
         // Création du tableau de niveaux
         this.niveaux = new ArrayList<Niveau>();
 
@@ -32,26 +32,6 @@ public class Tour {
 
         // Chargement des niveaux
         this.currentLevel = 1;
-        this.loadNiveaux();
-    }
-
-    /**
-     * Méthode permettant de charger les niveaux
-     * @param list
-     *  Niveau à charger
-     * @throws FileNotFoundException
-     */
-    public Tour(ArrayList<Niveau> list) throws FileNotFoundException {
-        // Création du tableau de niveaux
-        this.niveaux = new ArrayList<>();
-
-        // Création du héros
-        this.heros = new Heros();
-
-        // Chargement des niveaux
-        this.currentLevel = 1;
-        this.niveaux.addAll(list);
-        this.niveaux.get(this.niveaux.size() - 1).setLastLevel(true);
     }
 
     /**
@@ -63,6 +43,13 @@ public class Tour {
         }
     }
 
+    /**
+     * Méthode autorisant ou non le déplacement du héros
+     * @param axe
+     * Axe de déplacement
+     * @param dir
+     * Direction de déplacement
+     */
     public void moveHeros(char axe, int dir) {
         if (this.niveaux.get(this.currentLevel-1).canMove(this.heros, axe, dir)) {
             this.heros.move(axe, dir);
@@ -73,14 +60,9 @@ public class Tour {
     /**
      * Charge des niveaux par défaut
      */
-    private void loadNiveaux() throws FileNotFoundException {
+    public void loadNiveaux(ArrayList<Niveau> levels) {
         // Chargement des niveaux
-        /**for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                this.niveaux.add(new Niveau("src/main/resources/niveau_" + i + "_" + j + ".txt"));
-            }
-        }**/
-        this.niveaux.add(new Niveau("resources/level_1.txt"));
+        this.niveaux.addAll(levels);
     }
 
     /**
