@@ -63,6 +63,7 @@ public class Tour {
     public void loadNiveaux(ArrayList<Niveau> levels) {
         // Chargement des niveaux
         this.niveaux.addAll(levels);
+        this.niveaux.get(niveaux.size()-1).setLastLevel(true);
     }
 
     /**
