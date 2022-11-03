@@ -3,6 +3,8 @@ package main.Cases;
 import main.Personnages.Heros;
 import main.Principale.Tour;
 
+import java.awt.*;
+
 /**
  * Représente une case de dégat, lorsque le joueur marche dessus il subit des dégats
  * @author Jacques Schneider
@@ -16,7 +18,7 @@ public class Degat extends Case{
      */
     public Degat(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y);
+        super(false, x, y, Color.red);
     }
 
 

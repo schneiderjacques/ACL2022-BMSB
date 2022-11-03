@@ -3,6 +3,8 @@ package main.Cases;
 import main.Personnages.Heros;
 import main.Principale.Tour;
 
+import java.awt.*;
+
 /**
  * Représente la clé récupérée par le joueur permettant d'ouvrire la case sortie
  * @author Jacques Schneider
@@ -16,7 +18,7 @@ public class Key extends Case{
      */
     public Key(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y);
+        super(false, x, y, Color.yellow);
     }
 
 
