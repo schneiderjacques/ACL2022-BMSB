@@ -13,10 +13,10 @@ import java.util.Set;
 public class Niveau {
 
     //Longueur du labyrinthe
-    private static int LONGUEUR;
+    private int longueur;
 
     //Largeur du labyrinthe
-    private static int LARGEUR;
+    private int largeur;
 
     // path du fichier contenant le labyrinthe
     private String path;
@@ -87,11 +87,11 @@ public class Niveau {
 
         // Récupération des dimensions du labyrinthe
         String[] dim = (sc.nextLine()).split(" ");
-        LONGUEUR = Integer.parseInt(dim[0]);
-        LARGEUR = Integer.parseInt(dim[1]);
+        longueur = Integer.parseInt(dim[0]);
+        largeur = Integer.parseInt(dim[1]);
 
         // Création du labyrinthe
-        this.niveau = new Case[LONGUEUR][LARGEUR];
+        this.niveau = new Case[longueur][largeur];
 
         // Parcours du fichier
         int index = 0;
@@ -149,7 +149,7 @@ public class Niveau {
      * @return LONGUEUR
      */
     public int getLongueur() {
-        return LONGUEUR;
+        return longueur;
     }
 
     /**
@@ -157,7 +157,7 @@ public class Niveau {
      * @return LARGEUR
      */
     public int getLargeur() {
-        return LARGEUR;
+        return largeur;
     }
 
     /**
@@ -191,6 +191,8 @@ public class Niveau {
      * @return String
      */
     public void printMap(Heros h){
+        System.out.println(this.getLargeur());
+        System.out.println(this.getLongueur());
         for (int i = 0 ; i < this.getLongueur() ; i++){
             for (int j = 0; j < this.getLargeur() ; j++){
                 if (h.getX() == j && h.getY() == i){

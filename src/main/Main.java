@@ -2,9 +2,11 @@ package main;
 
 import main.Controller.ControllerMouvement;
 import main.Principale.Jeu;
+import main.Principale.Niveau;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 /*
 * Class principale du projet
@@ -18,6 +20,16 @@ public class Main {
      */
     public static void main(String[] args) throws FileNotFoundException {
         Jeu jeu = new Jeu();
+
+        // Création des niveaux
+        ArrayList<Niveau> list = new ArrayList<Niveau>();
+        for (int i = 1; i <= 2; i++) {
+            list.add(new Niveau("src/resources/level_" + i + ".txt", jeu.getTour()));
+        }
+
+        // Chargement des niveaux dans la tour
+        jeu.getTour().loadNiveaux(list);
+
         ControllerMouvement cm = new ControllerMouvement(jeu); //Ajout du controleur des mouvements
         //Interface de test
         System.out.println("Labyrinthe n°1 chargé taille : ("+jeu.getTour().getCurrentLevel().getLargeur() + "-"+jeu.getTour().getCurrentLevel().getLongueur() + ")");
