@@ -53,8 +53,16 @@ public class Tour {
     public void moveHeros(char axe, int dir) {
         if (this.niveaux.get(this.currentLevel-1).canMove(this.heros, axe, dir)) {
             this.heros.move(axe, dir);
+            this.triggerCaseEvent();
         }
         //this.niveaux.get(currentLevel-1).printMap(this.getHeros());
+    }
+
+    /**
+     * On déclange l'effet de la case sur laquelle le joueur vient de se déplacer
+     */
+    public void triggerCaseEvent(){
+        this.getCurrentLevel().getCase(this.heros.getX(), this.heros.getY()).eventCollider(this);
     }
 
     /**
