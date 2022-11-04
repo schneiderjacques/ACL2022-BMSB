@@ -299,6 +299,7 @@ public class Niveau implements GamePainter {
             }
         }
 
+
         for (Monstre m : this.monstres) {
             m.draw(image);
         }

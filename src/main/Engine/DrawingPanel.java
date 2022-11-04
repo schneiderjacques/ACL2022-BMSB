@@ -108,6 +108,11 @@ public class DrawingPanel extends JPanel {
 		this.nextImage.getGraphics().fillRect(0, 0, this.width, this.height);
 		// met a jour l'image a afficher sur le panel
 		this.repaint();
+
+
+
+
+
 	}
 
 	/**
