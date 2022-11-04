@@ -37,6 +37,9 @@ public class Niveau implements GamePainter {
     //Tour du jeu
     private Tour tour;
 
+    //Clé trouvée dans le niveau
+    private boolean keyFound = false;
+
     /**
      * Constructeur du niveau
      *
@@ -56,10 +59,10 @@ public class Niveau implements GamePainter {
         for (Monstre m : this.monstres) {
             Runnable moveOrAttackMonster = () -> {
                 m.moveOrAttack();
-                this.printMap(this.tour.getHeros());
+                //this.printMap(this.tour.getHeros());
             };
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-            executor.scheduleAtFixedRate(moveOrAttackMonster, 0, 500, TimeUnit.MILLISECONDS);
+            executor.scheduleAtFixedRate(moveOrAttackMonster, 0, 3000, TimeUnit.MILLISECONDS);
         }
     }
 
@@ -301,5 +304,27 @@ public class Niveau implements GamePainter {
         }
 
         this.getTour().getHeros().draw(image);
+    }
+
+
+
+    /**
+     * Getter de la clé du personnage
+     * @return est ce que la clé est trouvée en boolean
+     */
+    public boolean isKeyFound() {
+        return keyFound;
+    }
+    /**
+     * setCanMove
+     * @return boolean KeyFound
+     * */
+    public void setKeyFound(boolean b, int x, int y) {
+        this.keyFound = b;
+        setCase(x, y);
+    }
+
+    public void setCase(int x, int y){
+        this.niveau[y][x] = new Sol(x, y);
     }
 }

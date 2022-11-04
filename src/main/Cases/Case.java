@@ -55,4 +55,18 @@ public abstract class Case implements CaseInterface, GamePainter {
      * @return type de case
      */
     public abstract String getType();
+    /**
+     * Getter du x de la case
+     * @return int du x de la case
+     */
+    public int getX() {
+        return x;
+    }
+    /**
+     * Getter du y de la case
+     * @return int du y de la case
+     */
+    public int getY() {
+        return y;
+    }
 }

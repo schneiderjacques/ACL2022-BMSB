@@ -51,7 +51,7 @@ public class Tour {
      * Direction de déplacement
      */
     public void moveHeros(char axe, int dir) {
-        if (this.niveaux.get(this.currentLevel-1).canMove(this.heros, axe, dir)) {
+        if (this.niveaux.get(this.currentLevel-1).canMove(this.heros, axe, dir) && this.heros.canMove()) {
             this.heros.move(axe, dir);
             this.triggerCaseEvent();
         }

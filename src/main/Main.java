@@ -23,7 +23,7 @@ public class Main {
 
         // Création des niveaux
         ArrayList<Niveau> list = new ArrayList<Niveau>();
-        for (int i = 1; i <= 2; i++) {
+        for (int i = 2; i <= 2; i++) {
             list.add(new Niveau("src/resources/level_" + i + ".txt", jeu.getTour()));
         }
 

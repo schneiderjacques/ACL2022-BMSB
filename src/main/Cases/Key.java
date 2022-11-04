@@ -35,5 +35,6 @@ public class Key extends Case{
     @Override
     public void eventCollider(Tour t) {
         System.out.println("Votre héros vient de récupéré la clé de sortie");
+        t.getCurrentLevel().setKeyFound(true, this.getX(), this.getY());
     }
 }
