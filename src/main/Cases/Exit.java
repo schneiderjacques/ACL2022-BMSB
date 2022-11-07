@@ -30,6 +30,11 @@ public class Exit extends Case {
 
     @Override
     public void eventCollider(Tour t) {
-        System.out.println("Passage au prochain niveau !");
+        if(t.getCurrentLevel().isKeyFound()){
+            t.nextLevel();
+            System.out.println("Passage au prochain niveau");
+        } else {
+            System.out.println("Recuperer la cle pour reussir le niveau !");
+        }
     }
 }

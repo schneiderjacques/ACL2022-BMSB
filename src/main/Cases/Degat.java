@@ -34,6 +34,7 @@ public class Degat extends Case{
 
     @Override
     public void eventCollider(Tour t) {
-        System.out.println("Votre héros a perdu de la vie !_!");
+        t.getHeros().setPDV(t.getHeros().getPDV() - DAMAGE_AMOUNT);
+        t.getCurrentLevel().setCaseToSol(this.getX(), this.getY());
     }
 }

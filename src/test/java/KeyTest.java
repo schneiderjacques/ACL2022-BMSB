@@ -1,28 +1,16 @@
 package test.java;
 
-import main.Cases.Exit;
 import main.Personnages.Heros;
 import main.Principale.Jeu;
 import main.Principale.Niveau;
-import org.junit.*;
-import main.Cases.Exit;
+import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-/**
- * Class de test de la sortie
- * @author Anthony Briot
- */
-public class ExitTest {
-
-    @Test
-    public void createSortie() {
-        Exit s = new Exit(1,1);
-        assertFalse(s.getCollision());
-    }
+public class KeyTest {
     @Test
     public void eventTest() throws FileNotFoundException {
         Jeu jeu = new Jeu();
@@ -33,11 +21,9 @@ public class ExitTest {
         }
         jeu.getTour().loadNiveaux(list);
         Heros h = jeu.getTour().getHeros();
-        h.moveY(3); h.moveX(13);
-        jeu.getTour().getCurrentLevel().setKeyFound(true);
-        /*
-        * Implémentation  plus tard du test
-        * */
+        h.moveY(3); h.moveX(4);
+        assertEquals(false, jeu.getTour().getCurrentLevel().isKeyFound());
         jeu.getTour().moveHeros('X', 1);
+        assertEquals(true, jeu.getTour().getCurrentLevel().isKeyFound());
     }
 }

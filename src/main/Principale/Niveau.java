@@ -320,12 +320,16 @@ public class Niveau implements GamePainter {
      * setCanMove
      * @return boolean KeyFound
      * */
-    public void setKeyFound(boolean b, int x, int y) {
+    public void setKeyFound(boolean b) {
         this.keyFound = b;
-        setCase(x, y);
     }
 
-    public void setCase(int x, int y){
-        this.niveau[y][x] = new Sol(x, y);
+    /**
+    * remplace une case par une case Sol
+    * @param x colonne
+    * @param y ligne
+    * */
+    public void setCaseToSol(int x, int y){
+        this.niveau[x][y] = new Sol(x, y);
     }
 }
