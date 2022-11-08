@@ -1,6 +1,7 @@
 package main.Cases;
 
 import main.Engine.GamePainter;
+import main.Principale.Tour;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,7 +10,7 @@ import java.awt.image.BufferedImage;
 * Class représentant une case du labyrinthe
 * @author Anthony Briot, Silvio Brancati
  */
-public abstract class Case implements CaseInterface, GamePainter {
+public abstract class Case implements GamePainter {
 
     //Position de la case en X
     private final int x;
@@ -55,6 +56,12 @@ public abstract class Case implements CaseInterface, GamePainter {
     public boolean getCollision() {
         return this.collision;
     }
+
+    /**
+     * Méthode qui est appelée lorsque le héros se déplace sur la case
+     * @param t : Tour du jeu
+     */
+    public abstract void eventCollider(Tour t);
 
     /**
      * Getter du type de case
