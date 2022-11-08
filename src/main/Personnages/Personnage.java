@@ -64,6 +64,11 @@ public abstract class Personnage implements GamePainter {
     public void moveX(int dir){
         //throw new Error("Not implemented yet");
         this.x = this.x + dir;
+        if(dir == 1){
+            lm = "d";
+        }else{
+            lm = "g";
+        }
         //System.out.println("Le personnage se déplace en X de " + dir + " cases");
     }
 
@@ -75,6 +80,11 @@ public abstract class Personnage implements GamePainter {
     public void moveY(int dir){
         //throw new Error("Not implemented yet");
         this.y = this.y + dir;
+        if(dir == 1){
+            lm = "b";
+        }else{
+            lm = "h";
+        }
         //System.out.println("Le personnage se déplace en Y de " + dir + " cases");
     }
 
@@ -90,18 +100,6 @@ public abstract class Personnage implements GamePainter {
         }
         else if (axe == 'Y'){
             this.moveY(dir);
-        }
-        if(axe == 'X' && dir == 1){
-            lm = "d"; 
-        }
-        if(axe == 'X' && dir == -1){
-            lm = "g"; 
-        }
-        if(axe == 'Y' && dir == -1){
-            lm = "h";
-        }
-        if(axe == 'Y' && dir == 1){
-            lm = "b";
         }
     }
 

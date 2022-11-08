@@ -62,7 +62,7 @@ public class Niveau implements GamePainter {
                 //this.printMap(this.tour.getHeros());
             };
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-            executor.scheduleAtFixedRate(moveOrAttackMonster, 0, 3000, TimeUnit.MILLISECONDS);
+            executor.scheduleAtFixedRate(moveOrAttackMonster, 0, 2, TimeUnit.SECONDS);
         }
     }
 

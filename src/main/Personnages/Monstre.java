@@ -25,7 +25,6 @@ public abstract class Monstre extends Personnage {
     public Monstre(int x, int y, boolean col, double pdv, double pda, Niveau n, Color color) {
         super(x, y, col, pdv, pda, color);
         this.niveau = n;
-        //move or attack every 5 seconds
     }
 
     /*
@@ -72,6 +71,7 @@ public abstract class Monstre extends Personnage {
                 !adv.beMonster()
         ){
             adv.recevoirDegats(getPDA());
+            System.out.println("Le monstre attaque");
             return true;
         }
         return false;
