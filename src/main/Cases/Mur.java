@@ -5,12 +5,12 @@ import main.Principale.Tour;
 
 import java.awt.*;
 
-/*
+/**
 * Class représentant les murs du labyrinthe
 * @author Anthony Briot
  */
 public class Mur extends Case {
-    /*
+    /**
     * Constructeur de la classe Mur
     * @param x : emplacement de la case en X
     * @param y : emplacement de la case en Y
@@ -30,6 +30,6 @@ public class Mur extends Case {
 
     @Override
     public void eventCollider(Tour t) {
-        return;
+        //Ne fait rien
     }
 }

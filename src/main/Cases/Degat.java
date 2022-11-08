@@ -10,8 +10,8 @@ import java.awt.*;
  * @author Jacques Schneider
  */
 public class Degat extends Case{
-    private final double DAMAGE_AMOUNT = 4;
-    /*
+
+    /**
      * Constructeur de la case Degat
      * @param x : emplacement de la case en X
      * @param y : emplacement de la case en Y
@@ -32,8 +32,15 @@ public class Degat extends Case{
         return "Degat";
     }
 
+
+    /**
+     * Méthode qui permet de faire subir des dégats au joueur
+     * @param t : Tour du jeu
+     */
     @Override
     public void eventCollider(Tour t) {
+        //Dégats de la case
+        double DAMAGE_AMOUNT = 4;
         t.getHeros().setPDV(t.getHeros().getPDV() - DAMAGE_AMOUNT);
         t.getCurrentLevel().setCaseToSol(this.getX(), this.getY());
     }

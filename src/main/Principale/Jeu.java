@@ -5,17 +5,17 @@ import main.Engine.Game;
 
 import java.io.FileNotFoundException;
 
-/*
+/**
 * Class représentant le jeu en lui même
 * @author Jacques Schneider
  */
 public class Jeu implements Game {
 
     //Labyritnhe du jeu en cours
-    private Tour tour;
+    private final Tour tour;
 
-    /*
-    * Constructeur du jeu
+    /**
+     * Constructeur du jeu
      */
     public Jeu() throws FileNotFoundException {
         //Création du labyrinthe
@@ -30,9 +30,13 @@ public class Jeu implements Game {
 
     @Override
     public void evolve(Cmd commande) {
-        /*System.out.println("Execute "+commande);*/
+        //Evolution du jeu
     }
 
+    /**
+     * Méthode permettant de savoir si le jeu est fini
+     * @return boolean
+     */
     @Override
     public boolean isFinished() {
         return false;

@@ -10,8 +10,8 @@ import java.awt.*;
  * @author Jacques Schneider
  */
 public class Vie extends Case{
-    private final double HEAL_AMOUNT = 4;
-    /*
+
+    /**
      * Constructeur de la case de Vie
      * @param x : emplacement de la case en X
      * @param y : emplacement de la case en Y
@@ -32,9 +32,15 @@ public class Vie extends Case{
         return "Vie";
     }
 
+    /**
+     * Méthode qui permet de récupérer des points de vie
+     * @param t : Tour courante
+     */
     @Override
     public void eventCollider(Tour t) {
         System.out.println("Votre héros vient de récupéré de la vie");
+        //Nombre de points de vie récupérés
+        double HEAL_AMOUNT = 4;
         t.getHeros().setPDV(t.getHeros().getPDV() + HEAL_AMOUNT);
         t.getCurrentLevel().setCaseToSol(this.getX(), this.getY());
     }

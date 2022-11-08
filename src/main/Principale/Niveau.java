@@ -23,7 +23,7 @@ public class Niveau implements GamePainter {
     private int largeur;
 
     // path du fichier contenant le labyrinthe
-    private String path;
+    private final String path;
 
     //Booleen true quand c'est le dernier niveau
     private boolean lastLevel;
@@ -32,18 +32,18 @@ public class Niveau implements GamePainter {
     private Case[][] niveau;
 
     //Monstres du niveau
-    private Set<Monstre> monstres;
+    private final Set<Monstre> monstres;
 
     //Tour du jeu
-    private Tour tour;
+    private final Tour tour;
 
     //Clé trouvée dans le niveau
     private boolean keyFound = false;
 
     /**
      * Constructeur du niveau
-     *
-     * @param path Chemin du fichier contenant le niveau
+     * @param t : Tour
+     * @param path : Chemin du fichier contenant le niveau
      */
     public Niveau(String path, Tour t) throws FileNotFoundException {
         this.path = path;
@@ -57,10 +57,7 @@ public class Niveau implements GamePainter {
 
         // Mise en place des threads pour chaque monstre
         for (Monstre m : this.monstres) {
-            Runnable moveOrAttackMonster = () -> {
-                m.moveOrAttack();
-                //this.printMap(this.tour.getHeros());
-            };
+            Runnable moveOrAttackMonster = m::moveOrAttack;
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
             executor.scheduleAtFixedRate(moveOrAttackMonster, 0, 2, TimeUnit.SECONDS);
         }
@@ -68,7 +65,6 @@ public class Niveau implements GamePainter {
 
     /**
      * Méthode autorisant ou non le déplacement d'un personnage
-     *
      * @param p   Personnage à déplacer
      * @param axe Axe de déplacement
      * @param dir Direction de déplacement
@@ -79,12 +75,8 @@ public class Niveau implements GamePainter {
         int targetY = p.getY();
 
         switch (axe) {
-            case 'X':
-                targetX += dir;
-                break;
-            case 'Y':
-                targetY += dir;
-                break;
+            case 'X' -> targetX += dir;
+            case 'Y' -> targetY += dir;
         }
 
         if (!this.niveau[targetY][targetX].getCollision()) {
@@ -93,20 +85,38 @@ public class Niveau implements GamePainter {
                     return false;
                 }
             }
-            if (this.tour.getHeros().getX() == targetX && this.tour.getHeros().getY() == targetY) {
-                return false;
-            }
-            return true;
+            return this.tour.getHeros().getX() != targetX || this.tour.getHeros().getY() != targetY;
         }
         if (!p.isCollision()) {
-            if (targetX == 0 || targetX == this.longueur - 1 || targetY == 0 || targetY == this.largeur - 1) {
-                return false;
-            }
-            return true;
+            return targetX != 0 && targetX != this.longueur - 1 && targetY != 0 && targetY != this.largeur - 1;
         }
         return false;
-
     }
+
+    /**
+     * Méthode qui retourne le monstre en face du personnage sinon null
+     * @param p : Personnage
+     * @return monstre
+     */
+    public Monstre getMonsterInFront(Personnage p) {
+        int targetX = p.getX();
+        int targetY = p.getY();
+
+        switch (p.getLM()) {
+            case "h" -> targetY -= 1;
+            case "b" -> targetY += 1;
+            case "g" -> targetX -= 1;
+            case "d" -> targetX += 1;
+        }
+
+        for (Monstre m : this.monstres) {
+            if (m.getX() == targetX && m.getY() == targetY) {
+                return m;
+            }
+        }
+        return null;
+    }
+
 
     /**
      * Charge le labyrinthe depuis un fichier
@@ -128,47 +138,44 @@ public class Niveau implements GamePainter {
         int index = 0;
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
-
             for (int i = 0; i < line.length(); i++) {
+
                 // Récupération de la case
                 char c = line.charAt(i);
+
                 // Création de la case
-                //M : Mur
-                //V : Vide (sol)
-                //S : Sortie
-                //K : Clé
-                //H : Heal (vie)
-                //D : Dégat
                 switch (c) {
-                    case 'M':
-                        this.niveau[index][i] = new Mur(true, index, i);
-                        break;
-                    case 'V':
-                        this.niveau[index][i] = new Sol(index, i);
-                        break;
-                    case 'S':
-                        this.niveau[index][i] = new Exit(index, i);
-                        break;
-                    case 'K':
-                        this.niveau[index][i] = new Key(index, i);
-                        break;
-                    case 'T':
-                        this.niveau[index][i] = new Trappe(index, i);
-                        break;
-                    case 'H':
-                        this.niveau[index][i] = new Vie(index, i);
-                        break;
-                    case 'D':
-                        this.niveau[index][i] = new Degat(index, i);
-                        break;
-                    case 'B':
+                    //M : Mur
+                    case 'M' -> this.niveau[index][i] = new Mur(true, index, i);
+
+                    //V : Vide (sol)
+                    case 'V' -> this.niveau[index][i] = new Sol(index, i);
+
+                    //S : Sortie (Exit)
+                    case 'S' -> this.niveau[index][i] = new Exit(index, i);
+
+                    //K : Clé
+                    case 'K' -> this.niveau[index][i] = new Key(index, i);
+
+                    //T : Trappe (piège)
+                    case 'T' -> this.niveau[index][i] = new Trappe(index, i);
+
+                    //H : Heal (vie)
+                    case 'H' -> this.niveau[index][i] = new Vie(index, i);
+
+                    //D : Dégat
+                    case 'D' -> this.niveau[index][i] = new Degat(index, i);
+
+                    //B : Boo (monstre(fantôme))
+                    case 'B' -> {
                         this.monstres.add(new Boo(index, i, this));
                         this.niveau[index][i] = new Sol(index, i);
-                        break;
-                    case 'G':
+                    }
+                    //G : Goomba (monstre)
+                    case 'G' -> {
                         this.monstres.add(new Goomba(index, i, this));
                         this.niveau[index][i] = new Sol(index, i);
-                        break;
+                    }
                 }
             }
             index++;
@@ -177,7 +184,6 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter path
-     *
      * @return path
      */
     public String getPath() {
@@ -186,7 +192,6 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter LONGUEUR
-     *
      * @return LONGUEUR
      */
     public int getLongueur() {
@@ -195,7 +200,6 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter LARGEUR
-     *
      * @return LARGEUR
      */
     public int getLargeur() {
@@ -204,7 +208,6 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter lastLevel
-     *
      * @return lastLevel
      */
     public boolean isLastLevel() {
@@ -213,7 +216,6 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter labyrinthe
-     *
      * @return labyrinthe
      */
     public Case[][] getNiveau() {
@@ -222,7 +224,6 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter Case
-     *
      * @param x entier représentant l'axe des X du labyrinthe
      * @param y entier représentant l'axe des Y du labyrinthe
      * @return CASE[][]
@@ -233,9 +234,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Print labyrinthe temporaire
-     *
      * @param h Heros du niveau
-     * @return String
      */
     public void printMap(Heros h) {
         System.out.println(this.getLargeur());
@@ -270,8 +269,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Setter lastLevel
-     *
-     * @param b Booleen
+     * @param b boolean
      */
     public void setLastLevel(boolean b) {
         this.lastLevel = b;
@@ -279,7 +277,6 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter tour
-     *
      * @return tour
      */
     public Tour getTour() {
@@ -288,8 +285,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Dessiner le niveau
-     *
-     * @param image image sur laquelle dessiner
+     * @param image : image sur laquelle dessiner
      */
     @Override
     public void draw(BufferedImage image) {
@@ -298,12 +294,9 @@ public class Niveau implements GamePainter {
                 this.niveau[i][j].draw(image);
             }
         }
-
-
         for (Monstre m : this.monstres) {
             m.draw(image);
         }
-
         this.getTour().getHeros().draw(image);
     }
 
@@ -316,10 +309,10 @@ public class Niveau implements GamePainter {
     public boolean isKeyFound() {
         return keyFound;
     }
+
     /**
      * setCanMove
-     * @return boolean KeyFound
-     * */
+     */
     public void setKeyFound(boolean b) {
         this.keyFound = b;
     }
@@ -328,7 +321,7 @@ public class Niveau implements GamePainter {
     * remplace une case par une case Sol
     * @param x colonne
     * @param y ligne
-    * */
+    */
     public void setCaseToSol(int x, int y){
         this.niveau[x][y] = new Sol(x, y);
     }

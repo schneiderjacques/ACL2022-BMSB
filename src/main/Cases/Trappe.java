@@ -13,13 +13,17 @@ import java.util.concurrent.TimeUnit;
  * @author Jacques Schneider
  */
 public class Trappe extends Case{
+    //Temps d'immobilisation du joueur
     private final double BLOCKED_TIME = 3;
-    /*
+
+    //Executer pour bloquer le personnage
+    private ScheduledExecutorService executor;
+
+    /**
      * Constructeur de la case Piege
      * @param x : emplacement de la case en X
      * @param y : emplacement de la case en Y
      */
-    private ScheduledExecutorService executor;
     public Trappe(int x, int y) {
         //Initialisation des attributs
         super(false, x, y, Color.darkGray);
@@ -36,6 +40,10 @@ public class Trappe extends Case{
         return "Trappe";
     }
 
+    /**
+     * Méthode qui bloque le joueur pendant 3 secondes
+     * @param t : tour du jeu
+     */
     @Override
     public void eventCollider(Tour t) {
         Heros h = t.getHeros();
@@ -49,6 +57,10 @@ public class Trappe extends Case{
         };
         this.executor.scheduleAtFixedRate(stopPlayer, 3000, 100, TimeUnit.MILLISECONDS);
     }
+
+    /**
+     * Méthode qui arrête l'executor
+     */
     public void stopExecutor(){
         this.executor.shutdown();
     }

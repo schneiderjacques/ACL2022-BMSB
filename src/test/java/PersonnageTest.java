@@ -28,7 +28,7 @@ public class PersonnageTest {
      */
     @Test
     public void testAttaque(){
-        /*
+
         Heros p = new Heros(2,2,10,1);
         Goomba h = new Goomba(2, 0);
         Goomba d = new Goomba(4, 2);
@@ -57,7 +57,6 @@ public class PersonnageTest {
         p.move('Y', -1);
         p.attaque(d);
         assertEquals("Le monstre n'a perdu de points de vie.", 9, (int)d.getPDV());
-         */
     }
     /**
      * Test de déplacement du personnage
@@ -84,7 +83,6 @@ public class PersonnageTest {
 
     /**
      * Test de déplacement du personnage avec le clavier (avec le controlleur) et collisions
-     * @throws FileNotFoundException
      */
     @Test
     public void movePlayerInWall() throws FileNotFoundException {

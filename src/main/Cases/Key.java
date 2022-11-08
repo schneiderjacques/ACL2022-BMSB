@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class Key extends Case{
 
-    /*
+    /**
      * Constructeur de la case Key
      * @param x : emplacement de la case en X
      * @param y : emplacement de la case en Y
@@ -32,6 +32,10 @@ public class Key extends Case{
         return "Key";
     }
 
+    /**
+     * Méthode permettant de récupérer la clé
+     * @param t : tour courante
+     */
     @Override
     public void eventCollider(Tour t) {
         System.out.println("Votre héros vient de récupéré la clé de sortie");

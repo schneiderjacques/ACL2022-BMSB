@@ -2,20 +2,20 @@ package main.Personnages;
 
 import java.awt.*;
 
-/*
+/**
  * Class représentant le héros du jeu que l'on contrôle
  * @author Arthur Moitrier
  */
 public class Heros extends Personnage {
 
-    /*
-     * Constructeur du héros
-     * Le héros commence toujours aux coordonnées (1,1) avec 10 points de vie et 0.5 points d'attaque
-     */
     // Le personnage peut se deplacer
     // Par défaut à true car tout les personnages peuvent se déplacer
     private boolean canMove = true;
 
+    /**
+     * Constructeur du héros
+     * Le héros commence toujours aux coordonnées (1,1) avec 10 points de vie et 0.5 points d'attaque
+     */
     public Heros() {
         super(1, 1, true, 10, 0.5, Color.blue);
     }
@@ -28,7 +28,6 @@ public class Heros extends Personnage {
      * @param pda : points d'attaque
      */
     public Heros(int x, int y, double pdv, double pda) {
-        //super(1, 1, 10, 0.5);
         super(x,y,true, pdv,pda, Color.blue);
     }
 
@@ -39,13 +38,15 @@ public class Heros extends Personnage {
     public String getType() {
         return "Heros";
     }
-    /*
+
+    /**
      * canMove
      * @return canMove
      * */
     public boolean canMove(){
         return canMove;
     }
+
     /*
      * setCanMove
      * @param canMove

@@ -1,21 +1,22 @@
 package main.Principale;
 
 import main.Personnages.Heros;
+import main.Personnages.Monstre;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-/*
+/**
  * Class représentant le labynthe du jeu
  * @author Silvio Brancati
  */
 public class Tour {
 
     //Tableau de niveaux représentant la tour
-    private ArrayList<Niveau> niveaux;
+    private final ArrayList<Niveau> niveaux;
 
     //Personnage du jeu en cours
-    private Heros heros;
+    private final Heros heros;
 
     //Niveau courant
     private int currentLevel;
@@ -25,7 +26,7 @@ public class Tour {
      */
     public Tour() {
         // Création du tableau de niveaux
-        this.niveaux = new ArrayList<Niveau>();
+        this.niveaux = new ArrayList<>();
 
         // Création du héros
         this.heros = new Heros();
@@ -51,11 +52,36 @@ public class Tour {
      * Direction de déplacement
      */
     public void moveHeros(char axe, int dir) {
+        switch (axe) {
+            case 'X':
+                if (dir > 0){
+                    this.heros.setLm("d");
+                } else {
+                    this.heros.setLm("g");
+                }
+                break;
+            case 'Y':
+                if (dir > 0){
+                    this.heros.setLm("b");
+                } else {
+                    this.heros.setLm("h");
+                }
+                break;
+        }
         if (this.niveaux.get(this.currentLevel-1).canMove(this.heros, axe, dir) && this.heros.canMove()) {
             this.heros.move(axe, dir);
             this.triggerCaseEvent();
         }
-        //this.niveaux.get(currentLevel-1).printMap(this.getHeros());
+    }
+
+    /**
+     * Méthode qui fait attaquer le héros si un monstre est en face de lui
+     */
+    public void heroAttaque(){
+        Monstre m = this.niveaux.get(this.currentLevel-1).getMonsterInFront(this.heros);
+        if (m != null) {
+            this.heros.attaque(m);
+        }
     }
 
     /**
@@ -80,7 +106,7 @@ public class Tour {
      */
     public Niveau getCurrentLevel() { return this.niveaux.get(this.currentLevel-1); }
 
-    /*
+    /**
      * Getter du Heros
      * @return Heros
      */

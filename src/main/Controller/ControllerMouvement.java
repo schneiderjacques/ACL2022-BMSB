@@ -6,14 +6,14 @@ import main.Engine.GameController;
 
 import java.awt.event.KeyEvent;
 
-/*
+/**
  * Controlleur qui permet de gérer les mouvements du joueur
  * @author Anthony Briot
  */
 public class ControllerMouvement implements GameController {
 
     //Le jeu courant
-    private Jeu jeu;
+    private final Jeu jeu;
 
     /**
      * commande en cours
@@ -29,6 +29,7 @@ public class ControllerMouvement implements GameController {
         this.commandeEnCours = Cmd.IDLE;
     }
 
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -37,29 +38,30 @@ public class ControllerMouvement implements GameController {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_UP -> {
                 this.jeu.getTour().moveHeros('Y', -1);
                 this.commandeEnCours = Cmd.UP;
-                break;
-            case KeyEvent.VK_DOWN:
+            }
+            case KeyEvent.VK_DOWN -> {
                 this.jeu.getTour().moveHeros('Y', 1);
                 this.commandeEnCours = Cmd.DOWN;
-                break;
-            case KeyEvent.VK_LEFT:
+            }
+            case KeyEvent.VK_LEFT -> {
                 this.jeu.getTour().moveHeros('X', -1);
                 this.commandeEnCours = Cmd.LEFT;
-                break;
-            case KeyEvent.VK_RIGHT:
+            }
+            case KeyEvent.VK_RIGHT -> {
                 this.jeu.getTour().moveHeros('X', 1);
                 this.commandeEnCours = Cmd.RIGHT;
-                break;
+            }
+            case KeyEvent.VK_SPACE -> {
+                this.jeu.getTour().heroAttaque();
+                this.commandeEnCours = Cmd.SPACE;
+            }
         }
     }
 
     @Override
-    /**
-     * met a jour les commandes quand le joueur relache une touche
-     */
     public void keyReleased(KeyEvent e) {
         this.commandeEnCours = Cmd.IDLE;
     }

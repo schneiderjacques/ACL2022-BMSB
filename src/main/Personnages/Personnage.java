@@ -4,8 +4,9 @@ import main.Engine.GamePainter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 
-/*
+/**
 * Class représentant un personnage du jeu
 * @author Martin Gurtner
  */
@@ -13,22 +14,29 @@ public abstract class Personnage implements GamePainter {
 
     //Position du personnage en X
     private int x;
+
     //Position du personnage en Y
     private int y;
+
     //Vie du personnage
     private double pdv;
+
     //Force du personnage
-    private double pda;
+    private final double pda;
+
     //Dernier mouvement du héros 
     private String lm;
+
     //Taille d'une case en pixels
     private static final int TAILLE_CASE = 16*3;
-    //Collision du personnage
-    private boolean collision;
-    // Couleur du personnage
-    private Color color;
 
-    /*
+    //Collision du personnage
+    private final boolean collision;
+
+    //Couleur du personnage
+    private final Color color;
+
+    /**
     * Constructeur du personnage
     * @param x : position en X
     * @param y : position en Y
@@ -49,86 +57,83 @@ public abstract class Personnage implements GamePainter {
 
     /**
      * Méthode de dessin du personnage dans le jeu
-     * @param im
-     *            image sur laquelle dessiner
+     * @param im : image sur laquelle dessiner
      */
     public void draw(BufferedImage im) {
         Graphics2D crayon = (Graphics2D) im.getGraphics();
         crayon.setColor(this.color);
         crayon.fillRect(x*TAILLE_CASE,y*TAILLE_CASE,TAILLE_CASE,TAILLE_CASE);
     }
-    /*
+
+    /**
     * Méthode permettant de déplacer le personnage en X
-    * @param x
+    * @param dir : direction du déplacement
      */
     public void moveX(int dir){
-        //throw new Error("Not implemented yet");
         this.x = this.x + dir;
         if(dir == 1){
             lm = "d";
         }else{
             lm = "g";
         }
-        //System.out.println("Le personnage se déplace en X de " + dir + " cases");
     }
 
 
-    /*
+    /**
     * Méthode permettant de déplacer le personnage en Y
-    * @param y
+    * @param dir : direction du déplacement
      */
     public void moveY(int dir){
-        //throw new Error("Not implemented yet");
         this.y = this.y + dir;
         if(dir == 1){
             lm = "b";
         }else{
             lm = "h";
         }
-        //System.out.println("Le personnage se déplace en Y de " + dir + " cases");
     }
 
-    /*
+    /**
     * Méthode permettant de déplacer le personnage
-    * @param axe
-    * @param dir
+    * @param axe : axe de déplacement
+    * @param dir : direction du déplacement
      */
     public void move(char axe, int dir){
-        //throw new Error("Not implemented yet");
         if (axe == 'X'){
             this.moveX(dir);
         }
         else if (axe == 'Y'){
             this.moveY(dir);
         }
-        System.out.println("Hero:"+getX()+";"+getY());
     }
 
-    /*
+    /**
     * Méthode qui permet d'attaquer les personnages en face du personnage
+     * @param adv : adversaire
+     * @return : true s'il y a eu une attaque, false sinon
      */
     public boolean attaque(Personnage adv){
-        if((adv.getX() == getX()+1 && adv.getY() == getY() && getLM() == "d") ||
-        (adv.getX() == getX()-1 && adv.getY() == getY() && getLM() == "g") ||
-        (adv.getY() == getY()-1 && adv.getX() == getX() && getLM() == "h") ||
-        (adv.getY() == getY()+1 && adv.getX() == getX() && getLM() == "b")){
+        if((adv.getX() == getX()+1 && adv.getY() == getY() && Objects.equals(getLM(), "d")) ||
+        (adv.getX() == getX()-1 && adv.getY() == getY() && Objects.equals(getLM(), "g")) ||
+        (adv.getY() == getY()-1 && adv.getX() == getX() && Objects.equals(getLM(), "h")) ||
+        (adv.getY() == getY()+1 && adv.getX() == getX() && Objects.equals(getLM(), "b"))){
             adv.recevoirDegats(getPDA());
+            System.out.println("Vous avez attaqué un adversaire");
             return true;
         }
         return false;
     }
 
-    /*
+    /**
      * Getter de la position X du personnage
-     * @return x
+     * @return : position X du personnage
      */
     public int getX(){
         return x; 
     }
 
-    /*
+    /**
      * Getter de la position Y du personnage
-     * @return y 
+     * @return : position Y du personnage
      */
     public int getY(){
         return y; 
@@ -136,7 +141,7 @@ public abstract class Personnage implements GamePainter {
 
     /**
      * getteur de la vie du personnage
-     * @return pdv
+     * @return : vie du personnage
      */
     public double getPDV(){
         return pdv; 
@@ -144,19 +149,23 @@ public abstract class Personnage implements GamePainter {
 
     /**
      * getteur de la force du personnage
-     * @return pda
+     * @return : force du personnage
      */
     public double getPDA(){
         return pda; 
     }
 
+    /**
+     * getteur du dernier mouvement du personnage
+     * @return : dernier mouvement du personnage
+     */
     public String getLM(){
         return lm; 
     }
 
     /**
      * Setter de la vie du personnage. 
-     * @param pv
+     * @param pv : nouvelle vie du personnage
      */
     public void setPDV(double pv){
         this.pdv = pv; 
@@ -165,10 +174,18 @@ public abstract class Personnage implements GamePainter {
         }
     }
 
+    /**
+     * Setter de la vie du personnage après une attaque
+     * @param degats : dégats subis par le personnage
+     */
     public void recevoirDegats(double degats){
         setPDV(getPDV() - degats);
     }
 
+    /**
+     * Methode qui indique si le personnage est mort
+     * @return : true si le personnage est mort, false sinon
+     */
     public boolean estVivant(){
         return getPDV() != 0; 
     }
@@ -190,12 +207,27 @@ public abstract class Personnage implements GamePainter {
         "Position : "+getX()+";"+getY()+"\n\n"; 
     }
 
+    /**
+     * Indique si le personnage est un monstre
+     * @return true si le personnage est un monstre, false sinon
+     */
     public boolean beMonster(){
         return false;
     }
 
+    /**
+     * Indique si le personnage entre en collision avec les murs ou non
+     * @return true si le personnage entre en collision avec les murs, false sinon
+     */
     public boolean isCollision() {
         return collision;
     }
 
+    /**
+     * Setter du l'orientation du personnage
+     * @param orientation : nouvelle orientation du personnage
+     */
+    public void setLm(String orientation) {
+        this.lm = orientation;
+    }
 }
