@@ -14,6 +14,7 @@ Réalisation d'un jeu mono-utilisateur.
 
 # Exécution
 
+Nécessite Java 17. \
 Compiler le projet depuis le dossier `src` : 
 
 ```bash

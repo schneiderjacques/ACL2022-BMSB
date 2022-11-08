@@ -1,5 +1,6 @@
 package main.Personnages;
 
+import main.Cases.Case;
 import main.Engine.GamePainter;
 
 import java.awt.*;
@@ -26,9 +27,6 @@ public abstract class Personnage implements GamePainter {
 
     //Dernier mouvement du héros 
     private String lm;
-
-    //Taille d'une case en pixels
-    private static final int TAILLE_CASE = 16*3;
 
     //Collision du personnage
     private final boolean collision;
@@ -62,7 +60,7 @@ public abstract class Personnage implements GamePainter {
     public void draw(BufferedImage im) {
         Graphics2D crayon = (Graphics2D) im.getGraphics();
         crayon.setColor(this.color);
-        crayon.fillRect(x*TAILLE_CASE,y*TAILLE_CASE,TAILLE_CASE,TAILLE_CASE);
+        crayon.fillRect(x* Case.TAILLE_CASE,y*Case.TAILLE_CASE,Case.TAILLE_CASE,Case.TAILLE_CASE);
     }
 
     /**

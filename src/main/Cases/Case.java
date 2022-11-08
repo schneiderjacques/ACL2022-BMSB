@@ -18,7 +18,7 @@ public abstract class Case implements CaseInterface, GamePainter {
     private final int y;
 
     //Taille d'une case en pixels
-    private static final int TAILLE_CASE = 16*3;
+    public static final int TAILLE_CASE = 16*3;
 
     //Couleur de la case
     private final Color color;
