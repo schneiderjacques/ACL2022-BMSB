@@ -54,12 +54,14 @@ public class Niveau implements GamePainter {
         // Chargement du fichier
         this.loadFile();
 
-
+        int delay = 20;
         // Mise en place des threads pour chaque monstre
         for (Monstre m : this.monstres) {
             Runnable moveOrAttackMonster = m::moveOrAttack;
+            long period = delay * 100L;
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-            executor.scheduleAtFixedRate(moveOrAttackMonster, 0, 2, TimeUnit.SECONDS);
+            executor.scheduleAtFixedRate(moveOrAttackMonster, period, 2000, TimeUnit.MILLISECONDS);
+            delay += 1;
         }
     }
 
@@ -168,12 +170,12 @@ public class Niveau implements GamePainter {
 
                     //B : Boo (monstre(fantôme))
                     case 'B' -> {
-                        this.monstres.add(new Boo(index, i, this));
+                        this.monstres.add(new Boo(i, index, this));
                         this.niveau[index][i] = new Sol(index, i);
                     }
                     //G : Goomba (monstre)
                     case 'G' -> {
-                        this.monstres.add(new Goomba(index, i, this));
+                        this.monstres.add(new Goomba(i, index, this));
                         this.niveau[index][i] = new Sol(index, i);
                     }
                 }
