@@ -33,6 +33,7 @@ public abstract class Monstre extends Personnage {
     public void moveOrAttack() {
         if (!this.attaque(this.niveau.getTour().getHeros())) {
             this.moveRandom();
+            this.attaque(this.niveau.getTour().getHeros());
         }
     }
 
@@ -64,13 +65,15 @@ public abstract class Monstre extends Personnage {
      * @return boolean
      */
     public boolean attaque(Personnage adv){
-        if(((adv.getX() == getX()+1 && getLM() == "d") ||
-                (adv.getX() == getX()-1 && getLM() == "g") ||
-                (adv.getY() == getY()-1 && getLM() == "h") ||
-                (adv.getY() == getY()+1 && getLM() == "b" )) &&
+        if(((adv.getX() == getX()+1 && adv.getY() == getY()) ||
+                (adv.getX() == getX()-1 && adv.getY() == getY()) ||
+                (adv.getY() == getY()-1 && adv.getX() == getX()) ||
+                (adv.getY() == getY()+1 && adv.getX() == getX())) &&
                 !adv.beMonster()
         ){
             adv.recevoirDegats(getPDA());
+            System.out.println("Monstre:"+getX()+";"+getY());
+            System.out.println("Hero:"+adv.getX()+";"+adv.getY());
             System.out.println("Le monstre attaque");
             return true;
         }

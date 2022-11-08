@@ -101,16 +101,17 @@ public abstract class Personnage implements GamePainter {
         else if (axe == 'Y'){
             this.moveY(dir);
         }
+        System.out.println("Hero:"+getX()+";"+getY());
     }
 
     /*
     * Méthode qui permet d'attaquer les personnages en face du personnage
      */
     public boolean attaque(Personnage adv){
-        if((adv.getX() == getX()+1 && getLM() == "d") ||
-        (adv.getX() == getX()-1 && getLM() == "g") ||
-        (adv.getY() == getY()-1 && getLM() == "h") ||
-        (adv.getY() == getY()+1 && getLM() == "b")){
+        if((adv.getX() == getX()+1 && adv.getY() == getY() && getLM() == "d") ||
+        (adv.getX() == getX()-1 && adv.getY() == getY() && getLM() == "g") ||
+        (adv.getY() == getY()-1 && adv.getX() == getX() && getLM() == "h") ||
+        (adv.getY() == getY()+1 && adv.getX() == getX() && getLM() == "b")){
             adv.recevoirDegats(getPDA());
             return true;
         }
