@@ -19,7 +19,7 @@ public class TourTest {
     public void createTour() throws FileNotFoundException {
         ArrayList<Niveau> list = new ArrayList<Niveau>();
         Tour t = new Tour();
-        list.add(new Niveau("src/test/resources/lab_test_1.txt", t));
+        list.add(new Niveau(TourTest.class.getResourceAsStream("/test/resources/lab_test_1.txt"), t));
 
         t.loadNiveaux(list);
         assertEquals(10, t.getCurrentLevel().getLongueur());
@@ -31,7 +31,7 @@ public class TourTest {
         ArrayList<Niveau> list = new ArrayList<Niveau>();
         Tour t = new Tour();
         for (int i = 1; i <= 3; i++) {
-            list.add(new Niveau("src/test/resources/lab_test_" + i + ".txt", t));
+            list.add(new Niveau(TourTest.class.getResourceAsStream("/test/resources/lab_test_" + i + ".txt"), t));
         }
         t.loadNiveaux(list);
 

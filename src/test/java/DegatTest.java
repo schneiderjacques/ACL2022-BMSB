@@ -17,7 +17,7 @@ public class DegatTest {
         // Création des niveaux
         ArrayList<Niveau> list = new ArrayList<Niveau>();
         for (int i = 2; i <= 2; i++) {
-            list.add(new Niveau("src/resources/level_" + i + ".txt", jeu.getTour()));
+            list.add(new Niveau(DegatTest.class.getResourceAsStream("/resources/level_" + i + ".txt"), jeu.getTour()));
         }
         jeu.getTour().loadNiveaux(list);
         Heros h = jeu.getTour().getHeros();

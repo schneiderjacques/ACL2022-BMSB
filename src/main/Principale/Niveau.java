@@ -7,6 +7,9 @@ import main.Personnages.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -23,7 +26,7 @@ public class Niveau implements GamePainter {
     private int largeur;
 
     // path du fichier contenant le labyrinthe
-    private final String path;
+    private final InputStream path;
 
     //Booleen true quand c'est le dernier niveau
     private boolean lastLevel;
@@ -45,7 +48,7 @@ public class Niveau implements GamePainter {
      * @param t : Tour
      * @param path : Chemin du fichier contenant le niveau
      */
-    public Niveau(String path, Tour t) throws FileNotFoundException {
+    public Niveau(InputStream path, Tour t) throws FileNotFoundException {
         this.path = path;
         this.lastLevel = false;
         this.tour = t;
@@ -125,8 +128,7 @@ public class Niveau implements GamePainter {
      */
     private void loadFile() throws FileNotFoundException {
         // Ouvre le fichier
-        File file = new File(this.path);
-        Scanner sc = new Scanner(file);
+        Scanner sc = new Scanner(this.path);
 
         // Récupération des dimensions du labyrinthe
         String[] dim = (sc.nextLine()).split(" ");
@@ -188,7 +190,7 @@ public class Niveau implements GamePainter {
      * Getter path
      * @return path
      */
-    public String getPath() {
+    public InputStream getPath() {
         return path;
     }
 
