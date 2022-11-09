@@ -48,8 +48,10 @@ public class Tour {
      */
     public void nextLevel() {
         if (this.currentLevel < this.niveaux.size()) {
+            this.niveaux.get(this.currentLevel-1).deleteNiveau();
             this.currentLevel++;
             this.levelChanged = true;
+            this.heros.reset();
         } else {
             this.fini = true;
         }
@@ -90,8 +92,11 @@ public class Tour {
      */
     public void heroAttaque(){
         Monstre m = this.niveaux.get(this.currentLevel-1).getMonsterInFront(this.heros);
-        if (m != null) {
+        if (m != null && this.heros.canAttack()) {
             this.heros.attaque(m);
+            if (!m.estVivant()){
+                this.niveaux.get(this.currentLevel-1).removeMonstre(m);
+            }
         }
     }
 

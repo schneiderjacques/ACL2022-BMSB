@@ -7,6 +7,7 @@ import main.Personnages.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -37,6 +38,8 @@ public class Niveau implements GamePainter {
     //Monstres du niveau
     private final Set<Monstre> monstres;
 
+    private final HashMap<Monstre, ScheduledExecutorService> monstresThreads;
+
     //Tour du jeu
     private final Tour tour;
 
@@ -53,6 +56,7 @@ public class Niveau implements GamePainter {
         this.lastLevel = false;
         this.tour = t;
         this.monstres = new HashSet<>();
+        this.monstresThreads = new HashMap<>();
 
         // Chargement du fichier
         this.loadFile();
@@ -63,6 +67,7 @@ public class Niveau implements GamePainter {
             Runnable moveOrAttackMonster = m::moveOrAttack;
             long period = delay * 100L;
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+            this.monstresThreads.put(m, executor);
             executor.scheduleAtFixedRate(moveOrAttackMonster, period, 2000, TimeUnit.MILLISECONDS);
             delay += 1;
         }
@@ -328,5 +333,33 @@ public class Niveau implements GamePainter {
     */
     public void setCaseToSol(int x, int y){
         this.niveau[x][y] = new Sol(x, y);
+    }
+
+    /**
+     * Methode qui supprime un monstre du niveau
+     * @param m : monstre à supprimer
+     */
+    public void removeMonstre(Monstre m) {
+        this.monstres.remove(m);
+        this.monstresThreads.get(m).shutdown();
+        this.monstresThreads.remove(m);
+    }
+
+    public void resetMonstre(Monstre monstre) {
+        Runnable moveOrAttackMonster = monstre::moveOrAttack;
+        this.monstresThreads.get(monstre).shutdown();
+        this.monstresThreads.remove(monstre);
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        this.monstresThreads.put(monstre, executor);
+        executor.scheduleAtFixedRate(moveOrAttackMonster, 1500, 2000, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * Methode qui supprime tous les monstres du niveau
+     */
+    public void deleteNiveau(){
+        this.monstresThreads.forEach((monstre, executor) -> executor.shutdown());
+        this.monstresThreads.clear();
+        this.monstres.clear();
     }
 }

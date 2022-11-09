@@ -115,7 +115,7 @@ public abstract class Personnage implements GamePainter {
         (adv.getY() == getY()-1 && adv.getX() == getX() && Objects.equals(getLM(), "h")) ||
         (adv.getY() == getY()+1 && adv.getX() == getX() && Objects.equals(getLM(), "b"))){
             adv.recevoirDegats(getPDA());
-            System.out.println("Vous avez attaqué un adversaire");
+            System.out.println("Le héros a attaqué le monstre" + " : " + adv.getPDV());
             return true;
         }
         return false;
@@ -227,5 +227,13 @@ public abstract class Personnage implements GamePainter {
      */
     public void setLm(String orientation) {
         this.lm = orientation;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

@@ -88,6 +88,7 @@ public abstract class Monstre extends Personnage {
                 !adv.beMonster()
         ){
             adv.recevoirDegats(getPDA());
+            System.out.println("Le monstre attaque le héros" + " : " + adv.getPDV());
             return true;
         }
         return false;
@@ -100,4 +101,11 @@ public abstract class Monstre extends Personnage {
     public boolean beMonster(){
         return true;
     }
+
+    @Override
+    public void recevoirDegats(double degats) {
+        super.recevoirDegats(degats);
+        this.niveau.resetMonstre(this);
+    }
+
 }
