@@ -37,6 +37,7 @@ public class DrawingPanel extends JPanel {
 	public static int scale = 3; //3x plus grand
 
 	public static final int TILE_SIZE = originalTileSize * scale; //48x48 tile
+	public static final int ECART = 16 * scale; //le niveau commence 48 pixels plus bas afin de laisser de la place pour l'UI
 	private int maxScreenCol; //Nombre de colonne maximum visible sur l'écran
 	private int maxScreenRow; //Nombre de ligne maximum visible sur l'écran
 	private int screenWidth;
@@ -49,6 +50,8 @@ public class DrawingPanel extends JPanel {
 	private int maxLevelRow; //Nombre de ligne maximum dans le niveau
 	private int worldWidth; //Largeur du monde en pixel
 	private int worldHeight; //Hauteur du monde en pixel
+
+	private UI ui;
 
 	private Jeu jeu;
 
@@ -68,7 +71,7 @@ public class DrawingPanel extends JPanel {
 		super();
 		this.jeu = jeu;
 		this.maxScreenCol = jeu.getTour().getCurrentLevel().getLargeur();
-		this.maxScreenRow = jeu.getTour().getCurrentLevel().getLongueur();
+		this.maxScreenRow = jeu.getTour().getCurrentLevel().getLongueur() + 1; //+1 pour laisser de la place pour l'UI
 		this.screenWidth = TILE_SIZE * maxScreenCol;
 		this.screenHeight = TILE_SIZE * maxScreenRow;
 		this.width = this.screenWidth;
@@ -83,6 +86,8 @@ public class DrawingPanel extends JPanel {
 
 		this.setPreferredSize(new Dimension(this.maxScreenCol * TILE_SIZE, this.maxScreenRow * TILE_SIZE));
 		this.painter=painter;
+
+		this.ui = new UI(this);
 
 		// cree l'image buffer et son graphics
 		this.nextImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -125,7 +130,18 @@ public class DrawingPanel extends JPanel {
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawImage(this.currentImage, 0, 0, getWidth(), getHeight(), 0, 0, getWidth(), getHeight(), null);
+		ui.draw(g2);
 
 	}
 
+	/**
+	 * @return Jeu instance du jeu
+	 * */
+	public Jeu getJeu() {
+		return jeu;
+	}
+
+	public int getScreenWidth() {
+		return screenWidth;
+	}
 }

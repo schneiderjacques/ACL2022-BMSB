@@ -1,6 +1,7 @@
 package main.Personnages;
 
 import main.Cases.Case;
+import main.Engine.DrawingPanel;
 import main.Engine.GamePainter;
 
 import java.awt.*;
@@ -60,7 +61,7 @@ public abstract class Personnage implements GamePainter {
     public void draw(BufferedImage im) {
         Graphics2D crayon = (Graphics2D) im.getGraphics();
         crayon.setColor(this.color);
-        crayon.fillRect(x* Case.TAILLE_CASE,y*Case.TAILLE_CASE,Case.TAILLE_CASE,Case.TAILLE_CASE);
+        crayon.fillRect(x* Case.TAILLE_CASE,y*Case.TAILLE_CASE + DrawingPanel.ECART,Case.TAILLE_CASE,Case.TAILLE_CASE);
     }
 
     /**

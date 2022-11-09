@@ -2,6 +2,7 @@ package main.Principale;
 
 import main.Cases.*;
 import main.Engine.GamePainter;
+import main.Engine.UI;
 import main.Personnages.*;
 
 import java.awt.image.BufferedImage;
@@ -46,6 +47,7 @@ public class Niveau implements GamePainter {
     //Clé trouvée dans le niveau
     private boolean keyFound = false;
 
+
     /**
      * Constructeur du niveau
      * @param t : Tour
@@ -57,7 +59,6 @@ public class Niveau implements GamePainter {
         this.tour = t;
         this.monstres = new HashSet<>();
         this.monstresThreads = new HashMap<>();
-
         // Chargement du fichier
         this.loadFile();
 
@@ -303,10 +304,13 @@ public class Niveau implements GamePainter {
                 this.niveau[i][j].draw(image);
             }
         }
+
+
         for (Monstre m : this.monstres) {
             m.draw(image);
         }
         this.getTour().getHeros().draw(image);
+
     }
 
 

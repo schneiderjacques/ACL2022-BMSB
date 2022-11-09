@@ -123,6 +123,13 @@ public class Tour {
     public Niveau getCurrentLevel() { return this.niveaux.get(this.currentLevel-1); }
 
     /**
+     * Getter du niveau courant en tant qu'entier
+     * @return int
+     */
+    public int getLevelNumber(){
+        return this.currentLevel;
+    }
+    /**
      * Getter du Heros
      * @return Heros
      */

@@ -45,7 +45,6 @@ public class GraphicalInterface  {
 		this.gamePainter = gamePainter;
 		this.frame = new JFrame();
 		this.panel=new DrawingPanel(this.gamePainter, controller.getJeu());
-
 		buildFrame();
 	}
 

@@ -1,5 +1,6 @@
 package main.Cases;
 
+import main.Engine.DrawingPanel;
 import main.Engine.GamePainter;
 import main.Principale.Tour;
 
@@ -46,7 +47,7 @@ public abstract class Case implements GamePainter {
     public void draw(BufferedImage im) {
         Graphics2D crayon = (Graphics2D) im.getGraphics();
         crayon.setColor(this.color);
-        crayon.fillRect(y*TAILLE_CASE,x*TAILLE_CASE,TAILLE_CASE,TAILLE_CASE);
+        crayon.fillRect(y*TAILLE_CASE,x*TAILLE_CASE + DrawingPanel.ECART,TAILLE_CASE,TAILLE_CASE);
     }
 
     /**
