@@ -1,5 +1,7 @@
 package main.Engine;
 
+import main.Principale.Jeu;
+
 /**
  * @author Horatiu Cirstea, Vincent Thomas
  *
@@ -11,7 +13,7 @@ public class GameEngineGraphical {
 	/**
 	 * le game a executer
 	 */
-	private Game game;
+	private Jeu game;
 
 	/**
 	 * l'afficheur a utiliser pour le rendu
@@ -31,18 +33,16 @@ public class GameEngineGraphical {
 	/**
 	 * construit un moteur
 	 *
-	 * @param game
-	 *            game a lancer
-	 * @param gamePainter
-	 *            afficheur a utiliser
+	 * @param jeu
+	 *            jeu a lancer
 	 * @param gameController
 	 *            controlleur a utiliser
 	 *
 	 */
-	public GameEngineGraphical(Game game, GamePainter gamePainter, GameController gameController) {
-		// creation du game
-		this.game = game;
-		this.gamePainter = gamePainter;
+	public GameEngineGraphical(Jeu jeu, GameController gameController) {
+		// creation du jeu
+		this.game = jeu;
+		this.gamePainter = jeu.getTour().getCurrentLevel();
 		this.gameController = gameController;
 	}
 
@@ -61,6 +61,11 @@ public class GameEngineGraphical {
 		int drawCount = 0;
 		// boucle de game
 		while (!this.game.isFinished()) {
+			if (this.game.getTour().levelChanged()) {
+				this.game.getTour().setLevelChanged(false);
+				this.gui.setGamePainter(this.game.getTour().getCurrentLevel());
+			}
+
 			currentTime = System.nanoTime();
 			delta += (currentTime - lastTime) / drawInterval;
 			timer += (currentTime - lastTime);
@@ -84,6 +89,12 @@ public class GameEngineGraphical {
 				timer = 0;
 			}
 
+		}
+
+		if (this.game.isWon()) {
+			System.out.println("You won!");
+		} else {
+			System.out.println("You lost!");
 		}
 	}
 

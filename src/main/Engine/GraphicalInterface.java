@@ -1,5 +1,7 @@
 package main.Engine;
 
+import main.Principale.Niveau;
+
 import javax.swing.JFrame;
 
 
@@ -17,6 +19,21 @@ public class GraphicalInterface  {
 	private DrawingPanel panel;
 
 	/**
+	 * le controller
+	 */
+	private GameController controller;
+
+	/**
+	 * le frame
+	 */
+	private JFrame frame;
+
+	/**
+	 * construit une interface graphique
+	 */
+	private GamePainter gamePainter;
+
+	/**
 	 * la construction de l'interface graphique: JFrame avec panel pour le game
 	 *
 	 * @param gamePainter l'afficheur a utiliser dans le moteur
@@ -24,20 +41,27 @@ public class GraphicalInterface  {
 	 *
 	 */
 	public GraphicalInterface(GamePainter gamePainter, GameController gameController){
-		JFrame f=new JFrame();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.controller = gameController;
+		this.gamePainter = gamePainter;
+		this.frame = new JFrame();
+		this.panel=new DrawingPanel(this.gamePainter, controller.getJeu());
+
+		buildFrame();
+	}
+
+	private void buildFrame() {
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// attacher le panel contenant l'afficheur du game
-		this.panel=new DrawingPanel(gamePainter, gameController.getJeu());
-		f.setContentPane(this.panel);
+		frame.setContentPane(this.panel);
 
 		// attacher controller au panel du game
-		this.panel.addKeyListener(gameController);
+		this.panel.addKeyListener(controller);
 
-		f.pack();
-		f.setVisible(true);
-		f.getContentPane().setFocusable(true);
-		f.getContentPane().requestFocus();
+		frame.pack();
+		frame.setVisible(true);
+		frame.getContentPane().setFocusable(true);
+		frame.getContentPane().requestFocus();
 	}
 
 	/**
@@ -47,4 +71,8 @@ public class GraphicalInterface  {
 		this.panel.drawGame();
 	}
 
+    public void setGamePainter(Niveau currentLevel) {
+		this.panel = new DrawingPanel(currentLevel, controller.getJeu());
+		buildFrame();
+    }
 }

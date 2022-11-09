@@ -15,6 +15,12 @@ public class Tour {
     //Tableau de niveaux représentant la tour
     private final ArrayList<Niveau> niveaux;
 
+    //Fini ou non
+    private boolean fini;
+
+    //Niveau a changé
+    private boolean levelChanged;
+
     //Personnage du jeu en cours
     private final Heros heros;
 
@@ -33,6 +39,8 @@ public class Tour {
 
         // Chargement des niveaux
         this.currentLevel = 1;
+
+        this.fini = false;
     }
 
     /**
@@ -41,6 +49,9 @@ public class Tour {
     public void nextLevel() {
         if (this.currentLevel < this.niveaux.size()) {
             this.currentLevel++;
+            this.levelChanged = true;
+        } else {
+            this.fini = true;
         }
     }
 
@@ -112,5 +123,47 @@ public class Tour {
      */
     public Heros getHeros() {
         return this.heros;
+    }
+
+    /**
+     * Setter de fini
+     * @param fini
+     * Fini ou non
+     */
+    public void setFini(boolean fini) {
+        this.fini = fini;
+    }
+
+    /**
+     * Retourne si la tour est gagnée ou non
+     * @return boolean
+     */
+    public boolean isWon() {
+        return this.heros.estVivant() && this.fini;
+    }
+
+    /**
+     * Retourne si la tour est perdue ou non
+     * @return boolean
+     */
+    public boolean isLost() {
+        return !this.heros.estVivant();
+    }
+
+    /**
+     * Getter de levelChanged
+     * @return levelChanged
+     */
+    public boolean levelChanged() {
+        return this.levelChanged;
+    }
+
+    /**
+     * Setter de levelChanged
+     * @param levelChanged
+     * Nouvelle valeur de levelChanged
+     */
+    public void setLevelChanged(boolean levelChanged) {
+        this.levelChanged = levelChanged;
     }
 }

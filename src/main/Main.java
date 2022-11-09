@@ -30,11 +30,10 @@ public class Main {
         jeu.getTour().loadNiveaux(list);
 
         // creation du jeu particulier et de son afficheur
-        Jeu game = new Jeu();
         ControllerMouvement controller = new ControllerMouvement(jeu);
 
         // classe qui lance le moteur de jeu generique
-        GameEngineGraphical engine = new GameEngineGraphical(game, jeu.getTour().getCurrentLevel(), controller);
+        GameEngineGraphical engine = new GameEngineGraphical(jeu, controller);
         engine.run();
 
 

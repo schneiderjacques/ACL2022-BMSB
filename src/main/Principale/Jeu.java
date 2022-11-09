@@ -39,6 +39,22 @@ public class Jeu implements Game {
      */
     @Override
     public boolean isFinished() {
-        return false;
+        return isWon() || isLost();
+    }
+
+    /**
+     * Méthode permettant de savoir si le jeu est gagné
+     * @return boolean
+     */
+    public boolean isWon() {
+        return tour.isWon();
+    }
+
+    /**
+     * Méthode permettant de savoir si le jeu est perdu
+     * @return boolean
+     */
+    public boolean isLost() {
+        return tour.isLost();
     }
 }

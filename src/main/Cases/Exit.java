@@ -1,6 +1,5 @@
 package main.Cases;
 
-import main.Personnages.Heros;
 import main.Principale.Tour;
 
 import java.awt.*;
@@ -36,7 +35,11 @@ public class Exit extends Case {
     @Override
     public void eventCollider(Tour t) {
         if(t.getCurrentLevel().isKeyFound()){
-            t.nextLevel();
+            if (t.getCurrentLevel().isLastLevel()) {
+                t.setFini(true);
+            } else {
+                t.nextLevel();
+            }
             System.out.println("Passage au prochain niveau");
         } else {
             System.out.println("Recuperer la cle pour reussir le niveau !");
