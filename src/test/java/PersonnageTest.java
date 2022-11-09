@@ -38,25 +38,25 @@ public class PersonnageTest {
         p.move('X', 1);
         p.attaque(d);
         assertEquals("Le héro s'est deplacé à droite.", 3, p.getX());
-        assertEquals("Le monstre a perdu de points de vie.", 9, (int)d.getPDV());
+        assertEquals("Le monstre a perdu de points de vie.", 14, (int)d.getPDV());
         p.move('X', -1);
         p.move('X', -1);
         p.attaque(g);
-        assertEquals("Le monstre a perdu de points de vie.", 9, (int)g.getPDV());
+        assertEquals("Le monstre a perdu de points de vie.", 14, (int)g.getPDV());
         p.move('X', 1);
         p.move('Y', -1);
         p.attaque(h);
         p.attaque(b);
-        assertEquals("Le monstre a perdu de points de vie.", 9, (int)h.getPDV());
-        assertEquals("Le monstre n'a pas perdu de points de vie.", 10, (int)b.getPDV());
+        assertEquals("Le monstre a perdu de points de vie.", 14, (int)h.getPDV());
+        assertEquals("Le monstre n'a pas perdu de points de vie.", 15, (int)b.getPDV());
         p.move('Y', 1);
         p.move('Y', 1);
         p.attaque(b);
-        assertEquals("Le monstre a perdu de points de vie.", 9, (int)b.getPDV());
+        assertEquals("Le monstre a perdu de points de vie.", 14, (int)b.getPDV());
         p.move('X', 1);
         p.move('Y', -1);
         p.attaque(d);
-        assertEquals("Le monstre n'a perdu de points de vie.", 9, (int)d.getPDV());
+        assertEquals("Le monstre n'a perdu de points de vie.", 14, (int)d.getPDV());
     }
     /**
      * Test de déplacement du personnage
