@@ -1,4 +1,6 @@
 Création d'une carte pour le jeu :
+Min longueur = 13
+Min largeur = 20
 Longueur, Largeur
 - 0 (Vide/Sol)
 - 1 (Mur)

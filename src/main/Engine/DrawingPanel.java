@@ -101,19 +101,33 @@ public class DrawingPanel extends JPanel {
 		//Viewport Size
 		this.maxScreenCol = 20;
 		this.maxScreenRow = 12; //+1 pour laisser de la place pour l'UI
+
+		// Taille du monde
+		this.maxLevelCol = jeu.getTour().getCurrentLevel().getLargeur();
+		this.maxLevelRow = jeu.getTour().getCurrentLevel().getLongueur();
+
+		if(this.maxScreenRow >= this.maxLevelRow) { //Si 12 >= 10
+			this.maxScreenRow = this.maxLevelRow;
+		}
+
 		this.screenWidth = TILE_SIZE * maxScreenCol; //960 pixels
 		this.screenHeight = TILE_SIZE * maxScreenRow; //576 pixels
 
 
 
-		// Taille du monde
-		this.maxLevelCol = jeu.getTour().getCurrentLevel().getLargeur();
-		this.maxLevelRow = jeu.getTour().getCurrentLevel().getLongueur();
+
+
+
+
+
+
 		this.worldWidth = TILE_SIZE * maxLevelCol;
-		this.worldHeight = TILE_SIZE * maxLevelRow;
+		this.worldHeight = TILE_SIZE * maxLevelRow + TILE_SIZE; //+48 pixels pour laisser de la place pour l'UI
 
 		this.width = worldWidth;
 		this.height = worldHeight;
+
+
 
 		//Dimensions du monde
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -171,7 +185,6 @@ public class DrawingPanel extends JPanel {
 		g2.translate(-camX, -camY);
 
 		g2.drawImage(this.currentImage, 0, 0, this.worldWidth, this.worldHeight, 0, 0, worldWidth, worldHeight, null);
-
 		ui.draw(g2);
 
 
