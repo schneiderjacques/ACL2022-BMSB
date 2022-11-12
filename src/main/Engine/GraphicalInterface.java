@@ -3,6 +3,7 @@ package main.Engine;
 import main.Principale.Niveau;
 
 import javax.swing.JFrame;
+import java.awt.*;
 
 
 /**
@@ -33,6 +34,8 @@ public class GraphicalInterface  {
 	 */
 	private GamePainter gamePainter;
 
+	private GraphicsDevice gDevice;
+
 	/**
 	 * la construction de l'interface graphique: JFrame avec panel pour le game
 	 *
@@ -41,6 +44,9 @@ public class GraphicalInterface  {
 	 *
 	 */
 	public GraphicalInterface(GamePainter gamePainter, GameController gameController){
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		gDevice = ge.getDefaultScreenDevice();
+
 		this.controller = gameController;
 		this.gamePainter = gamePainter;
 		this.frame = new JFrame();
@@ -56,12 +62,14 @@ public class GraphicalInterface  {
 
 		// attacher controller au panel du game
 		this.panel.addKeyListener(controller);
-
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.getContentPane().setFocusable(true);
 		frame.getContentPane().requestFocus();
+		this.frame.setResizable(false);
 	}
+
 
 	/**
 	 * mise a jour du dessin

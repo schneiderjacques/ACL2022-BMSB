@@ -51,11 +51,38 @@ public class DrawingPanel extends JPanel {
 	private int worldWidth; //Largeur du monde en pixel
 	private int worldHeight; //Hauteur du monde en pixel
 
+	/**
+	 * Met en place l'UI
+	 */
 	private UI ui;
 
 	private Jeu jeu;
 
 
+	/**
+	 * Camera position X
+	 */
+	private int camX;
+	/**
+	 * Camera position Y
+	 */
+	private int camY;
+	/**
+	 * Max camera position X
+	 */
+	private int offsetMaxX;
+	/**
+	 * Max camera position Y
+	 */
+	private int offsetMaxY;
+	/**
+	 * Min camera position X
+	 */
+	private int offsetMinX = 0;
+	/**
+	 * Min camera position Y
+	 */
+	private int offsetMinY = 0;
 
 	/**
 	 * la taille des images
@@ -70,28 +97,41 @@ public class DrawingPanel extends JPanel {
 	public DrawingPanel(GamePainter painter, Jeu jeu) {
 		super();
 		this.jeu = jeu;
-		this.maxScreenCol = jeu.getTour().getCurrentLevel().getLargeur();
-		this.maxScreenRow = jeu.getTour().getCurrentLevel().getLongueur() + 1; //+1 pour laisser de la place pour l'UI
-		this.screenWidth = TILE_SIZE * maxScreenCol;
-		this.screenHeight = TILE_SIZE * maxScreenRow;
-		this.width = this.screenWidth;
-		this.height = this.screenHeight;
 
-		// Initialise les max
+		//Viewport Size
+		this.maxScreenCol = 20;
+		this.maxScreenRow = 12; //+1 pour laisser de la place pour l'UI
+		this.screenWidth = TILE_SIZE * maxScreenCol; //960 pixels
+		this.screenHeight = TILE_SIZE * maxScreenRow; //576 pixels
+
+
+
+		// Taille du monde
 		this.maxLevelCol = jeu.getTour().getCurrentLevel().getLargeur();
 		this.maxLevelRow = jeu.getTour().getCurrentLevel().getLongueur();
 		this.worldWidth = TILE_SIZE * maxLevelCol;
 		this.worldHeight = TILE_SIZE * maxLevelRow;
 
+		this.width = worldWidth;
+		this.height = worldHeight;
 
-		this.setPreferredSize(new Dimension(this.maxScreenCol * TILE_SIZE, this.maxScreenRow * TILE_SIZE));
+		//Dimensions du monde
+		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		this.setSize(worldWidth, worldHeight);
+
+
 		this.painter=painter;
+
+		//Camera max X and max Y
+		this.offsetMaxX = worldWidth - screenWidth;
+		this.offsetMaxY = worldHeight - screenHeight;
 
 		this.ui = new UI(this);
 
 		// cree l'image buffer et son graphics
 		this.nextImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		this.currentImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		requestFocus();
 
 
 	}
@@ -114,10 +154,6 @@ public class DrawingPanel extends JPanel {
 		// met a jour l'image a afficher sur le panel
 		this.repaint();
 
-
-
-
-
 	}
 
 	/**
@@ -129,8 +165,15 @@ public class DrawingPanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
-		g.drawImage(this.currentImage, 0, 0, getWidth(), getHeight(), 0, 0, getWidth(), getHeight(), null);
+		this.camX = this.jeu.getTour().getHeros().getX() * TILE_SIZE - screenWidth/2;
+		this.camY = this.jeu.getTour().getHeros().getY() * TILE_SIZE - screenHeight/2;
+		checkCamera();
+		g2.translate(-camX, -camY);
+
+		g2.drawImage(this.currentImage, 0, 0, this.worldWidth, this.worldHeight, 0, 0, worldWidth, worldHeight, null);
+
 		ui.draw(g2);
+
 
 	}
 
@@ -141,7 +184,48 @@ public class DrawingPanel extends JPanel {
 		return jeu;
 	}
 
+	/**
+	 * @return screenWidth largeur de l'écran
+	 * */
 	public int getScreenWidth() {
 		return screenWidth;
+	}
+	/**
+	 * Retourne la hauteur de l'écran
+	 * @return screenHeight hauteur de l'écran
+	 */
+	public int getScreenHeight() {
+		return screenHeight;
+	}
+
+	/**
+	 * Vérifie si la caméra est dans les limites du niveau
+	 *
+	 * */
+	public void checkCamera(){
+		if(camX < offsetMinX){
+			camX = offsetMinX;
+		}
+		if(camX > offsetMaxX){
+			camX = offsetMaxX;
+		}
+		if(camY < offsetMinY){
+			camY = offsetMinY;
+		}
+		if(camY > offsetMaxY){
+			camY = offsetMaxY;
+		}
+	}
+	/**
+	 * X position de la caméra
+	 */
+	public int getCamX() {
+		return camX;
+	}
+	/**
+	 * Y position de la caméra
+	 */
+	public int getCamY() {
+		return camY;
 	}
 }
