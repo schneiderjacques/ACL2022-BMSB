@@ -155,34 +155,34 @@ public class Niveau implements GamePainter {
 
                 // Création de la case
                 switch (c) {
-                    //M : Mur
-                    case 'M' -> this.niveau[index][i] = new Mur(true, index, i);
+                    //0 : Vide (sol)
+                    case '0' -> this.niveau[index][i] = new Sol(index, i);
 
-                    //V : Vide (sol)
-                    case 'V' -> this.niveau[index][i] = new Sol(index, i);
+                    //1 : Mur
+                    case '1' -> this.niveau[index][i] = new Mur(true, index, i);
 
-                    //S : Sortie (Exit)
-                    case 'S' -> this.niveau[index][i] = new Exit(index, i);
+                    //2 : Dégat
+                    case '2' -> this.niveau[index][i] = new Degat(index, i);
 
-                    //K : Clé
-                    case 'K' -> this.niveau[index][i] = new Key(index, i);
+                    //3 : Heal (vie)
+                    case '3' -> this.niveau[index][i] = new Vie(index, i);
 
-                    //T : Trappe (piège)
-                    case 'T' -> this.niveau[index][i] = new Trappe(index, i);
+                    //4 : Clé
+                    case '4' -> this.niveau[index][i] = new Key(index, i);
 
-                    //H : Heal (vie)
-                    case 'H' -> this.niveau[index][i] = new Vie(index, i);
+                    //5 : Sortie (Exit)
+                    case '5' -> this.niveau[index][i] = new Exit(index, i);
 
-                    //D : Dégat
-                    case 'D' -> this.niveau[index][i] = new Degat(index, i);
+                    //6 : Trappe (piège)
+                    case '6' -> this.niveau[index][i] = new Trappe(index, i);
 
-                    //B : Boo (monstre(fantôme))
-                    case 'B' -> {
+                    //7 : Boo (monstre(fantôme))
+                    case '7' -> {
                         this.monstres.add(new Boo(i, index, this));
                         this.niveau[index][i] = new Sol(index, i);
                     }
-                    //G : Goomba (monstre)
-                    case 'G' -> {
+                    //8 : Goomba (monstre)
+                    case '8' -> {
                         this.monstres.add(new Goomba(i, index, this));
                         this.niveau[index][i] = new Sol(index, i);
                     }
