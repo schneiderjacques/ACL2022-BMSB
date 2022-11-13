@@ -5,5 +5,5 @@ package main.Engine;
  *
  */
 public enum Cmd {
-	 LEFT,RIGHT,UP,DOWN,IDLE,SPACE
+	 LEFT,RIGHT,UP,DOWN,IDLE,SPACE,ENTER
 }

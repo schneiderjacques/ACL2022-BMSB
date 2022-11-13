@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 
 /**
  * Controlleur qui permet de gérer les mouvements du joueur
+ *
  * @author Anthony Briot
  */
 public class ControllerMouvement implements GameController {
@@ -37,26 +38,33 @@ public class ControllerMouvement implements GameController {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_UP -> {
-                this.jeu.getTour().moveHeros('Y', -1);
-                this.commandeEnCours = Cmd.UP;
+        if (this.jeu.getGameState() == 1) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_UP -> {
+                    this.jeu.getTour().moveHeros('Y', -1);
+                    this.commandeEnCours = Cmd.UP;
+                }
+                case KeyEvent.VK_DOWN -> {
+                    this.jeu.getTour().moveHeros('Y', 1);
+                    this.commandeEnCours = Cmd.DOWN;
+                }
+                case KeyEvent.VK_LEFT -> {
+                    this.jeu.getTour().moveHeros('X', -1);
+                    this.commandeEnCours = Cmd.LEFT;
+                }
+                case KeyEvent.VK_RIGHT -> {
+                    this.jeu.getTour().moveHeros('X', 1);
+                    this.commandeEnCours = Cmd.RIGHT;
+                }
+                case KeyEvent.VK_SPACE -> {
+                    this.jeu.getTour().heroAttaque();
+                    this.commandeEnCours = Cmd.SPACE;
+                }
             }
-            case KeyEvent.VK_DOWN -> {
-                this.jeu.getTour().moveHeros('Y', 1);
-                this.commandeEnCours = Cmd.DOWN;
-            }
-            case KeyEvent.VK_LEFT -> {
-                this.jeu.getTour().moveHeros('X', -1);
-                this.commandeEnCours = Cmd.LEFT;
-            }
-            case KeyEvent.VK_RIGHT -> {
-                this.jeu.getTour().moveHeros('X', 1);
-                this.commandeEnCours = Cmd.RIGHT;
-            }
-            case KeyEvent.VK_SPACE -> {
-                this.jeu.getTour().heroAttaque();
-                this.commandeEnCours = Cmd.SPACE;
+        } else if (this.jeu.getGameState() == 0) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                this.commandeEnCours = Cmd.ENTER;
+                this.jeu.demarreJeu();
             }
         }
     }
@@ -65,6 +73,7 @@ public class ControllerMouvement implements GameController {
     public void keyReleased(KeyEvent e) {
         this.commandeEnCours = Cmd.IDLE;
     }
+
     /**
      * quand on demande les commandes, le controleur retourne la commande en
      * cours

@@ -1,9 +1,8 @@
 package main.Principale;
 
+import main.Main;
 import main.Personnages.Heros;
 import main.Personnages.Monstre;
-
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -27,12 +26,24 @@ public class Tour {
     //Niveau courant
     private int currentLevel;
 
+
+
     /**
      * Constructeur de la tour
      */
     public Tour() {
         // Création du tableau de niveaux
+
         this.niveaux = new ArrayList<>();
+
+        // Création des niveaux
+        ArrayList<Niveau> list = new ArrayList<>();
+        for (int i = 1; i <= 2; i++) {
+            list.add(new Niveau(Main.class.getResourceAsStream("/resources/level_"+ i +".txt"), this));
+        }
+
+        // Chargement des niveaux dans la tour
+        this.loadNiveaux(list);
 
         // Création du héros
         this.heros = new Heros();
@@ -44,6 +55,14 @@ public class Tour {
     }
 
     /**
+     * Méthode permettant de démarrer le premier niveau
+     */
+    public void demarreTour(){
+        this.getCurrentLevel().demarreNiveau();
+    }
+
+
+    /**
      * Passer au niveau suivant de la tour
      */
     public void nextLevel() {
@@ -52,6 +71,7 @@ public class Tour {
             this.currentLevel++;
             this.levelChanged = true;
             this.heros.reset();
+            this.getCurrentLevel().demarreNiveau();
         } else {
             this.fini = true;
         }
@@ -178,4 +198,6 @@ public class Tour {
     public void setLevelChanged(boolean levelChanged) {
         this.levelChanged = levelChanged;
     }
+
+
 }

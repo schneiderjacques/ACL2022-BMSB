@@ -19,15 +19,8 @@ public class Main {
     * @param args : arguments de la ligne de commande
      */
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-        Jeu jeu = new Jeu();
-        // Création des niveaux
-        ArrayList<Niveau> list = new ArrayList<>();
-        for (int i = 1; i <= 2; i++) {
-            list.add(new Niveau(Main.class.getResourceAsStream("/resources/level_"+ i +".txt"), jeu.getTour()));
-        }
 
-        // Chargement des niveaux dans la tour
-        jeu.getTour().loadNiveaux(list);
+        Jeu jeu = new Jeu();
 
         // creation du jeu particulier et de son afficheur
         ControllerMouvement controller = new ControllerMouvement(jeu);

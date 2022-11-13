@@ -2,16 +2,12 @@ package main.Principale;
 
 import main.Cases.*;
 import main.Engine.GamePainter;
-import main.Engine.UI;
 import main.Personnages.*;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -53,15 +49,25 @@ public class Niveau implements GamePainter {
      * @param t : Tour
      * @param path : Chemin du fichier contenant le niveau
      */
-    public Niveau(InputStream path, Tour t) throws FileNotFoundException {
+    public Niveau(InputStream path, Tour t) {
         this.path = path;
         this.lastLevel = false;
         this.tour = t;
         this.monstres = new HashSet<>();
         this.monstresThreads = new HashMap<>();
         // Chargement du fichier
-        this.loadFile();
+        try {
+            this.loadFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("Les fichiers du niveau n'ont pas été trouvés");
+        }
+    }
 
+    /**
+     * Méthode permettant de démarrer l'IA des monstres
+     */
+    public void demarreNiveau(){
         int delay = 20;
         // Mise en place des threads pour chaque monstre
         for (Monstre m : this.monstres) {

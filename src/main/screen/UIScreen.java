@@ -1,15 +1,13 @@
-package main.Engine;
+package main.screen;
 
-import main.Main;
-import main.Principale.Niveau;
+import main.Engine.DrawingPanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Objects;
 
-public class UI{
+public class UIScreen {
 
     private DrawingPanel dp;
     private BufferedImage keyImage;
@@ -18,7 +16,12 @@ public class UI{
     private boolean imageChanged = false;
     private int maxHealthWidth = 110;
     private int healthBarWidth;
-    public UI(DrawingPanel drawingPanel) {
+
+    /**
+     * Constructeur de la classe UIScreen
+     * @param drawingPanel DrawingPanel du jeu
+     * */
+    public UIScreen(DrawingPanel drawingPanel) {
         this.dp = drawingPanel;
         keyImage = getImage("key_not_found");
         healthImage = getImage("health_bar");
@@ -27,6 +30,11 @@ public class UI{
         this.healthBarWidth = (int) (divider * this.maxHealthWidth / 100);
 
     }
+    /**
+     * Dessine l'UI
+     * @param g2 Graphics du DrawingPanel
+     *
+     * */
     public void draw(Graphics2D g2) {
 
         //Barre horizontale grise
@@ -59,10 +67,18 @@ public class UI{
         g2.drawImage(healthDecorationImage, this.dp.getCamX() + dp.getScreenWidth()/2 - (60), this.dp.getCamY() + 5, 150,42 , null);
         g2.drawImage(healthImage, this.dp.getCamX() + dp.getScreenWidth()/2+20 - (maxHealthWidth/2-12), this.dp.getCamY() + 5, healthBarWidth,42 , null);
     }
+    /**
+     * Change l'image de la clé lorsque la clé est trouvée
+     * */
     public void changeImage(){
         keyImage = getImage("key_found");
         this.imageChanged = true;
     }
+    /**
+     * Récupère une image en fonction de son nom dans le dossier resources
+     * @param name Nom de l'image
+     * @return BufferedImage
+     * */
     public BufferedImage getImage(String name){
         BufferedImage image = new BufferedImage(DrawingPanel.TILE_SIZE,DrawingPanel.TILE_SIZE,BufferedImage.TYPE_INT_ARGB);
         try {

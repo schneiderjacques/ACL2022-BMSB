@@ -5,6 +5,8 @@ package main.Engine;
  *
  */
 import main.Principale.Jeu;
+import main.screen.MenuScreen;
+import main.screen.UIScreen;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -54,9 +56,14 @@ public class DrawingPanel extends JPanel {
 	/**
 	 * Met en place l'UI
 	 */
-	private UI ui;
+	private UIScreen uiScreen;
 
 	private Jeu jeu;
+
+	/**
+	 * Ecran de démarrage du jeu
+	 */
+	private MenuScreen menuScreen;
 
 
 	/**
@@ -88,6 +95,7 @@ public class DrawingPanel extends JPanel {
 	 * la taille des images
 	 */
 	private int width, height;
+
 
 	/**
 	 * constructeur Il construit les images pour doublebuffering ainsi que le
@@ -140,7 +148,11 @@ public class DrawingPanel extends JPanel {
 		this.offsetMaxX = worldWidth - screenWidth;
 		this.offsetMaxY = worldHeight - screenHeight;
 
-		this.ui = new UI(this);
+		//Creation du menu de depart
+		this.menuScreen = new MenuScreen(this);
+
+		//Creation de l'UI
+		this.uiScreen = new UIScreen(this);
 
 		// cree l'image buffer et son graphics
 		this.nextImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -179,13 +191,18 @@ public class DrawingPanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
-		this.camX = this.jeu.getTour().getHeros().getX() * TILE_SIZE - screenWidth/2;
-		this.camY = this.jeu.getTour().getHeros().getY() * TILE_SIZE - screenHeight/2;
-		checkCamera();
-		g2.translate(-camX, -camY);
+		if (this.jeu.getGameState() == 1) {
 
-		g2.drawImage(this.currentImage, 0, 0, this.worldWidth, this.worldHeight, 0, 0, worldWidth, worldHeight, null);
-		ui.draw(g2);
+			this.camX = this.jeu.getTour().getHeros().getX() * TILE_SIZE - screenWidth / 2;
+			this.camY = this.jeu.getTour().getHeros().getY() * TILE_SIZE - screenHeight / 2;
+			checkCamera();
+			g2.translate(-camX, -camY);
+
+			g2.drawImage(this.currentImage, 0, 0, this.worldWidth, this.worldHeight, 0, 0, worldWidth, worldHeight, null);
+			uiScreen.draw(g2);
+		} else {
+			this.menuScreen.draw(g2);
+		}
 
 
 	}
@@ -230,13 +247,13 @@ public class DrawingPanel extends JPanel {
 		}
 	}
 	/**
-	 * X position de la caméra
+	 * @return X position de la caméra
 	 */
 	public int getCamX() {
 		return camX;
 	}
 	/**
-	 * Y position de la caméra
+	 * @return Y position de la caméra
 	 */
 	public int getCamY() {
 		return camY;
