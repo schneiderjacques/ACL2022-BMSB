@@ -82,8 +82,8 @@ public class MonstreTest {
         Goomba g = new Goomba(1, 1); 
         Boo b = new Boo(4,4); 
         Heros h = new Heros(1,4,10,10);
-        g.moveDir(h);
-        b.moveDir(h);
+        g.moveDir(h,false);
+        b.moveDir(h,false);
         assertEquals(2, g.getY());
         assertEquals(3, b.getX());
     }

@@ -54,7 +54,7 @@ public abstract class Monstre extends Personnage {
     public void moveOrAttack() {
         if (!this.attaque(this.niveau.getTour().getHeros())) {
             if(inView(this.niveau.getTour().getHeros())){
-                moveDir(this.niveau.getTour().getHeros());
+                moveDir(this.niveau.getTour().getHeros(),true);
             }else{
                 moveRandom();
             }
@@ -103,7 +103,7 @@ public abstract class Monstre extends Personnage {
      * Methode permettant de déplacer le monstre en direction de son adversaire
      * @param adv
      */
-    public void moveDir(Personnage adv){
+    public void moveDir(Personnage adv, boolean niv){
         char dir; 
         int depl = 0; 
         double diffX = adv.getX() - this.getX(); 
@@ -136,8 +136,16 @@ public abstract class Monstre extends Personnage {
                 depl = 1;
             }
         }
-
-        move(dir, depl);
+        
+        if(!niv){
+            move(dir, depl);
+        }else{
+            if(this.niveau.canMove(this, dir, depl)){
+                moveRandom();
+            }else{
+                move(dir, depl);
+            }
+        }
     }
 
 
