@@ -17,7 +17,7 @@ public class Boo extends Monstre{
      * @param n : niveau dans lequel se trouve le monstre
      */
     public Boo(int x, int y, Niveau n) {
-        super(x, y, false, 10, 1, n, Color.MAGENTA);
+        super(x, y, false, 10, 1, n, Color.MAGENTA, 5);
     }
 
     /**
@@ -26,7 +26,7 @@ public class Boo extends Monstre{
      * @param y : position en Y
      */
     public Boo(int x, int y) {
-        super(x, y, false, 10, 1, Color.MAGENTA);
+        super(x, y, false, 10, 1, Color.MAGENTA, 5);
     }
 
     /**

@@ -5,6 +5,7 @@ import main.Principale.Niveau;
 import java.awt.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.lang.Math.*;
 
 /**
  * Class représentant un monstre du jeu
@@ -14,6 +15,7 @@ public abstract class Monstre extends Personnage {
 
     //Niveau du monstre
     private Niveau niveau;
+    private int view;
 
     /**
      * Constructeur du monstre
@@ -24,10 +26,12 @@ public abstract class Monstre extends Personnage {
      * @param pda : points d'attaque
      * @param n : niveau dans lequel se trouve le monstre
      * @param color : couleur du monstre
+     * @param view : vue du monstre.
      */
-    public Monstre(int x, int y, boolean col, double pdv, double pda, Niveau n, Color color) {
+    public Monstre(int x, int y, boolean col, double pdv, double pda, Niveau n, Color color, int view) {
         super(x, y, col, pdv, pda, color);
         this.niveau = n;
+        this.view = view; 
     }
 
     /**
@@ -39,8 +43,9 @@ public abstract class Monstre extends Personnage {
      * @param pda : points d'attaques
      * @param color : couleur du monstre
      */
-    public Monstre(int x, int y, boolean col, double pdv, double pda, Color color) {
+    public Monstre(int x, int y, boolean col, double pdv, double pda, Color color, int view) {
         super(x, y, col, pdv, pda, color);
+        this.view = view; 
     }
 
     /**
@@ -48,7 +53,11 @@ public abstract class Monstre extends Personnage {
      */
     public void moveOrAttack() {
         if (!this.attaque(this.niveau.getTour().getHeros())) {
-            this.moveRandom();
+            if(inView(this.niveau.getTour().getHeros())){
+                moveDir(this.niveau.getTour().getHeros());
+            }else{
+                moveRandom();
+            }
             this.attaque(this.niveau.getTour().getHeros());
         }
     }
@@ -72,6 +81,63 @@ public abstract class Monstre extends Personnage {
                     if (this.niveau.canMove(this, 'Y', -1)) this.moveY(-1);
                     break;
             }
+    }
+
+    /**
+     * Methode permettant de déterminer si l'adversaire est dans le champ de vision du monstre 
+     * @param adv : Adversaire 
+     * @return : Boolean 
+     */
+    public boolean inView(Personnage adv){
+        double dist = 0; 
+        double x = this.getX() + adv.getX(); 
+        double y = this.getY() + adv.getY(); 
+        x = x*x; 
+        y = y*y; 
+        dist = x + y; 
+        dist = Math.sqrt(dist); 
+        return dist <= view; 
+    }
+
+    /**
+     * Methode permettant de déplacer le monstre en direction de son adversaire
+     * @param adv
+     */
+    public void moveDir(Personnage adv){
+        char dir; 
+        int depl = 0; 
+        double diffX = adv.getX() - this.getX(); 
+        double diffY = adv.getY() - this.getY();
+        if(diffX == 0){
+            dir = 'Y'; 
+        }else{
+            if(diffY == 0){
+                dir = 'X'; 
+            }else{
+                if(Math.abs(diffX)<Math.abs(diffY)){
+                    dir = 'X'; 
+                }else{
+                    dir = 'Y'; 
+                }
+            }
+        }
+
+        if(dir == 'X'){
+            if(diffX < 0){
+                depl = -1;
+            }else{
+                depl = 1; 
+            }
+        }
+        if(dir == 'Y'){
+            if(diffY<0){
+                depl = -1; 
+            }else{
+                depl = 1;
+            }
+        }
+
+        move(dir, depl);
     }
 
 
