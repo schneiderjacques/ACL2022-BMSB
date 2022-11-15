@@ -68,4 +68,24 @@ public class MonstreTest {
 
     }
 
+    @Test 
+    public void testViewMonstre(){
+        Goomba g = new Goomba(1, 1); 
+        Boo b = new Boo(4,4); 
+        Heros h = new Heros(1,4,10,10); 
+        assertEquals(true, g.inView(h));
+        assertEquals(true, b.inView(h));
+    }
+
+    @Test
+    public void testMoveDir(){
+        Goomba g = new Goomba(1, 1); 
+        Boo b = new Boo(4,4); 
+        Heros h = new Heros(1,4,10,10);
+        g.moveDir(h);
+        b.moveDir(h);
+        assertEquals(2, g.getY());
+        assertEquals(3, b.getX());
+    }
+
 }

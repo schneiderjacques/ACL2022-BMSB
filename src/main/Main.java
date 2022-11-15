@@ -29,6 +29,5 @@ public class Main {
         GameEngineGraphical engine = new GameEngineGraphical(jeu, controller);
         engine.run();
 
-
     }
 }

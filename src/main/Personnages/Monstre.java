@@ -90,8 +90,8 @@ public abstract class Monstre extends Personnage {
      */
     public boolean inView(Personnage adv){
         double dist = 0; 
-        double x = this.getX() + adv.getX(); 
-        double y = this.getY() + adv.getY(); 
+        double x = this.getX() - adv.getX(); 
+        double y = this.getY() - adv.getY(); 
         x = x*x; 
         y = y*y; 
         dist = x + y; 
