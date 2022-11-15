@@ -136,14 +136,14 @@ public abstract class Monstre extends Personnage {
                 depl = 1;
             }
         }
-        
+
         if(!niv){
             move(dir, depl);
         }else{
             if(this.niveau.canMove(this, dir, depl)){
-                moveRandom();
-            }else{
                 move(dir, depl);
+            }else{
+                moveRandom();
             }
         }
     }
