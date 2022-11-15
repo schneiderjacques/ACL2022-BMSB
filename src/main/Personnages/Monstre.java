@@ -15,7 +15,7 @@ public abstract class Monstre extends Personnage {
 
     //Niveau du monstre
     private Niveau niveau;
-    private int view;
+    private double view;
 
     /**
      * Constructeur du monstre
