@@ -1,5 +1,7 @@
 package main.Personnages;
 
+import main.Engine.Sound;
+
 import java.awt.*;
 import java.util.Objects;
 import java.util.concurrent.Executors;
@@ -19,13 +21,14 @@ public class Heros extends Personnage {
     // Le personnage peut attaquer
     // Par défaut à true car le heros peut attaquer
     private boolean canAttack = true;
+    private Sound sound = new Sound();
 
     /**
      * Constructeur du héros
      * Le héros commence toujours aux coordonnées (1,1) avec 10 points de vie et 0.5 points d'attaque
      */
     public Heros() {
-        super(1, 1, true, 10, 0.5, Color.blue);
+        super(1, 1, true, 10, 5, Color.blue);
     }
 
     /**
@@ -71,6 +74,8 @@ public class Heros extends Personnage {
                 (adv.getX() == getX()-1 && adv.getY() == getY() && Objects.equals(getLM(), "g")) ||
                 (adv.getY() == getY()-1 && adv.getX() == getX() && Objects.equals(getLM(), "h")) ||
                 (adv.getY() == getY()+1 && adv.getX() == getX() && Objects.equals(getLM(), "b"))){
+            sound.setFile(0);
+            sound.play();
             adv.recevoirDegats(getPDA());
             this.setCanAttack(false);
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
