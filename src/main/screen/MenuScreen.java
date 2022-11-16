@@ -38,13 +38,13 @@ public class MenuScreen{
         this.dp = dp;
         this.backgroundImage = new BufferedImage(DrawingPanel.TILE_SIZE,DrawingPanel.TILE_SIZE,BufferedImage.TYPE_INT_ARGB);
         try{
-            backgroundImage = ImageIO.read(getClass().getClassLoader().getResource("images/menu/background.jpg"));
+            backgroundImage = ImageIO.read(MenuScreen.class.getResource("/resources/images/menu/background.jpg"));
         } catch (IOException e){
             e.printStackTrace();
         }
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResource("font/Minecraft.ttf").openStream()));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, MenuScreen.class.getResource("/resources/font/Minecraft.ttf").openStream()));
         } catch (IOException|FontFormatException e) {
             e.printStackTrace();
         }

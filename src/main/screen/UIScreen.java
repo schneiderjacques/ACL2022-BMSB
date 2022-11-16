@@ -82,7 +82,7 @@ public class UIScreen {
     public BufferedImage getImage(String name){
         BufferedImage image = new BufferedImage(DrawingPanel.TILE_SIZE,DrawingPanel.TILE_SIZE,BufferedImage.TYPE_INT_ARGB);
         try {
-            image = ImageIO.read(getClass().getClassLoader().getResource("images/ui/"+name+".png"));
+            image = ImageIO.read(UIScreen.class.getResource("/resources/images/ui/"+name+".png"));
         } catch (IOException e){
             System.out.println("Image not found");
         }
