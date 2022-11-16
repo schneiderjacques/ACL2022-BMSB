@@ -94,8 +94,7 @@ public abstract class Monstre extends Personnage {
         double y = this.getY() - adv.getY(); 
         x = x*x; 
         y = y*y; 
-        dist = x + y; 
-        dist = Math.sqrt(dist); 
+        dist = Math.sqrt(x + y); 
         return dist <= view; 
     }
 
