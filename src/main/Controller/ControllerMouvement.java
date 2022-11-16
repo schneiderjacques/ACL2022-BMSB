@@ -1,5 +1,6 @@
 package main.Controller;
 
+import main.Engine.DrawingPanel;
 import main.Principale.Jeu;
 import main.Engine.Cmd;
 import main.Engine.GameController;
@@ -20,6 +21,12 @@ public class ControllerMouvement implements GameController {
      * commande en cours
      */
     private Cmd commandeEnCours;
+
+
+    /**
+     * Permet l'interaction avec le drawing panel
+     * */
+    private DrawingPanel dp;
 
     /**
      * construction du controleur par defaut le controleur n'a pas de commande
@@ -62,9 +69,24 @@ public class ControllerMouvement implements GameController {
                 }
             }
         } else if (this.jeu.getGameState() == 0) {
-            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                this.commandeEnCours = Cmd.ENTER;
-                this.jeu.demarreJeu();
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_ENTER -> {
+                    this.commandeEnCours = Cmd.ENTER;
+                    if (dp.getMenuScreen().getCommandNum() == 0 ){
+                        this.jeu.demarreJeu();
+                    } else {
+                        System.exit(0);
+                    }
+                }
+                case KeyEvent.VK_UP -> {
+                    this.commandeEnCours = Cmd.UP;
+                    dp.getMenuScreen().setCommandNum(0);
+                }
+                case KeyEvent.VK_DOWN -> {
+                    this.commandeEnCours = Cmd.DOWN;
+                    dp.getMenuScreen().setCommandNum(1);
+                }
+
             }
         }
     }
@@ -87,5 +109,10 @@ public class ControllerMouvement implements GameController {
     @Override
     public Jeu getJeu() {
         return this.jeu;
+    }
+
+    @Override
+    public void setDrawingPanel(DrawingPanel dp) {
+        this.dp = dp;
     }
 }

@@ -53,6 +53,7 @@ public class GameEngineGraphical {
 
 		// creation de l'interface graphique
 		this.gui = new GraphicalInterface(this.gamePainter,this.gameController);
+		this.gameController.setDrawingPanel(gui.getPanel());
 		double drawInterval = 1000000000.0 / 60.0;
 		double delta = 0;
 		long lastTime = System.nanoTime();

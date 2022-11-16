@@ -82,4 +82,8 @@ public class GraphicalInterface  {
 		this.panel = new DrawingPanel(currentLevel, controller.getJeu());
 		buildFrame();
     }
+
+	public DrawingPanel getPanel() {
+		return this.panel;
+	}
 }

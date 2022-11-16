@@ -1,5 +1,6 @@
 package main.Cases;
 
+import main.Engine.Sound;
 import main.Personnages.Heros;
 import main.Principale.Tour;
 
@@ -41,5 +42,8 @@ public class Key extends Case{
         System.out.println("Votre héros vient de récupéré la clé de sortie");
         t.getCurrentLevel().setKeyFound(true);
         t.getCurrentLevel().setCaseToSol(this.getX(), this.getY());
+        Sound sound = new Sound();
+        sound.setFile(2);
+        sound.play();
     }
 }

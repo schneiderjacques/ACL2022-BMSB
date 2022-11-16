@@ -258,4 +258,11 @@ public class DrawingPanel extends JPanel {
 	public int getCamY() {
 		return camY;
 	}
+
+	/**
+	 * @return MenuScreen instance du menu
+	 */
+	public MenuScreen getMenuScreen() {
+		return menuScreen;
+	}
 }

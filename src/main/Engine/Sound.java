@@ -3,7 +3,6 @@ package main.Engine;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.applet.Applet;
 import java.net.URL;
 
 public class Sound {
@@ -13,9 +12,8 @@ public class Sound {
 
     public Sound() {
         soundUrl[0] = Sound.class.getResource("/resources/sounds/game/hero/attack.wav");
-        //soundUrl[1] = Sound.class.getResource("/resources/sounds/game/hero/death.wav");
-        //soundUrl[2] = Sound.class.getResource("/resources/sounds/game/key_pickup.wav");
-        System.out.println(soundUrl[0]);
+        soundUrl[1] = Sound.class.getResource("/resources/sounds/game/hero/death.wav");
+        soundUrl[2] = Sound.class.getResource("/resources/sounds/game/key_pickup.wav");
 
     }
     public void setFile(int i){

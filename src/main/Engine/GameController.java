@@ -22,4 +22,6 @@ public interface GameController extends KeyListener {
 
 	public Jeu getJeu();
 
+	public void setDrawingPanel(DrawingPanel dp);
+
 }
