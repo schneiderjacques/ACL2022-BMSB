@@ -6,11 +6,8 @@ import main.Personnages.*;
 
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
+import java.util.*;
 import java.io.InputStream;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -192,6 +189,12 @@ public class Niveau implements GamePainter {
                         this.monstres.add(new Goomba(i, index, this));
                         this.niveau[index][i] = new Sol(index, i);
                     }
+
+                    //9 : Passage
+                    case '9' -> this.niveau[index][i] = new Passage(index, i);
+
+                    //D : Dalle
+                    case 'D' -> this.niveau[index][i] = new Dalle(index, i);
                 }
             }
             index++;
