@@ -23,6 +23,9 @@ public class Heros extends Personnage {
     private boolean canAttack = true;
     private Sound sound = new Sound();
 
+    //Point de vie maximal du héros
+    private final static double PDV_MAX = 10;
+
     /**
      * Constructeur du héros
      * Le héros commence toujours aux coordonnées (1,1) avec 10 points de vie et 0.5 points d'attaque
@@ -108,5 +111,15 @@ public class Heros extends Personnage {
         this.setCanAttack(true);
         this.setX(1);
         this.setY(1);
+    }
+
+    @Override
+    public void ajouterPDV(double pv) {
+        this.setPDV(Math.min(this.getPDV() + pv, PDV_MAX));
+    }
+
+    @Override
+    public void retirerPDV(double pv) {
+        this.setPDV(Math.max(this.getPDV() - pv, 0));
     }
 }

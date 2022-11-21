@@ -69,6 +69,7 @@ public class ControllerMouvement implements GameController {
                 }
             }
         } else if (this.jeu.getGameState() == 0) {
+
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_ENTER -> {
                     this.commandeEnCours = Cmd.ENTER;
@@ -85,6 +86,27 @@ public class ControllerMouvement implements GameController {
                 case KeyEvent.VK_DOWN -> {
                     this.commandeEnCours = Cmd.DOWN;
                     dp.getMenuScreen().setCommandNum(1);
+                }
+
+            }
+        }else if (this.jeu.getGameState() == 2 || this.jeu.getGameState() == 3){
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_ENTER -> {
+                    this.commandeEnCours = Cmd.ENTER;
+                    if (dp.getEndScreen().getCommandNum() == 0 ){
+                        this.jeu.getTour().setLevelChanged(true);
+                        this.jeu.restartJeu();
+                    } else {
+                        System.exit(0);
+                    }
+                }
+                case KeyEvent.VK_UP -> {
+                    this.commandeEnCours = Cmd.UP;
+                    dp.getEndScreen().setCommandNum(0);
+                }
+                case KeyEvent.VK_DOWN -> {
+                    this.commandeEnCours = Cmd.DOWN;
+                    dp.getEndScreen().setCommandNum(1);
                 }
 
             }

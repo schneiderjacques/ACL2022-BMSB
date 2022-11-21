@@ -41,7 +41,7 @@ public class Degat extends Case{
     public void eventCollider(Tour t) {
         //Dégats de la case
         double DAMAGE_AMOUNT = 4;
-        t.getHeros().setPDV(t.getHeros().getPDV() - DAMAGE_AMOUNT);
+        t.getHeros().retirerPDV(DAMAGE_AMOUNT);
         t.getCurrentLevel().setCaseToSol(this.getX(), this.getY());
     }
 }

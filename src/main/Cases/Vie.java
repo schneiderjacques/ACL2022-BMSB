@@ -38,10 +38,9 @@ public class Vie extends Case{
      */
     @Override
     public void eventCollider(Tour t) {
-        System.out.println("Votre héros vient de récupéré de la vie");
         //Nombre de points de vie récupérés
         double HEAL_AMOUNT = 4;
-        t.getHeros().setPDV(t.getHeros().getPDV() + HEAL_AMOUNT);
+        t.getHeros().ajouterPDV(HEAL_AMOUNT);
         t.getCurrentLevel().setCaseToSol(this.getX(), this.getY());
     }
 }

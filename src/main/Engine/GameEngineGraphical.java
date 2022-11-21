@@ -67,6 +67,14 @@ public class GameEngineGraphical {
 				this.gui.setGamePainter(this.game.getTour().getCurrentLevel());
 			}
 
+			if (this.game.isWon()) {
+				this.game.setGameState(2);
+				this.game.getTour().clearLevel();
+			} else if (this.game.isLost()) {
+				this.game.setGameState(3);
+				this.game.getTour().clearLevel();
+			}
+
 			currentTime = System.nanoTime();
 			delta += (currentTime - lastTime) / drawInterval;
 			timer += (currentTime - lastTime);
@@ -92,11 +100,6 @@ public class GameEngineGraphical {
 
 		}
 
-		if (this.game.isWon()) {
-			System.out.println("You won!");
-		} else {
-			System.out.println("You lost!");
-		}
 	}
 
 }

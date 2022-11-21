@@ -167,19 +167,26 @@ public abstract class Personnage implements GamePainter {
      * @param pv : nouvelle vie du personnage
      */
     public void setPDV(double pv){
-        this.pdv = pv; 
-        if(getPDV() < 0){
-            pdv = 0; 
-        }
+        this.pdv = pv;
     }
+
+    /**
+     * Ajouter des points de vie au personnage
+     * @param pv
+     */
+    public abstract void ajouterPDV(double pv);
+
+    /**
+     * Retirer des points de vie au personnage
+     * @param pv
+     */
+    public abstract void retirerPDV(double pv);
 
     /**
      * Setter de la vie du personnage après une attaque
      * @param degats : dégats subis par le personnage
      */
-    public void recevoirDegats(double degats){
-        setPDV(getPDV() - degats);
-    }
+    public void recevoirDegats(double degats){retirerPDV(degats);}
 
     /**
      * Methode qui indique si le personnage est mort

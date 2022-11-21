@@ -5,6 +5,7 @@ package main.Engine;
  *
  */
 import main.Principale.Jeu;
+import main.screen.EndScreen;
 import main.screen.MenuScreen;
 import main.screen.UIScreen;
 
@@ -65,6 +66,8 @@ public class DrawingPanel extends JPanel {
 	 */
 	private MenuScreen menuScreen;
 
+	private EndScreen endScreen;
+
 
 	/**
 	 * Camera position X
@@ -114,10 +117,6 @@ public class DrawingPanel extends JPanel {
 		this.maxLevelCol = jeu.getTour().getCurrentLevel().getLargeur();
 		this.maxLevelRow = jeu.getTour().getCurrentLevel().getLongueur();
 
-		if(this.maxScreenRow >= this.maxLevelRow) { //Si 12 >= 10
-			this.maxScreenRow = this.maxLevelRow;
-		}
-
 		this.screenWidth = TILE_SIZE * maxScreenCol; //960 pixels
 		this.screenHeight = TILE_SIZE * maxScreenRow; //576 pixels
 
@@ -150,6 +149,9 @@ public class DrawingPanel extends JPanel {
 
 		//Creation du menu de depart
 		this.menuScreen = new MenuScreen(this);
+
+		//Creation de l'ecran de fin
+		this.endScreen = new EndScreen(this);
 
 		//Creation de l'UI
 		this.uiScreen = new UIScreen(this);
@@ -191,20 +193,32 @@ public class DrawingPanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
-		if (this.jeu.getGameState() == 1) {
+		switch (this.jeu.getGameState()) {
+			case 0:
+				this.menuScreen.draw(g2);
+				break;
+			case 1:
+				this.camX = this.jeu.getTour().getHeros().getX() * TILE_SIZE - screenWidth / 2;
+				this.camY = this.jeu.getTour().getHeros().getY() * TILE_SIZE - screenHeight / 2;
+				checkCamera();
+				g2.translate(-camX, -camY);
 
-			this.camX = this.jeu.getTour().getHeros().getX() * TILE_SIZE - screenWidth / 2;
-			this.camY = this.jeu.getTour().getHeros().getY() * TILE_SIZE - screenHeight / 2;
-			checkCamera();
-			g2.translate(-camX, -camY);
-
-			g2.drawImage(this.currentImage, 0, 0, this.worldWidth, this.worldHeight, 0, 0, worldWidth, worldHeight, null);
-			uiScreen.draw(g2);
-		} else {
-			this.menuScreen.draw(g2);
+				g2.drawImage(this.currentImage, 0, 0, this.worldWidth, this.worldHeight, 0, 0, worldWidth, worldHeight, null);
+				uiScreen.draw(g2);
+				break;
+			case 2:
+				this.endScreen.setTitle("You won !");
+				this.endScreen.draw(g2);
+				this.requestFocus();
+				break;
+			case 3:
+				this.endScreen.setTitle("You lost !");
+				this.endScreen.draw(g2);
+				this.requestFocus();
+				break;
 		}
 
-
+		g2.dispose();
 	}
 
 	/**
@@ -264,5 +278,12 @@ public class DrawingPanel extends JPanel {
 	 */
 	public MenuScreen getMenuScreen() {
 		return menuScreen;
+	}
+
+	/**
+	 * @return EndScreen instance de l'écran de fin
+	 */
+	public EndScreen getEndScreen() {
+		return endScreen;
 	}
 }

@@ -19,7 +19,9 @@ public class Jeu implements Game {
     private int gameState;
 
     //Labyritnhe du jeu en cours
-    private final Tour tour;
+    private Tour tour;
+
+    private boolean isFinished;
 
     /**
      * Constructeur du jeu
@@ -27,6 +29,8 @@ public class Jeu implements Game {
     public Jeu() throws FileNotFoundException {
         // Mise en place de l'état du Jeu
         this.gameState = 0;
+
+        this.isFinished = false;
         //Création du labyrinthe
         this.tour = new Tour();
     }
@@ -47,9 +51,7 @@ public class Jeu implements Game {
      * @return boolean
      */
     @Override
-    public boolean isFinished() {
-        return isWon() || isLost();
-    }
+    public boolean isFinished() {return isFinished;}
 
     /**
      * Méthode permettant de savoir si le jeu est gagné
@@ -90,5 +92,12 @@ public class Jeu implements Game {
      * */
     public void setGameState(int gameState) {
         this.gameState = gameState;
+    }
+
+    public void restartJeu() {
+        this.gameState = 1;
+        tour = new Tour();
+        tour.setLevelChanged(true);
+        tour.demarreTour();
     }
 }

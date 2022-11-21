@@ -74,6 +74,7 @@ public class Tour {
             this.getCurrentLevel().demarreNiveau();
         } else {
             this.fini = true;
+            this.niveaux.get(this.currentLevel-1).deleteNiveau();
         }
     }
 
@@ -199,5 +200,8 @@ public class Tour {
         this.levelChanged = levelChanged;
     }
 
-
+    /**
+     * Methode qui clear le niveau courant
+     */
+    public void clearLevel(){this.niveaux.get(this.currentLevel-1).deleteNiveau();}
 }

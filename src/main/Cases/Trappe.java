@@ -49,7 +49,6 @@ public class Trappe extends Case{
         Heros h = t.getHeros();
         h.setCanMove(false);
         executor = Executors.newSingleThreadScheduledExecutor();
-        System.out.println("Vous venez d'entrer dans une trappe, vous êtes bloqué pendant 3 secondes");
         Runnable stopPlayer = () -> {
             h.setCanMove(true);
             stopExecutor();
