@@ -4,9 +4,3 @@ ACL2022-BMSB.iml
 .idea/
 /out/
 /src/META-INF/MANIFEST.MF
-
-# Ignore Gradle project-specific cache directory
-.gradle
-
-# Ignore Gradle build output directory
-build
