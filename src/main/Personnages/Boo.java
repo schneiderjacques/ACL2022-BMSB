@@ -29,12 +29,4 @@ public class Boo extends Monstre{
         super(x, y, false, 10, 1, Color.MAGENTA, 5);
     }
 
-    /**
-     * Méthode qui retourne le nom du monstre
-     * @return : nom du monstre
-     */
-    @Override
-    public String getType() {
-        return "Boo";
-    }
 }

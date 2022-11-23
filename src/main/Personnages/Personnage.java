@@ -197,12 +197,6 @@ public abstract class Personnage implements GamePainter {
     }
 
     /**
-     * Getter du type de personnage
-     * @return type de personnage
-     */
-    public abstract String getType();
-
-    /**
      * toString
      * @return String
      */

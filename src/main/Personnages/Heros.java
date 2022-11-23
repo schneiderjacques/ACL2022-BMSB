@@ -46,14 +46,6 @@ public class Heros extends Personnage {
     }
 
     /**
-     * Getter du type de personnage
-     * @return type de personnage
-     */
-    public String getType() {
-        return "Heros";
-    }
-
-    /**
      * canMove
      * @return canMove
      * */

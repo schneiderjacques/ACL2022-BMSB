@@ -25,13 +25,4 @@ public class Goomba extends Monstre {
      */
     public Goomba(int x, int y) {super(x, y, true, 15, 2, Color.pink,3);}
 
-
-    /**
-     * Méthode qui retourne le nom du monstre
-     * @return : nom du monstre
-     */
-    @Override
-    public String getType() {
-        return "Goomba";
-    }
 }
