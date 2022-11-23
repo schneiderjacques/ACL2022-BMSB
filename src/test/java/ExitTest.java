@@ -1,11 +1,10 @@
 package test.java;
 
-import main.Cases.Exit;
-import main.Personnages.Heros;
-import main.Principale.Jeu;
-import main.Principale.Niveau;
+import main.java.Cases.Exit;
+import main.java.Personnages.Heros;
+import main.java.Principale.Jeu;
+import main.java.Principale.Niveau;
 import org.junit.*;
-import main.Cases.Exit;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -28,12 +27,9 @@ public class ExitTest {
         Jeu jeu = new Jeu();
         // Création des niveaux
         ArrayList<Niveau> list = new ArrayList<Niveau>();
-        for (int i = 2; i <= 2; i++) {
-            list.add(new Niveau(ExitTest.class.getResourceAsStream("/resources/level_" + i + ".txt"), jeu.getTour()));
-        }
+        list.add(new Niveau(DegatTest.class.getResourceAsStream("/lab_test_2.txt"), jeu.getTour()));
         jeu.getTour().loadNiveaux(list);
         Heros h = jeu.getTour().getHeros();
-        h.moveY(3); h.moveX(13);
         jeu.getTour().getCurrentLevel().setKeyFound(true);
         /*
         * Implémentation  plus tard du test

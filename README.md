@@ -4,23 +4,27 @@ Réalisation d'un jeu mono-utilisateur.
 
 # TP2 - Equipe
 
-| Nom |
-| ------ |
-| Silvio BRANCATI |
-| Anthony BRIOT |
-| Martin GURTNER |
-| Arthur MOITRIER |
+| Nom               |
+|-------------------|
+| Silvio BRANCATI   |
+| Anthony BRIOT     |
+| Martin GURTNER    |
+| Arthur MOITRIER   |
 | Jacques SCHNEIDER |
 
 # Exécution
 
-Nécessite Java 17. \
-Compiler le projet depuis le dossier `src` : 
+## Prérequis
 
-```bash
-javac */*.java
-java main/Main
-```
+Nécessite Java 17.
+
+## AutoBuild
+
+Pour générer un fichier jar exécutable, il suffit de lancer la commande suivante : \
+
+`mvn clean package`
+
+Le fichier jar se trouve dans le dossier target.
 
 # Liens 
 

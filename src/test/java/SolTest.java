@@ -1,7 +1,7 @@
 package test.java;
 
 import org.junit.*;
-import main.Cases.Sol;
+import main.java.Cases.Sol;
 
 import static org.junit.Assert.*;
 
