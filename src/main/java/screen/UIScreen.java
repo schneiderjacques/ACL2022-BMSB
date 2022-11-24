@@ -38,7 +38,8 @@ public class UIScreen {
     public void draw(Graphics2D g2) {
 
         //Barre horizontale grise
-        g2.setColor(Color.gray);
+
+        g2.setColor(new Color(92,105,159, 255));
         g2.fillRect(this.dp.getCamX(),this.dp.getCamY(), this.dp.getWidth(), DrawingPanel.TILE_SIZE);
 
 
