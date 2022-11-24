@@ -1,12 +1,14 @@
 package main.java.Cases;
 
+import main.java.Engine.DrawingPanel;
 import main.java.Principale.Niveau;
 import main.java.Principale.Tour;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Objects;
 
-public class Dalle extends Case{
+public class Dalle extends Case {
     /**
      * Constructeur de la classe Case
      *
@@ -20,22 +22,25 @@ public class Dalle extends Case{
     @Override
     public void eventCollider(Tour t) {
         Niveau n = t.getCurrentLevel();
-        if(Objects.equals(n.getCase(this.getY() + 1, this.getX()).getType(), "Porte")){
-            ((Passage)n.getCase(this.getY() + 1, this.getX())).open();
-        }
-        if(Objects.equals(n.getCase(this.getY() - 1, this.getX()).getType(), "Porte")){
-            ((Passage)n.getCase(this.getY() - 1, this.getX())).open();
-        }
-        if(Objects.equals(n.getCase(this.getY(), this.getX() + 1).getType(), "Porte")){
-            ((Passage)n.getCase(this.getY(), this.getX() + 1)).open();
-        }
-        if(Objects.equals(n.getCase(this.getY(), this.getX() - 1).getType(), "Porte")){
-            ((Passage)n.getCase(this.getY(), this.getX() - 1)).open();
+        openPorte(n.getCaseObject(this.getY() + 1, this.getX()));
+        openPorte(n.getCaseObject(this.getY() - 1, this.getX()));
+        openPorte(n.getCaseObject(this.getY(), this.getX() + 1));
+        openPorte(n.getCaseObject(this.getY(), this.getX() - 1));
+
+    }
+    public void openPorte(Case c){
+        if (c instanceof Passage){
+            ((Passage) c).open();
         }
     }
 
     @Override
     public String getType() {
         return "Levier";
+    }
+
+    @Override
+    public void draw(BufferedImage image) {
+        return;
     }
 }

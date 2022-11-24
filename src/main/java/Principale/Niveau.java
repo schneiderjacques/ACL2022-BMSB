@@ -4,6 +4,8 @@ import main.java.Cases.*;
 import main.java.Engine.GamePainter;
 import main.java.Personnages.*;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -29,6 +31,9 @@ public class Niveau implements GamePainter {
     //Tableau de cases représentant le niveau
     private Case[][] niveau;
 
+    //Tableau de cases représentant les objets du niveau
+    private Case[][] objetNiveau;
+
     //Monstres du niveau
     private final Set<Monstre> monstres;
 
@@ -43,7 +48,8 @@ public class Niveau implements GamePainter {
 
     /**
      * Constructeur du niveau
-     * @param t : Tour
+     *
+     * @param t    : Tour
      * @param path : Chemin du fichier contenant le niveau
      */
     public Niveau(InputStream path, Tour t) {
@@ -64,7 +70,7 @@ public class Niveau implements GamePainter {
     /**
      * Méthode permettant de démarrer l'IA des monstres
      */
-    public void demarreNiveau(){
+    public void demarreNiveau() {
         int delay = 20;
         // Mise en place des threads pour chaque monstre
         for (Monstre m : this.monstres) {
@@ -79,6 +85,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Méthode autorisant ou non le déplacement d'un personnage
+     *
      * @param p   Personnage à déplacer
      * @param axe Axe de déplacement
      * @param dir Direction de déplacement
@@ -92,8 +99,12 @@ public class Niveau implements GamePainter {
             case 'X' -> targetX += dir;
             case 'Y' -> targetY += dir;
         }
+        if(this.objetNiveau[targetY][targetX] != null && this.objetNiveau[targetY][targetX].getCollision()){
+            return false;
+        }
 
         if (!this.niveau[targetY][targetX].getCollision()) {
+
             for (Monstre m : this.monstres) {
                 if (m.getX() == targetX && m.getY() == targetY) {
                     return false;
@@ -109,6 +120,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Méthode qui retourne le monstre en face du personnage sinon null
+     *
      * @param p : Personnage
      * @return monstre
      */
@@ -144,14 +156,76 @@ public class Niveau implements GamePainter {
         longueur = Integer.parseInt(dim[0]);
         largeur = Integer.parseInt(dim[1]);
 
+        String[] collisionMur =
+                {"27","15","31","55","59","40","1","17","4","14","18","68","13","16","60","3","10","11","12","23","24","25", "36", "37", "38", "0", "26", "28"};
+
         // Création du labyrinthe
         this.niveau = new Case[longueur][largeur];
+
+        // Création des objets du labyrinthe
+        this.objetNiveau = new Case[longueur][largeur];
 
         // Parcours du fichier
         int index = 0;
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
-            for (int i = 0; i < line.length(); i++) {
+            String[] cases = line.split("\t");
+            //loop sur les cases
+            for (int i = 0; i < cases.length; i++) {
+                Case c = null;
+                if (this.isNumeric(cases[i])) {
+                    if(Arrays.stream(collisionMur).anyMatch(cases[i]::equals)) {
+                        c = new Mur(true, index, i); //C'est un mur
+                    } else {
+                        c = new Sol(index, i); //C'est un sol
+                    }
+
+                    String imgName = String.format("%03d", Integer.parseInt(cases[i]));
+                    c.setImage(Tools.getImageByName("/images/game/tiles/tile" + imgName),0);
+
+                } else {
+                    //C'est une case spéciale
+                    char l = cases[i].charAt(0);
+                    c = new Sol(index, i);
+                    c.setImage(Tools.getImageByName("/images/game/tiles/tile" + "092"),0);
+                    switch (l){
+                        case 'E' -> {
+                            this.objetNiveau[index][i] = new Exit(index, i);
+                        }
+                        case 'K' -> {
+                            this.objetNiveau[index][i] = new Key(index, i);
+                        }
+                        case 'H' -> {
+                            this.objetNiveau[index][i] = new Vie(index, i);
+                        }
+                        case 'D' -> {
+                            this.objetNiveau[index][i] = new Degat(index, i);
+                        }
+                        case 'T' -> {
+                            this.objetNiveau[index][i] = new Trappe(index, i);
+                        }
+                        case 'W' -> {
+                            this.objetNiveau[index][i] = new Passage(index, i);
+                            c.setImage(Tools.getImageByName("/images/game/tiles/tile" + "055"),0);
+                        }
+                        case 'X' -> {
+                            this.objetNiveau[index][i] = new Dalle(index, i);
+                        }
+                        case 'B' -> {
+                            this.monstres.add(new Boo(i, index, this));
+                        }
+                        case 'G' -> {
+                            this.monstres.add(new Goomba(i, index, this));
+                        }
+                    }
+
+
+                }
+
+                this.niveau[index][i] = c;
+
+            }
+            /*for (int i = 0; i < line.length(); i++) {
 
                 // Récupération de la case
                 char c = line.charAt(i);
@@ -196,13 +270,24 @@ public class Niveau implements GamePainter {
                     //D : Dalle
                     case 'D' -> this.niveau[index][i] = new Dalle(index, i);
                 }
-            }
+            }*/
             index++;
+        }
+        this.printMap(new Heros());
+    }
+
+    public boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 
     /**
      * Getter path
+     *
      * @return path
      */
     public InputStream getPath() {
@@ -211,6 +296,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter LONGUEUR
+     *
      * @return LONGUEUR
      */
     public int getLongueur() {
@@ -219,6 +305,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter LARGEUR
+     *
      * @return LARGEUR
      */
     public int getLargeur() {
@@ -227,6 +314,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter lastLevel
+     *
      * @return lastLevel
      */
     public boolean isLastLevel() {
@@ -235,6 +323,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter labyrinthe
+     *
      * @return labyrinthe
      */
     public Case[][] getNiveau() {
@@ -243,6 +332,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter Case
+     *
      * @param x entier représentant l'axe des X du labyrinthe
      * @param y entier représentant l'axe des Y du labyrinthe
      * @return CASE[][]
@@ -252,7 +342,23 @@ public class Niveau implements GamePainter {
     }
 
     /**
+     * Getter CaseObject
+     *
+     * @param x entier représentant l'axe des X du labyrinthe
+     * @param y entier représentant l'axe des Y du labyrinthe
+     * @return CASE[][]
+     */
+    public Case getCaseObject(int x, int y) {
+        return this.objetNiveau[y][x];
+    }
+
+
+
+
+
+    /**
      * Print labyrinthe temporaire
+     *
      * @param h Heros du niveau
      */
     public void printMap(Heros h) {
@@ -288,6 +394,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Setter lastLevel
+     *
      * @param b boolean
      */
     public void setLastLevel(boolean b) {
@@ -296,6 +403,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Getter tour
+     *
      * @return tour
      */
     public Tour getTour() {
@@ -304,6 +412,7 @@ public class Niveau implements GamePainter {
 
     /**
      * Dessiner le niveau
+     *
      * @param image : image sur laquelle dessiner
      */
     @Override
@@ -311,6 +420,11 @@ public class Niveau implements GamePainter {
         for (int i = 0; i < this.getLongueur(); i++) {
             for (int j = 0; j < this.getLargeur(); j++) {
                 this.niveau[i][j].draw(image);
+            }
+        }
+        for (int i = 0; i < this.getLongueur(); i++) {
+            for (int j = 0; j < this.getLargeur(); j++) {
+                if (this.objetNiveau[i][j] != null) this.objetNiveau[i][j].draw(image);
             }
         }
 
@@ -323,9 +437,9 @@ public class Niveau implements GamePainter {
     }
 
 
-
     /**
      * Getter de la clé du personnage
+     *
      * @return est ce que la clé est trouvée en boolean
      */
     public boolean isKeyFound() {
@@ -340,16 +454,18 @@ public class Niveau implements GamePainter {
     }
 
     /**
-    * remplace une case par une case Sol
-    * @param x colonne
-    * @param y ligne
-    */
-    public void setCaseToSol(int x, int y){
-        this.niveau[x][y] = new Sol(x, y);
+     * remplace une case par une case Sol
+     *
+     * @param x colonne
+     * @param y ligne
+     */
+    public void setCaseToSol(int x, int y) {
+        this.objetNiveau[x][y] = null;
     }
 
     /**
      * Methode qui supprime un monstre du niveau
+     *
      * @param m : monstre à supprimer
      */
     public void removeMonstre(Monstre m) {
@@ -370,7 +486,7 @@ public class Niveau implements GamePainter {
     /**
      * Methode qui supprime tous les monstres du niveau
      */
-    public void deleteNiveau(){
+    public void deleteNiveau() {
         this.monstresThreads.forEach((monstre, executor) -> executor.shutdown());
         this.monstresThreads.clear();
         this.monstres.clear();

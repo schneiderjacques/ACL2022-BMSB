@@ -1,8 +1,10 @@
 package main.java.Cases;
 
+import main.java.Engine.DrawingPanel;
 import main.java.Principale.Tour;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
 * Class représentant les murs du labyrinthe
@@ -17,6 +19,7 @@ public class Mur extends Case {
     public Mur(boolean collision, int x, int y) {
         //Initialisation des attributs
         super(collision, x, y, Color.black);
+        this.initImage(1);
     }
 
     /**
@@ -30,5 +33,12 @@ public class Mur extends Case {
     @Override
     public void eventCollider(Tour t) {
         //Ne fait rien
+    }
+    @Override
+    public void draw(BufferedImage image) {
+        Graphics2D g = (Graphics2D) image.getGraphics();
+        if (image != null) {
+            g.drawImage(this.getImage(this.getFrame()), this.getY()*TAILLE_CASE, this.getX()*TAILLE_CASE + DrawingPanel.ECART, TAILLE_CASE, TAILLE_CASE, null);
+        }
     }
 }

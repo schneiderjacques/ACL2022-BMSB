@@ -1,5 +1,6 @@
 package main.java.Principale;
 
+import main.java.Cases.Case;
 import main.java.Personnages.Heros;
 import main.java.Personnages.Monstre;
 import main.java.Main;
@@ -126,7 +127,10 @@ public class Tour {
      * On déclange l'effet de la case sur laquelle le joueur vient de se déplacer
      */
     public void triggerCaseEvent(){
-        this.getCurrentLevel().getCase(this.heros.getX(), this.heros.getY()).eventCollider(this);
+        Case c = this.getCurrentLevel().getCaseObject(this.heros.getX(), this.heros.getY());
+        if (c != null) {
+            c.eventCollider(this);
+        }
     }
 
     /**

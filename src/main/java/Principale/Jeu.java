@@ -95,8 +95,8 @@ public class Jeu implements Game {
     }
 
     public void restartJeu() {
-        this.gameState = 1;
         tour = new Tour();
+        this.setGameState(1);
         tour.setLevelChanged(true);
         tour.demarreTour();
     }

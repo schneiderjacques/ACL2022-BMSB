@@ -1,9 +1,12 @@
 package main.java.Cases;
 
+import main.java.Engine.DrawingPanel;
 import main.java.Engine.Sound;
+import main.java.Principale.Tools;
 import main.java.Principale.Tour;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Représente la clé récupérée par le joueur permettant d'ouvrire la case sortie
@@ -19,6 +22,8 @@ public class Key extends Case{
     public Key(int x, int y) {
         //Initialisation des attributs
         super(false, x, y, Color.yellow);
+        this.initImage(1);
+        this.setImage(Tools.getImageByName("/images/game/objects/key_found"),0);
     }
 
 
@@ -43,5 +48,12 @@ public class Key extends Case{
         Sound sound = new Sound();
         sound.setFile(2);
         sound.play();
+    }
+    @Override
+    public void draw(BufferedImage image) {
+        Graphics2D g = (Graphics2D) image.getGraphics();
+        if (image != null) {
+            g.drawImage(this.getImage(this.getFrame()), this.getY()*TAILLE_CASE, this.getX()*TAILLE_CASE + DrawingPanel.ECART, TAILLE_CASE, TAILLE_CASE, null);
+        }
     }
 }

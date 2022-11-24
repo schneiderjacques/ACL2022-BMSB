@@ -1,6 +1,5 @@
 package main.java.Cases;
 
-import main.java.Engine.DrawingPanel;
 import main.java.Engine.GamePainter;
 import main.java.Principale.Tour;
 
@@ -25,8 +24,20 @@ public abstract class Case implements GamePainter {
     //Couleur de la case
     private Color color;
 
+    private BufferedImage[] image = null;
+
     //le joueur entre en collision avec la case ou non
     private boolean collision;
+
+    //Frame actuelle
+    private int frame = 0;
+    //Vitesse des frames
+    private int FrameSpeed = 10;
+
+    //Tick actuel
+    private int tick = 0;
+
+
 
     /**
     * Constructeur de la classe Case
@@ -39,16 +50,15 @@ public abstract class Case implements GamePainter {
         this.collision = collision;
         this.color = color;
     }
-
+    public int getFrame() {
+        return frame;
+    }
     /**
      * Méthode de dessin de la case dans le jeu
-     * @param im image sur laquelle dessiner
+     * @param image image sur laquelle dessiner
      */
-    public void draw(BufferedImage im) {
-        Graphics2D crayon = (Graphics2D) im.getGraphics();
-        crayon.setColor(this.color);
-        crayon.fillRect(y*TAILLE_CASE,x*TAILLE_CASE + DrawingPanel.ECART,TAILLE_CASE,TAILLE_CASE);
-    }
+    public abstract void draw(BufferedImage image);
+
 
     /**
     * Getter de collision
@@ -90,5 +100,65 @@ public abstract class Case implements GamePainter {
 
     public void setCollision(Boolean c){
         this.collision = c;
+    }
+    /**
+     * Initialisation le buffer de la case
+     * @param size : taille du buffer
+     */
+    public void initImage(int size){
+        this.image = new BufferedImage[size];
+    }
+
+    /**
+     * Getter de l'image de la case dans le buffer
+     * @param frame : frame de l'image
+     * @return image de la case
+     */
+    public Image getImage(int frame){
+        return this.image[frame];
+    }
+
+    /**
+     * Setter de l'image de la case dans le buffer
+     * @param image : image a mettre en place
+     * @param index :  index de l'image dans le buffer
+     */
+    public void setImage(BufferedImage image, int index){
+        this.image[index] = image;
+    }
+
+    /**
+     * Setter de la frame actuel
+     * @param frame : frame actuel
+     */
+    public void setFrame(int frame){
+        this.frame = frame;
+    }
+
+    /**
+     * Getter de la vitesse des frames
+     * @return int représentant la vitesse des frames
+     */
+    public int getFrameSpeed() {
+        return FrameSpeed;
+    }
+
+    /**
+     * Setter des ticks
+     * @param tick : int représentant le tick actuel de la case
+     */
+    public void setTick(int tick){
+        this.tick = tick;
+    }
+    /**
+     * Getter des ticks
+     * @return int représentant le tick actuel de la case
+     */
+    public int getTick(){
+        return this.tick;
+    }
+
+    public Color getColor(){
+        return this.color;
     }
 }

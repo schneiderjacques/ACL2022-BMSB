@@ -1,9 +1,11 @@
 package main.java.Cases;
 
+import main.java.Engine.DrawingPanel;
 import main.java.Personnages.Heros;
 import main.java.Principale.Tour;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -62,5 +64,12 @@ public class Trappe extends Case{
      */
     public void stopExecutor(){
         this.executor.shutdown();
+    }
+    @Override
+    public void draw(BufferedImage image) {
+        Graphics2D g = (Graphics2D) image.getGraphics();
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(this.getY()*TAILLE_CASE, this.getX()*TAILLE_CASE + DrawingPanel.ECART, TAILLE_CASE, TAILLE_CASE);
+        //g.drawImage(this.getImage(this.getFrame()), this.getY()*TAILLE_CASE, this.getX()*TAILLE_CASE + DrawingPanel.ECART, TAILLE_CASE, TAILLE_CASE, null);
     }
 }

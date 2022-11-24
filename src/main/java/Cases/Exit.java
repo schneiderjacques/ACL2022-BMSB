@@ -1,8 +1,11 @@
 package main.java.Cases;
 
+import main.java.Engine.DrawingPanel;
+import main.java.Principale.Tools;
 import main.java.Principale.Tour;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Class représentant la sortie du labyrinthe
@@ -18,6 +21,9 @@ public class Exit extends Case {
     public Exit(int x, int y) {
         //Initialisation des attributs
         super(false, x, y, Color.orange);
+        this.initImage(2);
+        this.setImage(Tools.getImageByName("/images/game/objects/door_closed"),0);
+        this.setImage(Tools.getImageByName("/images/game/objects/door_open"),1);
     }
 
     /**
@@ -28,16 +34,25 @@ public class Exit extends Case {
         return "Exit";
     }
 
+
     /**
      * Méthode qui permet de savoir si le héros peut sortir du labyrinthe
      * @param t : Tour courante
      */
     @Override
     public void eventCollider(Tour t) {
-        if (t.getCurrentLevel().isLastLevel()) {
+        System.out.println(t.getCurrentLevel().isKeyFound());
+        if (t.getCurrentLevel().isLastLevel() && t.getCurrentLevel().isKeyFound()) {
             t.setFini(true);
-        } else {
+        } else if (t.getCurrentLevel().isKeyFound()){
+            System.out.println("Niveau suivant");
             t.nextLevel();
         }
+    }
+
+    @Override
+    public void draw(BufferedImage image) {
+        Graphics2D g = (Graphics2D) image.getGraphics();
+        g.drawImage(this.getImage(this.getFrame()), this.getY()*TAILLE_CASE, this.getX()*TAILLE_CASE + DrawingPanel.ECART, TAILLE_CASE, TAILLE_CASE, null);
     }
 }
