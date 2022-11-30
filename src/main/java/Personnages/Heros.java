@@ -1,8 +1,12 @@
 package main.java.Personnages;
 
+import main.java.Cases.Case;
+import main.java.Engine.DrawingPanel;
 import main.java.Engine.Sound;
+import main.java.Principale.Tools;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,6 +26,8 @@ public class Heros extends Personnage {
     // Par défaut à true car le heros peut attaquer
     private boolean canAttack = true;
     private Sound sound = new Sound();
+    
+    private int nbFrame = 1;
 
     //Point de vie maximal du héros
     private final static double PDV_MAX = 10;
@@ -32,6 +38,8 @@ public class Heros extends Personnage {
      */
     public Heros() {
         super(1, 1, true, 10, 5, Color.blue);
+        this.initImage(1);
+        //this.setImage(Tools.getImageByName("/images/game/hero/knight_f_run_anim_f0"), 0);
     }
 
     /**
@@ -58,6 +66,13 @@ public class Heros extends Personnage {
      * @return canAttack
      * */
     public boolean canAttack(){return canAttack;}
+
+    @Override
+    public void draw(BufferedImage image) {
+        Graphics2D crayon = (Graphics2D) image.getGraphics();
+        crayon.setColor(this.getColor());
+        crayon.fillRect(getX()* Case.TAILLE_CASE,getY()*Case.TAILLE_CASE + DrawingPanel.ECART, Case.TAILLE_CASE,Case.TAILLE_CASE);
+    }
 
     /**
      * Méthode qui permet d'attaquer les personnages en face du personnage

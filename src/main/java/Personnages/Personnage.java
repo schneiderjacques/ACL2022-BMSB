@@ -35,6 +35,15 @@ public abstract class Personnage implements GamePainter {
     //Couleur du personnage
     private final Color color;
 
+    private BufferedImage[] image = null;
+    //Frame actuelle
+    private int frame = 0;
+    //Vitesse des frames
+    private int FrameSpeed = 10;
+
+    //Tick actuel
+    private int tick = 0;
+
     /**
     * Constructeur du personnage
     * @param x : position en X
@@ -54,14 +63,70 @@ public abstract class Personnage implements GamePainter {
         this.color = color;
     }
 
+    public int getFrame() {
+        return frame;
+    }
     /**
-     * Méthode de dessin du personnage dans le jeu
-     * @param im : image sur laquelle dessiner
+     * Méthode de dessin de la case dans le jeu
+     * @param image image sur laquelle dessiner
      */
-    public void draw(BufferedImage im) {
-        Graphics2D crayon = (Graphics2D) im.getGraphics();
-        crayon.setColor(this.color);
-        crayon.fillRect(x* Case.TAILLE_CASE,y*Case.TAILLE_CASE + DrawingPanel.ECART,Case.TAILLE_CASE,Case.TAILLE_CASE);
+    public abstract void draw(BufferedImage image);
+
+    /**
+     * Initialisation le buffer de la case
+     * @param size : taille du buffer
+     */
+    public void initImage(int size){
+        this.image = new BufferedImage[size];
+    }
+
+    /**
+     * Getter de l'image de la case dans le buffer
+     * @param frame : frame de l'image
+     * @return image de la case
+     */
+    public Image getImage(int frame){
+        return this.image[frame];
+    }
+
+    /**
+     * Setter de l'image de la case dans le buffer
+     * @param image : image a mettre en place
+     * @param index :  index de l'image dans le buffer
+     */
+    public void setImage(BufferedImage image, int index){
+        this.image[index] = image;
+    }
+
+    /**
+     * Setter de la frame actuel
+     * @param frame : frame actuel
+     */
+    public void setFrame(int frame){
+        this.frame = frame;
+    }
+
+    /**
+     * Getter de la vitesse des frames
+     * @return int représentant la vitesse des frames
+     */
+    public int getFrameSpeed() {
+        return FrameSpeed;
+    }
+
+    /**
+     * Setter des ticks
+     * @param tick : int représentant le tick actuel de la case
+     */
+    public void setTick(int tick){
+        this.tick = tick;
+    }
+    /**
+     * Getter des ticks
+     * @return int représentant le tick actuel de la case
+     */
+    public int getTick(){
+        return this.tick;
     }
 
     /**
@@ -237,5 +302,9 @@ public abstract class Personnage implements GamePainter {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }

@@ -1,8 +1,11 @@
 package main.java.Personnages;
 
+import main.java.Cases.Case;
+import main.java.Engine.DrawingPanel;
 import main.java.Principale.Niveau;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Class représentant un personnage du jeu
@@ -29,4 +32,10 @@ public class Boo extends Monstre{
         super(x, y, false, 10, 1, Color.MAGENTA, 5);
     }
 
+    @Override
+    public void draw(BufferedImage image) {
+        Graphics2D crayon = (Graphics2D) image.getGraphics();
+        crayon.setColor(this.getColor());
+        crayon.fillRect(getX()* Case.TAILLE_CASE,getY()*Case.TAILLE_CASE + DrawingPanel.ECART, Case.TAILLE_CASE,Case.TAILLE_CASE);
+    }
 }

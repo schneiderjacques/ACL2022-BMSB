@@ -1,8 +1,11 @@
 package main.java.Personnages;
 
+import main.java.Cases.Case;
+import main.java.Engine.DrawingPanel;
 import main.java.Principale.Niveau;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Class représentant un personnage du jeu
@@ -25,4 +28,10 @@ public class Goomba extends Monstre {
      */
     public Goomba(int x, int y) {super(x, y, true, 15, 2, Color.pink,3);}
 
+    @Override
+    public void draw(BufferedImage image) {
+        Graphics2D crayon = (Graphics2D) image.getGraphics();
+        crayon.setColor(this.getColor());
+        crayon.fillRect(getX()* Case.TAILLE_CASE,getY()*Case.TAILLE_CASE + DrawingPanel.ECART, Case.TAILLE_CASE,Case.TAILLE_CASE);
+    }
 }
