@@ -22,12 +22,14 @@ public class Heros extends Personnage {
     // Par défaut à true car le heros peut se déplacer
     private boolean canMove = true;
 
+    private boolean animationAttacked = false;
+
+    private boolean animationAttack = false;
+
     // Le personnage peut attaquer
     // Par défaut à true car le heros peut attaquer
     private boolean canAttack = true;
     private Sound sound = new Sound();
-    
-    private int nbFrame = 1;
 
     //Point de vie maximal du héros
     private final static double PDV_MAX = 10;
@@ -38,8 +40,10 @@ public class Heros extends Personnage {
      */
     public Heros() {
         super(1, 1, true, 10, 5, Color.blue);
-        this.initImage(1);
-        //this.setImage(Tools.getImageByName("/images/game/hero/knight_f_run_anim_f0"), 0);
+        this.initImage(9);
+        for (int i = 0; i < 9; i++) {
+            this.setImage(Tools.getImageByName("/images/game/hero/tiles/idle/down/sprite_idle_down" + i), i);
+        }
     }
 
     /**
@@ -69,9 +73,110 @@ public class Heros extends Personnage {
 
     @Override
     public void draw(BufferedImage image) {
+        /**
         Graphics2D crayon = (Graphics2D) image.getGraphics();
         crayon.setColor(this.getColor());
-        crayon.fillRect(getX()* Case.TAILLE_CASE,getY()*Case.TAILLE_CASE + DrawingPanel.ECART, Case.TAILLE_CASE,Case.TAILLE_CASE);
+        crayon.fillRect(getX()* Case.TAILLE_CASE,getY()*Case.TAILLE_CASE + DrawingPanel.ECART, Case.TAILLE_CASE,Case.TAILLE_CASE);**/
+        Graphics2D g = (Graphics2D) image.getGraphics();
+        this.setTick(this.getTick() + 1);
+        if (this.getTick() >= this.getFrameSpeed()) {
+            this.setTick(0);
+            this.setFrame(this.getFrame() + 1);
+            if (this.getFrame() >= getNbFrame()) {
+                this.setFrame(0);
+                if (this.animationAttacked) {
+                    this.animationAttacked = false;
+                    changeFrame();
+                }
+                if (this.animationAttack) {
+                    this.animationAttack = false;
+                    changeFrame();
+                }
+            }
+        }
+        g.drawImage(this.getImage(this.getFrame()), this.getX() * Case.TAILLE_CASE, this.getY() * Case.TAILLE_CASE + DrawingPanel.ECART, Case.TAILLE_CASE, Case.TAILLE_CASE, null);
+    }
+
+    @Override
+    public void changeFrame() {
+        this.setFrame(0);
+        switch (this.getLM()) {
+            case "d":
+                if (animationAttack) {
+                    this.initImage(3);
+                    for (int i = 0; i <= 2; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/attack/right/sprite_attack_right" + i), i);
+                    }
+                } else if (!animationAttacked) {
+                    this.initImage(9);
+                    for (int i = 0; i <= 8; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/idle/right/sprite_idle_right" + i), i);
+                    }
+                } else if (animationAttacked) {
+                    this.initImage(9);
+                    for (int i = 0; i <= 8; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/attacked/right/sprite_attacked_right" + i), i);
+                    }
+                }
+                break;
+            case "g":
+                if (animationAttack) {
+                    this.initImage(3);
+                    for (int i = 0; i <= 2; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/attack/left/sprite_attack_left" + i), i);
+                    }
+                } else if (!animationAttacked) {
+                    this.initImage(9);
+                    for (int i = 0; i <= 8; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/idle/left/sprite_idle_left" + i), i);
+                    }
+                } else {
+                    this.initImage(9);
+                    for (int i = 0; i <= 8; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/attacked/left/sprite_attacked_left" + i), i);
+                    }
+                }
+
+                break;
+            case "h":
+                if (animationAttack) {
+                    this.initImage(3);
+                    for (int i = 0; i <= 2; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/attack/up/sprite_attack_up" + i), i);
+                    }
+                } else if (!animationAttacked) {
+                    this.initImage(9);
+                    for (int i = 0; i <= 8; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/idle/up/sprite_idle_up" + i), i);
+                    }    
+                } else {
+                    this.initImage(9);
+                    for (int i = 0; i <= 8; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/attacked/up/sprite_attacked_up" + i), i);
+                    }
+                }
+                
+                break;
+            case "b":
+                if (animationAttack) {
+                    this.initImage(3);
+                    for (int i = 0; i <= 2; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/attack/down/sprite_attack_down" + i), i);
+                    }
+                } else if (!animationAttacked) {
+                    this.initImage(9);
+                    for (int i = 0; i <= 8; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/idle/down/sprite_idle_down" + i), i);
+                    }    
+                } else {
+                    this.initImage(9);
+                    for (int i = 0; i <= 8; i++) {
+                        this.setImage(Tools.getImageByName("/images/game/hero/tiles/attacked/down/sprite_attacked_down" + i), i);
+                    }
+                }
+                
+                break;
+        }
     }
 
     /**
@@ -84,6 +189,8 @@ public class Heros extends Personnage {
                 (adv.getX() == getX()-1 && adv.getY() == getY() && Objects.equals(getLM(), "g")) ||
                 (adv.getY() == getY()-1 && adv.getX() == getX() && Objects.equals(getLM(), "h")) ||
                 (adv.getY() == getY()+1 && adv.getX() == getX() && Objects.equals(getLM(), "b"))){
+            animationAttack = true;
+            changeFrame();
             sound.setFile(0);
             sound.play();
             adv.recevoirDegats(getPDA());
@@ -128,5 +235,7 @@ public class Heros extends Personnage {
     @Override
     public void retirerPDV(double pv) {
         this.setPDV(Math.max(this.getPDV() - pv, 0));
+        animationAttacked = true;
+        changeFrame();
     }
 }

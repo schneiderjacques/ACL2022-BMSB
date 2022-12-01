@@ -44,6 +44,8 @@ public abstract class Personnage implements GamePainter {
     //Tick actuel
     private int tick = 0;
 
+    private int nbFrame = 9;
+
     /**
     * Constructeur du personnage
     * @param x : position en X
@@ -66,6 +68,11 @@ public abstract class Personnage implements GamePainter {
     public int getFrame() {
         return frame;
     }
+
+    public int getNbFrame() {
+        return nbFrame;
+    }
+
     /**
      * Méthode de dessin de la case dans le jeu
      * @param image image sur laquelle dessiner
@@ -78,6 +85,7 @@ public abstract class Personnage implements GamePainter {
      */
     public void initImage(int size){
         this.image = new BufferedImage[size];
+        this.nbFrame = size;
     }
 
     /**
@@ -137,10 +145,17 @@ public abstract class Personnage implements GamePainter {
         this.x = this.x + dir;
         if(dir == 1){
             lm = "d";
+            changeFrame();
         }else{
             lm = "g";
+            changeFrame();
         }
     }
+
+    /**
+     * Méthode permettant de modifier les frames du personnage
+     */
+    public abstract void changeFrame();
 
 
     /**
@@ -151,8 +166,10 @@ public abstract class Personnage implements GamePainter {
         this.y = this.y + dir;
         if(dir == 1){
             lm = "b";
+            changeFrame();
         }else{
             lm = "h";
+            changeFrame();
         }
     }
 

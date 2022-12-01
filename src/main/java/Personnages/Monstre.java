@@ -45,6 +45,11 @@ public abstract class Monstre extends Personnage {
         this.view = view; 
     }
 
+    @Override
+    public void changeFrame() {
+
+    }
+
     /**
      * Méthode qui déplace ou attaque le monstre
      */
