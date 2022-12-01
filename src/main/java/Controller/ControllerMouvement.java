@@ -51,6 +51,9 @@ public class ControllerMouvement implements GameController {
                     this.jeu.getTour().moveHeros('Y', -1);
                     this.commandeEnCours = Cmd.UP;
                 }
+                case KeyEvent.VK_ESCAPE -> {
+                    this.jeu.pauseJeu();
+                }
                 case KeyEvent.VK_DOWN -> {
                     this.jeu.getTour().moveHeros('Y', 1);
                     this.commandeEnCours = Cmd.DOWN;
@@ -107,6 +110,38 @@ public class ControllerMouvement implements GameController {
                 case KeyEvent.VK_DOWN -> {
                     this.commandeEnCours = Cmd.DOWN;
                     dp.getEndScreen().setCommandNum(1);
+                }
+
+            }
+        }else if (this.jeu.getGameState() == 4) {
+
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_ENTER -> {
+                    this.commandeEnCours = Cmd.ENTER;
+                    if (dp.getBreakScreen().getCommandNum() == 0 ){
+                        this.jeu.resumeLevel();
+                    } else if (dp.getBreakScreen().getCommandNum() == 1 ) {
+                        this.jeu.getTour().setLevelChanged(true);
+                        this.jeu.restartJeu();
+                    } else {
+                        System.exit(0);
+                    }
+                }
+                case KeyEvent.VK_UP -> {
+                    this.commandeEnCours = Cmd.UP;
+                    if (dp.getBreakScreen().getCommandNum() == 1 ){
+                        dp.getBreakScreen().setCommandNum(0);
+                    }else if (dp.getBreakScreen().getCommandNum() == 2 ){
+                        dp.getBreakScreen().setCommandNum(1);
+                    }
+                }
+                case KeyEvent.VK_DOWN -> {
+                    this.commandeEnCours = Cmd.DOWN;
+                    if (dp.getBreakScreen().getCommandNum() == 0 ){
+                        dp.getBreakScreen().setCommandNum(1);
+                    }else if (dp.getBreakScreen().getCommandNum() == 1 ){
+                        dp.getBreakScreen().setCommandNum(2);
+                    }
                 }
 
             }

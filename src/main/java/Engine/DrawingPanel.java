@@ -5,9 +5,7 @@ package main.java.Engine;
  */
 
 import main.java.Principale.Jeu;
-import main.java.screen.EndScreen;
-import main.java.screen.MenuScreen;
-import main.java.screen.UIScreen;
+import main.java.screen.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -68,6 +66,8 @@ public class DrawingPanel extends JPanel {
 
     private EndScreen endScreen;
 
+    private BreakScreen breakScreen;
+
 
     /**
      * Camera position X
@@ -98,7 +98,6 @@ public class DrawingPanel extends JPanel {
      * la taille des images
      */
     private int width, height;
-
 
     /**
      * constructeur Il construit les images pour doublebuffering ainsi que le
@@ -144,6 +143,9 @@ public class DrawingPanel extends JPanel {
 
         //Creation de l'ecran de fin
         this.endScreen = new EndScreen(this);
+
+        //Creation de l'ecran de pause
+        this.breakScreen = new BreakScreen(this);
 
         //Creation de l'UI
         this.uiScreen = new UIScreen(this);
@@ -206,6 +208,10 @@ public class DrawingPanel extends JPanel {
             case 3:
                 this.endScreen.setTitle("You lost !");
                 this.endScreen.draw(g2);
+                this.requestFocus();
+                break;
+            case 4:
+                this.breakScreen.draw(g2);
                 this.requestFocus();
                 break;
         }
@@ -281,4 +287,13 @@ public class DrawingPanel extends JPanel {
     public EndScreen getEndScreen() {
         return endScreen;
     }
+
+    /**
+     * @return BreakScreen instance de l'écran de pause
+     */
+    public BreakScreen getBreakScreen() {
+        return breakScreen;
+    }
+
+
 }

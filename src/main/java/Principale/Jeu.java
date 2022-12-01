@@ -2,8 +2,15 @@ package main.java.Principale;
 
 import main.java.Engine.Cmd;
 import main.java.Engine.Game;
+import main.java.Main;
 
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
 * Class représentant le jeu en lui même
@@ -23,6 +30,12 @@ public class Jeu implements Game {
 
     private boolean isFinished;
 
+    //Tableau des scores
+    private ArrayList<String> scores;
+
+    //Nom du joueur
+    private String namePlayer;
+
     /**
      * Constructeur du jeu
      */
@@ -33,6 +46,17 @@ public class Jeu implements Game {
         this.isFinished = false;
         //Création du labyrinthe
         this.tour = new Tour();
+
+        //Initialisation des scores
+        this.scores = new ArrayList<>();
+
+        loadScores();
+
+        this.namePlayer = "";
+        setNamePlayer("Jacques");
+        addScore(100);
+        setNamePlayer("Silvio");
+        addScore(5);
     }
 
     /**
@@ -99,5 +123,50 @@ public class Jeu implements Game {
         this.setGameState(1);
         tour.setLevelChanged(true);
         tour.demarreTour();
+    }
+
+    public void pauseJeu() {
+        this.tour.getCurrentLevel().pauseMonstres();
+        this.setGameState(4);
+    }
+
+    public void resumeLevel() {
+        this.tour.resumeLevel();
+        this.setGameState(1);
+    }
+
+    public void loadScores() {
+        Scanner sc = new Scanner(Objects.requireNonNull(Main.class.getResourceAsStream("/Scores.txt")));
+        while (sc.hasNextLine()) {
+            scores.add(sc.nextLine());
+        }
+        System.out.println(scores);
+    }
+
+    public void addScore(int score) throws FileNotFoundException {
+        boolean added = false;
+        for(int i = 0; i < scores.size(); i++) {
+            if (scores.get(i).split(" ")[0].equals(namePlayer)) {
+                if (Integer.parseInt(scores.get(i).split(" ")[1]) < score) {
+                    scores.set(scores.indexOf(scores.get(i)), namePlayer + " " + score);
+                }
+                added = true;
+            }
+        };
+        if (!added) {
+            scores.add(namePlayer + " " + score);
+        }
+        PrintWriter writer = new PrintWriter("src/main/resources/Scores.txt");
+        writer.print("");
+        for (String s : scores) {
+            writer.println(s);
+        }
+        writer.close();
+
+        System.out.println(scores);
+    }
+
+    public void setNamePlayer(String name) {
+        this.namePlayer = name;
     }
 }

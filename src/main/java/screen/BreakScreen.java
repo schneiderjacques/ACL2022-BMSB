@@ -3,13 +3,12 @@ package main.java.screen;
 import main.java.Engine.DrawingPanel;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.print.PrinterException;
 import java.io.IOException;
 
-public class MenuScreen {
+public class BreakScreen {
+
     /**
      * Image de fond du menu démarrer
      */
@@ -23,15 +22,20 @@ public class MenuScreen {
     /**
      * Titre du jeu
      */
-    private final String title = "ACL BMSB - 2022";
+    private String title = "Pause";
     /**
-     * Nom du bouton démarrer
+     * Nom du bouton restart
      */
-    private final String launch = "Launch";
+    private final String restart = "Restart";
     /**
      * Nom du bouton quitter
      */
-    private final String exit = "Exit";
+    private final String exit = "Quitter";
+
+    /**
+     * Nom du bouton continuer
+     */
+    private final String resume = "Continuer";
 
     /**
      *
@@ -43,7 +47,7 @@ public class MenuScreen {
      *
      * @param dp DrawingPanel du jeu
      */
-    public MenuScreen(DrawingPanel dp) {
+    public BreakScreen(DrawingPanel dp) {
         this.dp = dp;
         this.backgroundImage = new BufferedImage(DrawingPanel.TILE_SIZE, DrawingPanel.TILE_SIZE, BufferedImage.TYPE_INT_ARGB);
         try {
@@ -81,21 +85,26 @@ public class MenuScreen {
         g2.setPaint(grandient);
 
         //Dessine le titre du jeu
-        g2.drawString(title, dp.getScreenWidth() / 2 - (title.length() * 14), dp.getScreenHeight() / 2 + 65);
+        g2.drawString(title, dp.getScreenWidth() / 2 - (title.length() * 20), dp.getScreenHeight() / 2 + 50);
 
         if (commandNum == 0) {
-            g2.drawString(">", dp.getScreenWidth() / 2 - 150, dp.getScreenHeight() / 2 + 205);
+            g2.drawString(">", dp.getScreenWidth() / 2 - 150, dp.getScreenHeight() / 2 + 155);
         } else if (commandNum == 1) {
+            g2.drawString(">", dp.getScreenWidth() / 2 - 150, dp.getScreenHeight() / 2 + 205);
+        }else if (commandNum == 2) {
             g2.drawString(">", dp.getScreenWidth() / 2 - 150, dp.getScreenHeight() / 2 + 255);
         }
 
 
         //Nouvelle font size
         g2.setFont(new Font("Minecraft", Font.BOLD, 30));
+        //Dessine le bouton continuer
+        g2.drawString(resume, dp.getScreenWidth() / 2 - (resume.length() * 13), dp.getScreenHeight() / 2 + 150);
         //Dessine le bouton démarrer
-        g2.drawString(launch, dp.getScreenWidth() / 2 - (launch.length() * 13), dp.getScreenHeight() / 2 + 200);
+        g2.drawString(restart, dp.getScreenWidth() / 2 - (restart.length() * 13), dp.getScreenHeight() / 2 + 200);
         //Dessine le bouton quitter
         g2.drawString(exit, dp.getScreenWidth() / 2 - (exit.length() * 13), dp.getScreenHeight() / 2 + 250);
+
 
 
     }
@@ -115,6 +124,15 @@ public class MenuScreen {
     public int getCommandNum() {
         return commandNum;
     }
+
+    /**
+     * Set le titre du jeu
+     * @param title titre du jeu
+     * */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
 
 
 }

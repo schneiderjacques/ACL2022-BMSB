@@ -24,9 +24,9 @@ public class EndScreen {
          */
         private String title = "";
         /**
-         * Nom du bouton démarrer
+         * Nom du bouton restart
          */
-        private final String launch = "Restart";
+        private final String restart = "Restart";
         /**
          * Nom du bouton quitter
          */
@@ -91,8 +91,8 @@ public class EndScreen {
 
             //Nouvelle font size
             g2.setFont(new Font("Minecraft", Font.BOLD, 30));
-            //Dessine le bouton démarrer
-            g2.drawString(launch, dp.getScreenWidth() / 2 - (launch.length() * 13), dp.getScreenHeight() / 2 + 200);
+            //Dessine le bouton restart
+            g2.drawString(restart, dp.getScreenWidth() / 2 - (restart.length() * 13), dp.getScreenHeight() / 2 + 200);
             //Dessine le bouton quitter
             g2.drawString(exit, dp.getScreenWidth() / 2 - (exit.length() * 13), dp.getScreenHeight() / 2 + 250);
 

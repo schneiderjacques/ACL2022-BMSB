@@ -491,4 +491,12 @@ public class Niveau implements GamePainter {
         this.monstresThreads.clear();
         this.monstres.clear();
     }
+
+    /**
+     * Methode qui stop les threads des monstres
+     */
+    public void pauseMonstres() {
+        this.monstresThreads.forEach((monstre, executor) -> executor.shutdown());
+        this.monstresThreads.clear();
+    }
 }

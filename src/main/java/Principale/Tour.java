@@ -211,4 +211,15 @@ public class Tour {
      * Methode qui clear le niveau courant
      */
     public void clearLevel(){this.niveaux.get(this.currentLevel-1).deleteNiveau();}
+
+    /**
+     * Methode qui stop les monstres du niveau courant
+     */
+    public void pauseLevel(){
+        this.niveaux.get(this.currentLevel-1).pauseMonstres();
+    }
+
+    public void resumeLevel(){
+        this.niveaux.get(this.currentLevel-1).demarreNiveau();
+    }
 }
