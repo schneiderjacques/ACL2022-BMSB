@@ -201,12 +201,16 @@ public class DrawingPanel extends JPanel {
                 uiScreen.draw(g2);
                 break;
             case 2:
-                this.endScreen.setTitle("You won !");
+                this.endScreen.setTitle("Gagne !");
+                this.endScreen.setScores(this.jeu.getScores());
+                this.endScreen.setScoreCourant(this.jeu.getTour().getLevelNumber());
                 this.endScreen.draw(g2);
                 this.requestFocus();
                 break;
             case 3:
-                this.endScreen.setTitle("You lost !");
+                this.endScreen.setTitle("Perdu !");
+                this.endScreen.setScores(this.jeu.getScores());
+                this.endScreen.setScoreCourant(this.jeu.getTour().getLevelNumber());
                 this.endScreen.draw(g2);
                 this.requestFocus();
                 break;

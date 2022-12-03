@@ -198,7 +198,6 @@ public abstract class Personnage implements GamePainter {
         (adv.getY() == getY()-1 && adv.getX() == getX() && Objects.equals(getLM(), "h")) ||
         (adv.getY() == getY()+1 && adv.getX() == getX() && Objects.equals(getLM(), "b"))){
             adv.recevoirDegats(getPDA());
-            System.out.println("Le héros a attaqué le monstre" + " : " + adv.getPDV());
             return true;
         }
         return false;

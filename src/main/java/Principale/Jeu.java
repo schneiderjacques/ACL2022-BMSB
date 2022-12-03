@@ -51,12 +51,6 @@ public class Jeu implements Game {
         this.scores = new ArrayList<>();
 
         loadScores();
-
-        this.namePlayer = "";
-        setNamePlayer("Jacques");
-        addScore(100);
-        setNamePlayer("Silvio");
-        addScore(5);
     }
 
     /**
@@ -140,10 +134,15 @@ public class Jeu implements Game {
         while (sc.hasNextLine()) {
             scores.add(sc.nextLine());
         }
-        System.out.println(scores);
+        scores.sort((o1, o2) -> {
+            String[] split1 = o1.split(" ");
+            String[] split2 = o2.split(" ");
+            return Integer.parseInt(split2[1]) - Integer.parseInt(split1[1]);
+        });
     }
 
-    public void addScore(int score) throws FileNotFoundException {
+    public void addScore() throws FileNotFoundException {
+        int score = tour.getLevelNumber();
         boolean added = false;
         for(int i = 0; i < scores.size(); i++) {
             if (scores.get(i).split(" ")[0].equals(namePlayer)) {
@@ -156,17 +155,26 @@ public class Jeu implements Game {
         if (!added) {
             scores.add(namePlayer + " " + score);
         }
+        System.out.println(scores);
+        scores.sort((o1, o2) -> {
+            String[] split1 = o1.split(" ");
+            String[] split2 = o2.split(" ");
+            return Integer.parseInt(split2[1]) - Integer.parseInt(split1[1]);
+        });
+
         PrintWriter writer = new PrintWriter("src/main/resources/Scores.txt");
         writer.print("");
         for (String s : scores) {
             writer.println(s);
         }
         writer.close();
-
-        System.out.println(scores);
     }
 
     public void setNamePlayer(String name) {
         this.namePlayer = name;
+    }
+
+    public ArrayList<String> getScores() {
+        return scores;
     }
 }

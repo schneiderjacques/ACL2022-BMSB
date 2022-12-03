@@ -45,7 +45,7 @@ public class Exit extends Case {
         if (t.getCurrentLevel().isLastLevel() && t.getCurrentLevel().isKeyFound()) {
             t.setFini(true);
         } else if (t.getCurrentLevel().isKeyFound()){
-            System.out.println("Niveau suivant");
+            //System.out.println("Niveau suivant");
             t.nextLevel();
         }
     }

@@ -198,7 +198,6 @@ public class Heros extends Personnage {
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
             Runnable delayAttaque = () -> {this.setCanAttack(true);executor.shutdown();};
             executor.scheduleAtFixedRate(delayAttaque, 1000, 100, TimeUnit.MILLISECONDS);
-            System.out.println("Le héros a attaqué le monstre" + " : " + adv.getPDV());
             return true;
         }
         return false;
