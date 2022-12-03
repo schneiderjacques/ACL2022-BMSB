@@ -131,7 +131,7 @@ public class Niveau implements GamePainter {
             return this.tour.getHeros().getX() != targetX || this.tour.getHeros().getY() != targetY;
         }
         if (!p.isCollision()) {
-            return targetX != 0 && targetX != this.longueur - 1 && targetY != 0 && targetY != this.largeur - 1;
+            return targetX != 0 && targetY != this.longueur - 1 && targetY != 0 && targetX != this.largeur - 1;
         }
         return false;
     }
