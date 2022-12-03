@@ -2,6 +2,8 @@ package main.java.Engine;
 
 import main.java.Principale.Jeu;
 
+import java.io.FileNotFoundException;
+
 /**
  * @author Horatiu Cirstea, Vincent Thomas
  *
@@ -49,7 +51,7 @@ public class GameEngineGraphical {
 	/**
 	 * permet de lancer le game
 	 */
-	public void run() throws InterruptedException {
+	public void run() throws InterruptedException, FileNotFoundException {
 
 		// creation de l'interface graphique
 		this.gui = new GraphicalInterface(this.gamePainter,this.gameController);
@@ -67,10 +69,12 @@ public class GameEngineGraphical {
 				this.gui.setGamePainter(this.game.getTour().getCurrentLevel());
 			}
 
-			if (this.game.isWon()) {
+			if (this.game.isWon() && this.game.getGameState() != 2) {
+				this.game.addScore();
 				this.game.setGameState(2);
 				this.game.getTour().clearLevel();
-			} else if (this.game.isLost()) {
+			} else if (this.game.isLost() && this.game.getGameState() != 3) {
+				this.game.addScore();
 				this.game.setGameState(3);
 				this.game.getTour().clearLevel();
 			}

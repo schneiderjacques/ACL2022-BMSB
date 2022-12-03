@@ -4,6 +4,7 @@ import main.java.Engine.Cmd;
 import main.java.Engine.DrawingPanel;
 import main.java.Principale.Jeu;
 import main.java.Engine.GameController;
+import main.java.screen.UsernameScreen;
 
 import java.awt.event.KeyEvent;
 
@@ -77,7 +78,7 @@ public class ControllerMouvement implements GameController {
                 case KeyEvent.VK_ENTER -> {
                     this.commandeEnCours = Cmd.ENTER;
                     if (dp.getMenuScreen().getCommandNum() == 0 ){
-                        this.jeu.demarreJeu();
+                        UsernameScreen usernameScreen = new UsernameScreen(this.jeu);
                     } else {
                         System.exit(0);
                     }

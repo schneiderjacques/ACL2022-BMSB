@@ -380,8 +380,6 @@ public class Niveau implements GamePainter {
      * @param h Heros du niveau
      */
     public void printMap(Heros h) {
-        System.out.println(this.getLargeur());
-        System.out.println(this.getLongueur());
         for (int i = 0; i < this.getLongueur(); i++) {
             for (int j = 0; j < this.getLargeur(); j++) {
                 if (h.getX() == j && h.getY() == i) {

@@ -27,11 +27,11 @@ public class MenuScreen {
     /**
      * Nom du bouton démarrer
      */
-    private final String launch = "Launch";
+    private final String launch = "Jouer";
     /**
      * Nom du bouton quitter
      */
-    private final String exit = "Exit";
+    private final String exit = "Quitter";
 
     /**
      *

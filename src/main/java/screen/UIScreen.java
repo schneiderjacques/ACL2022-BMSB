@@ -44,7 +44,7 @@ public class UIScreen {
 
 
         //Mise en place d'une nouvelle fonte et écriture du text du niveau
-        g2.setFont(new Font("Arial", Font.BOLD, 20));
+        g2.setFont(new Font("Minecraft", Font.BOLD, 20));
         g2.setColor(Color.BLACK);
         //affichage du niveau en cours
         g2.drawString("Niveau : " + dp.getJeu().getTour().getLevelNumber(), this.dp.getCamX() + 10, this.dp.getCamY()  + DrawingPanel.TILE_SIZE/2+5);
