@@ -20,10 +20,9 @@ public class Exit extends Case {
      */
     public Exit(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y);
-        this.initImage(2);
+        super(true, x, y);
+        this.initImage(1);
         this.setImage(Tools.getImageByName("/images/game/objects/door_closed"),0);
-        this.setImage(Tools.getImageByName("/images/game/objects/door_open"),1);
     }
 
     /**
@@ -32,6 +31,11 @@ public class Exit extends Case {
      */
     public String getType() {
         return "Exit";
+    }
+
+    public void open() {
+        this.setCollision(false);
+        this.setImage(Tools.getImageByName("/images/game/objects/door_open"),0);
     }
 
 

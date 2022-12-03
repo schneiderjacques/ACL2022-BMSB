@@ -31,6 +31,9 @@ public class Niveau implements GamePainter {
     //Tableau de cases représentant le niveau
     private Case[][] niveau;
 
+    // Case de sortie du niveau
+    private Exit exitCase;
+
     //Tableau de cases représentant les objets du niveau
     private Case[][] objetNiveau;
 
@@ -206,6 +209,7 @@ public class Niveau implements GamePainter {
                     switch (l){
                         case 'E' -> {
                             this.objetNiveau[index][i] = new Exit(index, i);
+                            this.exitCase = (Exit) this.objetNiveau[index][i];
                         }
                         case 'K' -> {
                             this.objetNiveau[index][i] = new Key(index, i);
@@ -467,6 +471,7 @@ public class Niveau implements GamePainter {
      */
     public void setKeyFound(boolean b) {
         this.keyFound = b;
+        exitCase.open();
     }
 
     /**

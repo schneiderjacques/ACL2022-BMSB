@@ -136,7 +136,6 @@ public class Heros extends Personnage {
                 break;
         }
         this.setAnimationAttacked(false);
-        this.setAnimationAttack(false);
     }
 
     /**
