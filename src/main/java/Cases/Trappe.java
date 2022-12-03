@@ -2,6 +2,7 @@ package main.java.Cases;
 
 import main.java.Engine.DrawingPanel;
 import main.java.Personnages.Heros;
+import main.java.Principale.Tools;
 import main.java.Principale.Tour;
 
 import java.awt.*;
@@ -18,6 +19,8 @@ public class Trappe extends Case{
     //Temps d'immobilisation du joueur
     private final double BLOCKED_TIME = 3;
 
+    private boolean walkedOn = false;
+
     //Executer pour bloquer le personnage
     private ScheduledExecutorService executor;
 
@@ -28,7 +31,9 @@ public class Trappe extends Case{
      */
     public Trappe(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y, Color.darkGray);
+        super(false, x, y);
+        this.initImage(1);
+        this.setImage(Tools.getImageByName("/images/game/objects/jail"),0);
     }
 
 
@@ -57,6 +62,7 @@ public class Trappe extends Case{
 
         };
         this.executor.scheduleAtFixedRate(stopPlayer, 3000, 100, TimeUnit.MILLISECONDS);
+        walkedOn = true;
     }
 
     /**
@@ -67,9 +73,17 @@ public class Trappe extends Case{
     }
     @Override
     public void draw(BufferedImage image) {
-        Graphics2D g = (Graphics2D) image.getGraphics();
-        g.setColor(Color.DARK_GRAY);
-        g.fillRect(this.getY()*TAILLE_CASE, this.getX()*TAILLE_CASE + DrawingPanel.ECART, TAILLE_CASE, TAILLE_CASE);
-        //g.drawImage(this.getImage(this.getFrame()), this.getY()*TAILLE_CASE, this.getX()*TAILLE_CASE + DrawingPanel.ECART, TAILLE_CASE, TAILLE_CASE, null);
+        if (walkedOn) {
+            Graphics2D g = (Graphics2D) image.getGraphics();
+            this.setTick(this.getTick() + 1);
+            if (this.getTick() >= this.getFrameSpeed()) {
+                this.setTick(0);
+                this.setFrame(this.getFrame() + 1);
+                if (this.getFrame() >= 1) {
+                    this.setFrame(0);
+                }
+            }
+            g.drawImage(this.getImage(this.getFrame()), this.getY() * TAILLE_CASE, this.getX() * TAILLE_CASE + DrawingPanel.ECART, TAILLE_CASE, TAILLE_CASE, null);
+        }
     }
 }

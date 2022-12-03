@@ -95,6 +95,21 @@ public class Niveau implements GamePainter {
         int targetX = p.getX();
         int targetY = p.getY();
 
+        // on change l'orientation du personnage
+        if (axe == 'X') {
+            if (dir > 0) {
+                p.setLastMove("d");
+            } else {
+                p.setLastMove("g");
+            }
+        } else {
+            if (dir > 0) {
+                p.setLastMove("b");
+            } else {
+                p.setLastMove("h");
+            }
+        }
+
         switch (axe) {
             case 'X' -> targetX += dir;
             case 'Y' -> targetY += dir;
@@ -208,14 +223,17 @@ public class Niveau implements GamePainter {
                             this.objetNiveau[index][i] = new Passage(index, i);
                             c.setImage(Tools.getImageByName("/images/game/tiles/tile" + "055"),0);
                         }
+                        case 'C' -> {
+                            this.objetNiveau[index][i] = new DalleDesacPassage(index, i);
+                        }
+                        case 'G' -> {
+                            this.monstres.add(new Goomba(i, index, this));
+                        }
                         case 'X' -> {
                             this.objetNiveau[index][i] = new Dalle(index, i);
                         }
                         case 'B' -> {
                             this.monstres.add(new Boo(i, index, this));
-                        }
-                        case 'G' -> {
-                            this.monstres.add(new Goomba(i, index, this));
                         }
                     }
 
@@ -273,7 +291,7 @@ public class Niveau implements GamePainter {
             }*/
             index++;
         }
-        this.printMap(new Heros());
+        //this.printMap(new Heros());
     }
 
     public boolean isNumeric(String str) {

@@ -23,7 +23,7 @@ public class Vie extends Case {
      */
     public Vie(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y, Color.green);
+        super(false, x, y);
         this.initImage(6);
         try {
             this.setImage(Tools.getImageByName("/images/game/objects/vie/Red 1"), 0);
@@ -60,7 +60,6 @@ public class Vie extends Case {
             }
         }
         g.drawImage(this.getImage(this.getFrame()), this.getY() * TAILLE_CASE, this.getX() * TAILLE_CASE + DrawingPanel.ECART, TAILLE_CASE, TAILLE_CASE, null);
-
     }
 
     /**

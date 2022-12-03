@@ -19,7 +19,7 @@ public class Sol extends Case {
      */
     public Sol(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y, Color.white);
+        super(false, x, y);
         this.initImage(1);
     }
 

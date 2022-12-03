@@ -20,7 +20,7 @@ public class Exit extends Case {
      */
     public Exit(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y, Color.orange);
+        super(false, x, y);
         this.initImage(2);
         this.setImage(Tools.getImageByName("/images/game/objects/door_closed"),0);
         this.setImage(Tools.getImageByName("/images/game/objects/door_open"),1);
@@ -41,11 +41,11 @@ public class Exit extends Case {
      */
     @Override
     public void eventCollider(Tour t) {
-        System.out.println(t.getCurrentLevel().isKeyFound());
+        //System.out.println(t.getCurrentLevel().isKeyFound());
         if (t.getCurrentLevel().isLastLevel() && t.getCurrentLevel().isKeyFound()) {
             t.setFini(true);
         } else if (t.getCurrentLevel().isKeyFound()){
-            System.out.println("Niveau suivant");
+            //System.out.println("Niveau suivant");
             t.nextLevel();
         }
     }

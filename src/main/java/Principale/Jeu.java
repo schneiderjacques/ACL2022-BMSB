@@ -140,7 +140,7 @@ public class Jeu implements Game {
         while (sc.hasNextLine()) {
             scores.add(sc.nextLine());
         }
-        System.out.println(scores);
+        //System.out.println(scores);
     }
 
     public void addScore(int score) throws FileNotFoundException {
@@ -163,7 +163,7 @@ public class Jeu implements Game {
         }
         writer.close();
 
-        System.out.println(scores);
+        //System.out.println(scores);
     }
 
     public void setNamePlayer(String name) {

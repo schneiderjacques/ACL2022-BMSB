@@ -16,7 +16,7 @@ public class Dalle extends Case {
      * @param y
      */
     public Dalle(int x, int y) {
-        super(false, x, y, Color.white);
+        super(false, x, y);
     }
 
     @Override

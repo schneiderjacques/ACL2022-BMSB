@@ -16,13 +16,20 @@ public class Passage extends Case{
      * @param y : emplacement de la case en Y
      */
     public Passage(int x, int y) {
-        super(true, x, y, Color.BLACK);
-        this.initImage(2);
+        super(true, x, y);
+        this.initImage(1);
         this.setImage(Tools.getImageByName("/images/game/objects/passage"),0);
     }
 
     @Override
     public void eventCollider(Tour t) {
+        // ne fait rien
+    }
+
+    /**
+     * Méthode qui permet de fermer le passage
+     */
+    public void close(){
         this.setCollision(true);
     }
 
@@ -31,14 +38,21 @@ public class Passage extends Case{
         return "Porte";
     }
 
+    /**
+     * Méthode qui permet d'ouvrir le passage
+     */
     public void open(){
         this.setCollision(false);
     }
+
+    /**
+     * Méthode qui permet de dessiner le passage
+     * @param image image sur laquelle dessiner
+     */
     @Override
     public void draw(BufferedImage image) {
-        Graphics2D g = (Graphics2D) image.getGraphics();
-        g.setColor(this.getColor());
         if (!this.getCollision()) {
+            Graphics2D g = (Graphics2D) image.getGraphics();
             g.drawImage(this.getImage(this.getFrame()), this.getY() * TAILLE_CASE, this.getX() * TAILLE_CASE + DrawingPanel.ECART, TAILLE_CASE, TAILLE_CASE, null);
         }
      }

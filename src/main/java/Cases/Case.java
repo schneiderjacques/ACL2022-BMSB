@@ -20,10 +20,6 @@ public abstract class Case implements GamePainter {
 
     //Taille d'une case en pixels
     public static final int TAILLE_CASE = 16*3;
-
-    //Couleur de la case
-    private Color color;
-
     private BufferedImage[] image = null;
 
     //le joueur entre en collision avec la case ou non
@@ -43,12 +39,11 @@ public abstract class Case implements GamePainter {
     * Constructeur de la classe Case
     * @param collision : le joueur entre en collision avec la case ou non
      */
-    public Case(boolean collision, int x, int y, Color color){
+    public Case(boolean collision, int x, int y){
         //Initialisation des attributs
         this.x = x;
         this.y = y;
         this.collision = collision;
-        this.color = color;
     }
     public int getFrame() {
         return frame;
@@ -92,10 +87,6 @@ public abstract class Case implements GamePainter {
      */
     public int getY() {
         return y;
-    }
-
-    public void setColor(Color c){
-        this.color = c;
     }
 
     public void setCollision(Boolean c){
@@ -156,9 +147,5 @@ public abstract class Case implements GamePainter {
      */
     public int getTick(){
         return this.tick;
-    }
-
-    public Color getColor(){
-        return this.color;
     }
 }

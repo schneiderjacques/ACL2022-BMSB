@@ -18,7 +18,7 @@ public class Mur extends Case {
      */
     public Mur(boolean collision, int x, int y) {
         //Initialisation des attributs
-        super(collision, x, y, Color.black);
+        super(collision, x, y);
         this.initImage(1);
     }
 

@@ -21,7 +21,7 @@ public class Key extends Case{
      */
     public Key(int x, int y) {
         //Initialisation des attributs
-        super(false, x, y, Color.yellow);
+        super(false, x, y);
         this.initImage(5);
         try {
             this.setImage(Tools.getImageByName("/images/game/objects/key/sprite_key0"), 0);
