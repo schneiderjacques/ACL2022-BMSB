@@ -1,5 +1,6 @@
 package main.java.Personnages;
 
+import main.java.Engine.Sound;
 import main.java.Principale.Niveau;
 
 import java.awt.*;
@@ -14,6 +15,7 @@ public abstract class Monstre extends Personnage {
     //Niveau du monstre
     private Niveau niveau;
     private double view;
+    private Sound sound;
 
     /**
      * Constructeur du monstre
@@ -30,6 +32,7 @@ public abstract class Monstre extends Personnage {
         super(x, y, col, pdv, pda);
         this.niveau = n;
         this.view = view;
+        sound = new Sound(); 
     }
 
     /**
@@ -43,7 +46,8 @@ public abstract class Monstre extends Personnage {
      */
     public Monstre(int x, int y, boolean col, double pdv, double pda, int view) {
         super(x, y, col, pdv, pda);
-        this.view = view;
+        this.view = view; 
+        sound = new Sound(); 
     }
 
     /**
@@ -169,6 +173,8 @@ public abstract class Monstre extends Personnage {
             this.setAnimationAttack(true);
             changeFrame();
             adv.recevoirDegats(getPDA());
+            sound.setFile(3);
+            sound.play();  
             return true;
         }
         return false;
