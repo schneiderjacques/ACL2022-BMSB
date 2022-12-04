@@ -57,6 +57,9 @@ public class DrawingPanel extends JPanel {
      */
     private UIScreen uiScreen;
 
+    /**
+     * Le jeu
+     */
     private Jeu jeu;
 
     /**
@@ -228,6 +231,45 @@ public class DrawingPanel extends JPanel {
      * */
     public Jeu getJeu() {
         return jeu;
+    }
+
+    /**
+     * Passe à l'affichage du niveau suivant
+     * @param painter
+     *          le painter du jeu
+     */
+    public void nextLevel(GamePainter painter) {
+        //Viewport Size
+        this.maxScreenCol = 20;
+        this.maxScreenRow = 12; //+1 pour laisser de la place pour l'UI
+
+        // Taille du monde
+        this.maxLevelCol = jeu.getTour().getCurrentLevel().getLargeur();
+        this.maxLevelRow = jeu.getTour().getCurrentLevel().getLongueur();
+
+        this.screenWidth = TILE_SIZE * maxScreenCol; //960 pixels
+        this.screenHeight = TILE_SIZE * maxScreenRow; //576 pixels
+
+
+        this.worldWidth = TILE_SIZE * maxLevelCol;
+        this.worldHeight = TILE_SIZE * maxLevelRow + TILE_SIZE; //+48 pixels pour laisser de la place pour l'UI
+
+        this.width = worldWidth;
+        this.height = worldHeight;
+
+
+        //Dimensions du monde
+        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setSize(worldWidth, worldHeight);
+
+
+        this.painter = painter;
+
+        //Camera max X and max Y
+        this.offsetMaxX = worldWidth - screenWidth;
+        this.offsetMaxY = worldHeight - screenHeight;
+
+        this.repaint();
     }
 
     /**

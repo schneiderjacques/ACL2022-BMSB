@@ -54,6 +54,9 @@ public class GraphicalInterface  {
 		buildFrame();
 	}
 
+	/**
+	 * construit le frame
+	 */
 	private void buildFrame() {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -70,7 +73,6 @@ public class GraphicalInterface  {
 		this.frame.setResizable(false);
 	}
 
-
 	/**
 	 * mise a jour du dessin
 	 */
@@ -78,11 +80,19 @@ public class GraphicalInterface  {
 		this.panel.drawGame();
 	}
 
-    public void setGamePainter(Niveau currentLevel) {
-		this.panel = new DrawingPanel(currentLevel, controller.getJeu());
-		buildFrame();
-    }
+	/**
+	 * Méthode permettant de passer à l'affichage du niveau suivant
+	 * @param currentLevel
+	 *  		le niveau courant
+	 */
+    public void nextLevel(Niveau currentLevel) {
+		this.panel.nextLevel(currentLevel);
+	}
 
+	/**
+	 * Getter du panel
+	 * @return le panel
+	 */
 	public DrawingPanel getPanel() {
 		return this.panel;
 	}
