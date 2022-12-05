@@ -566,13 +566,6 @@ public class Niveau implements GamePainter {
         int targetX = a.getX()/Case.TAILLE_CASE;
         int targetY = a.getY()/Case.TAILLE_CASE;
 
-        /**switch (a.getDirection()) {
-            case "h" -> targetY -= 1;
-            case "b" -> targetY += 1;
-            case "g" -> targetX -= 1;
-            case "d" -> targetX += 1;
-        }**/
-
         for (Monstre m : this.monstres) {
             if (m.getX() == targetX && m.getY() == targetY) {
                 return m;
