@@ -14,7 +14,6 @@ public class KeyTest {
     @Test
     public void eventTest() throws FileNotFoundException {
         Jeu jeu = new Jeu();
-        jeu.mute();
         // Création des niveaux
         ArrayList<Niveau> list = new ArrayList<Niveau>();
         list.add(new Niveau(DegatTest.class.getResourceAsStream("/lab_test_3.txt"), jeu.getTour()));

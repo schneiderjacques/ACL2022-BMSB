@@ -13,7 +13,7 @@ public class Sound {
     /**
      * Met en sourdine le jeu à true
      */
-    public boolean mute = false;
+    public boolean mute = true;
 
     public Sound() {
         soundUrl[0] = Sound.class.getResource("/sounds/game/hero/attack.wav");

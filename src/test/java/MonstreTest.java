@@ -45,9 +45,6 @@ public class MonstreTest {
      */
     @Test
     public void testAttackMonstre() throws FileNotFoundException {
-        Jeu jeu = new Jeu();
-        jeu.mute();
-
         Goomba g = new Goomba(1, 1);
         Goomba h = new Goomba(3, 1);
         Heros p = new Heros(2,3,10,1);
