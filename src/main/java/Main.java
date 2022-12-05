@@ -17,8 +17,8 @@ public class Main {
     * @param args : arguments de la ligne de commande
      */
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-
         Jeu jeu = new Jeu();
+        jeu.mute();
 
         // creation du jeu particulier et de son afficheur
         ControllerMouvement controller = new ControllerMouvement(jeu);

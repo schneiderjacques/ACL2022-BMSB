@@ -20,7 +20,7 @@ public class ExitTest {
     @Test
     public void createSortie() {
         Exit s = new Exit(1,1);
-        assertFalse(s.getCollision());
+        assertTrue(s.getCollision());
     }
     @Test
     public void eventTest() throws FileNotFoundException {

@@ -139,7 +139,7 @@ public class Niveau implements GamePainter {
             return this.tour.getHeros().getX() != targetX || this.tour.getHeros().getY() != targetY;
         }
         if (!p.isCollision()) {
-            return targetX != 0 && targetX != this.longueur - 1 && targetY != 0 && targetY != this.largeur - 1;
+            return targetX != 0 && targetY != this.longueur - 1 && targetY != 0 && targetX != this.largeur - 1;
         }
         return false;
     }
@@ -183,7 +183,7 @@ public class Niveau implements GamePainter {
         largeur = Integer.parseInt(dim[1]);
 
         String[] collisionMur =
-                {"27","15","31","55","59","40","1","17","4","14","18","68","13","16","60","3","10","11","12","23","24","25", "36", "37", "38", "0", "26", "28"};
+                {"27","42","15","31","55","59","40","1","17","4","14","18","68","13","16","60","3","2","10","11","12","23","24","25", "36", "37", "38", "0", "26", "28"};
 
         // Création du labyrinthe
         this.niveau = new Case[longueur][largeur];

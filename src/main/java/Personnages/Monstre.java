@@ -1,5 +1,7 @@
 package main.java.Personnages;
 
+import main.java.Engine.Sound;
+import main.java.Principale.Jeu;
 import main.java.Principale.Niveau;
 
 import java.awt.*;
@@ -169,6 +171,8 @@ public abstract class Monstre extends Personnage {
             this.setAnimationAttack(true);
             changeFrame();
             adv.recevoirDegats(getPDA());
+            Jeu.sound.setFile(3);
+            Jeu.sound.play();
             return true;
         }
         return false;

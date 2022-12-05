@@ -1,6 +1,7 @@
 package main.java.Personnages;
 
 import main.java.Engine.Sound;
+import main.java.Principale.Jeu;
 import main.java.Principale.Tools;
 import java.util.Objects;
 import java.util.concurrent.Executors;
@@ -20,7 +21,6 @@ public class Heros extends Personnage {
     // Le personnage peut attaquer
     // Par défaut à true car le heros peut attaquer
     private boolean canAttack = true;
-    private Sound sound = new Sound();
 
     //Point de vie maximal du héros
     private final static double PDV_MAX = 10;
@@ -150,8 +150,8 @@ public class Heros extends Personnage {
                 (adv.getY() == getY()+1 && adv.getX() == getX() && Objects.equals(getLM(), "b"))){
             this.setAnimationAttack(true);
             changeFrame();
-            sound.setFile(0);
-            sound.play();
+            Jeu.sound.setFile(0);
+            Jeu.sound.play();
             adv.recevoirDegats(getPDA());
             this.setCanAttack(false);
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();

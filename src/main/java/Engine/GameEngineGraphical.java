@@ -66,7 +66,7 @@ public class GameEngineGraphical {
 		while (!this.game.isFinished()) {
 			if (this.game.getTour().levelChanged()) {
 				this.game.getTour().setLevelChanged(false);
-				this.gui.setGamePainter(this.game.getTour().getCurrentLevel());
+				this.gui.nextLevel(this.game.getTour().getCurrentLevel());
 			}
 
 			if (this.game.isWon() && this.game.getGameState() != 2) {

@@ -10,11 +10,16 @@ public class Sound {
 
     URL[] soundUrl = new URL[30];
 
+    /**
+     * Met en sourdine le jeu à true
+     */
+    public boolean mute = true;
+
     public Sound() {
         soundUrl[0] = Sound.class.getResource("/sounds/game/hero/attack.wav");
         soundUrl[1] = Sound.class.getResource("/sounds/game/hero/death.wav");
         soundUrl[2] = Sound.class.getResource("/sounds/game/key_pickup.wav");
-
+        soundUrl[3] = Sound.class.getResource("/sounds/game/monster_attack.wav"); 
     }
     public void setFile(int i){
         try {
@@ -26,8 +31,15 @@ public class Sound {
         }
     }
     public void play(){
-        clip.start();
+        if(!mute){
+            clip.start();
+        }
     }
+
+    public void mute() {
+        mute = !mute;
+    }
+
     public void stop(){
         clip.stop();
     }
