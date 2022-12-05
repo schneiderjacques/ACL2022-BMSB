@@ -1,7 +1,10 @@
 package main.java.Controller;
 
+import main.java.Armes.Arme;
+import main.java.Armes.Lance;
 import main.java.Engine.Cmd;
 import main.java.Engine.DrawingPanel;
+import main.java.Personnages.Heros;
 import main.java.Principale.Jeu;
 import main.java.Engine.GameController;
 import main.java.screen.UsernameScreen;
@@ -70,6 +73,25 @@ public class ControllerMouvement implements GameController {
                 case KeyEvent.VK_SPACE -> {
                     this.jeu.getTour().heroAttaque();
                     this.commandeEnCours = Cmd.SPACE;
+                }
+                case KeyEvent.VK_C -> {
+                    Heros h = this.jeu.getTour().getHeros();
+                    Arme a = null;
+                    switch (h.getLM()){
+                        case "h" -> {
+                            a = new Lance(h.getX(), h.getY()-1,10, h.getLM(), this.getJeu().getTour().getCurrentLevel());
+                        }
+                        case "b" -> {
+                            a = new Lance(h.getX(), h.getY()+1,10, h.getLM(), this.getJeu().getTour().getCurrentLevel());
+                        }
+                        case "g" -> {
+                            a = new Lance(h.getX()-1, h.getY(),10, h.getLM(), this.getJeu().getTour().getCurrentLevel());
+                        }
+                        case "d" -> {
+                            a = new Lance(h.getX()+1, h.getY(),10, h.getLM(), this.getJeu().getTour().getCurrentLevel());
+                        }
+                    }
+                    this.jeu.getTour().getCurrentLevel().addArme(a);
                 }
             }
         } else if (this.jeu.getGameState() == 0) {

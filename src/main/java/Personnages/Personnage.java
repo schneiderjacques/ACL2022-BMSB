@@ -342,7 +342,7 @@ public abstract class Personnage implements GamePainter {
      * @return : true si le personnage est mort, false sinon
      */
     public boolean estVivant() {
-        return getPDV() != 0;
+        return getPDV() > 0;
     }
 
     /**

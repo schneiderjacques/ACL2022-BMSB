@@ -217,9 +217,11 @@ public class Tour {
      */
     public void pauseLevel(){
         this.niveaux.get(this.currentLevel-1).pauseMonstres();
+        this.niveaux.get(this.currentLevel-1).pauseArmes();
     }
 
     public void resumeLevel(){
         this.niveaux.get(this.currentLevel-1).demarreNiveau();
+        this.niveaux.get(this.currentLevel-1).resetArme();
     }
 }
