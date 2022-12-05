@@ -3,7 +3,10 @@ package test.java;
 import main.java.Personnages.Boo;
 import main.java.Personnages.Goomba;
 import main.java.Personnages.Heros;
+import main.java.Principale.Jeu;
 import org.junit.*;
+
+import java.io.FileNotFoundException;
 
 import static org.junit.Assert.*;
 
@@ -41,22 +44,23 @@ public class MonstreTest {
      * Test de déplacement du monstre
      */
     @Test
-    public void testAttackMonstre(){
-        /** TODO
+    public void testAttackMonstre() throws FileNotFoundException {
+        Jeu jeu = new Jeu();
+        jeu.mute();
+
         Goomba g = new Goomba(1, 1);
         Goomba h = new Goomba(3, 1);
         Heros p = new Heros(2,3,10,1);
 
         g.move('X', 1);
         assertFalse(g.attaque(h));
-        assertEquals(10, (int)h.getPDV());
+        assertEquals(15, (int)h.getPDV());
         g.move('Y', 1);
         assertTrue(g.attaque(p));
-        assertEquals(9, (int)p.getPDV());
+        assertEquals(8, (int)p.getPDV());
         g.move('X', -1);
         g.move('X', 1);
-        assertEquals(9, (int)p.getPDV());
-         **/
+        assertEquals(8, (int)p.getPDV());
     }
 
     @Test 

@@ -22,8 +22,8 @@ public class TourTest {
         list.add(new Niveau(TourTest.class.getResourceAsStream("/lab_test_1.txt"), t));
 
         t.loadNiveaux(list);
-        assertEquals(10, t.getCurrentLevel().getLongueur());
-        assertEquals(10, t.getCurrentLevel().getLargeur());
+        assertEquals(12, t.getCurrentLevel().getLongueur());
+        assertEquals(25, t.getCurrentLevel().getLargeur());
     }
 
     @Test
@@ -36,8 +36,8 @@ public class TourTest {
         t.loadNiveaux(list);
 
         for (int i = 1; i <= 2; i++) {
-            assertEquals(10, t.getCurrentLevel().getLongueur());
-            assertEquals(10, t.getCurrentLevel().getLargeur());
+            assertEquals(12, t.getCurrentLevel().getLongueur());
+            assertEquals(25, t.getCurrentLevel().getLargeur());
             assertFalse(t.getCurrentLevel().isLastLevel());
             t.nextLevel();
         }

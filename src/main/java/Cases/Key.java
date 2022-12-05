@@ -2,6 +2,7 @@ package main.java.Cases;
 
 import main.java.Engine.DrawingPanel;
 import main.java.Engine.Sound;
+import main.java.Principale.Jeu;
 import main.java.Principale.Tools;
 import main.java.Principale.Tour;
 
@@ -53,9 +54,9 @@ public class Key extends Case{
     public void eventCollider(Tour t) {
         t.getCurrentLevel().setKeyFound(true);
         t.getCurrentLevel().setCaseToSol(this.getX(), this.getY());
-        Sound sound = new Sound();
-        sound.setFile(2);
-        sound.play();
+        Jeu.sound.setFile(2);
+        Jeu.sound.play();
+
     }
     @Override
     public void draw(BufferedImage image) {

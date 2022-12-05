@@ -2,6 +2,7 @@ package main.java.Principale;
 
 import main.java.Engine.Cmd;
 import main.java.Engine.Game;
+import main.java.Engine.Sound;
 import main.java.Main;
 
 import java.io.FileNotFoundException;
@@ -30,6 +31,8 @@ public class Jeu implements Game {
 
     //Tableau des scores
     private ArrayList<String> scores;
+
+    public static Sound sound = new Sound();
 
     //Nom du joueur
     private String namePlayer;
@@ -60,6 +63,13 @@ public class Jeu implements Game {
     @Override
     public void evolve(Cmd commande) {
         //Evolution du jeu
+    }
+
+    /**
+     * Mute le jeu
+     */
+    public void mute() {
+    	sound.mute();
     }
 
     /**

@@ -13,7 +13,6 @@ import static org.junit.Assert.*;
 public class TrappeTest {
     @Test
     public void eventTest() throws FileNotFoundException, InterruptedException {
-        /** TODO
         Jeu jeu = new Jeu();
         // Création des niveaux
         ArrayList<Niveau> list = new ArrayList<Niveau>();
@@ -23,7 +22,7 @@ public class TrappeTest {
         assertEquals(true, h.canMove()); //le joueur peut se déplacer
         jeu.getTour().moveHeros('X', 1);
         assertEquals(false, h.canMove()); //le joueur ne peut plus se déplacer
-        Thread.sleep(3000);
+        Thread.sleep(3001);
         assertEquals(true, h.canMove()); //le joueur peut à nouveau se déplacer**/
     }
 }
