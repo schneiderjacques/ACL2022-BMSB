@@ -1,9 +1,15 @@
 package main.java.Personnages;
 
+import main.java.Armes.Arme;
+import main.java.Armes.Lance;
 import main.java.Engine.Sound;
 import main.java.Principale.Jeu;
 import main.java.Principale.Tools;
+
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -25,13 +31,15 @@ public class Heros extends Personnage {
     //Point de vie maximal du héros
     private final static double PDV_MAX = 10;
 
+    private final HashSet<Arme> armes;
+
     /**
      * Constructeur du héros
      * Le héros commence toujours aux coordonnées (1,1) avec 10 points de vie et 0.5 points d'attaque
      */
     public Heros() {
         super(1, 1, true, 10, 5);
-
+        this.armes = new HashSet<>();
         /**
          * initialisation des images du héros
          */
@@ -50,6 +58,7 @@ public class Heros extends Personnage {
      */
     public Heros(int x, int y, double pdv, double pda) {
         super(x,y,true, pdv,pda);
+        this.armes = new HashSet<>();
     }
 
     /**
@@ -222,5 +231,43 @@ public class Heros extends Personnage {
         this.setPDV(Math.max(this.getPDV() - pv, 0));
         this.setAnimationAttacked(true);
         changeFrame();
+    }
+
+    public void jeterLance(){
+        if(this.armes.size()!=1){
+            Arme a = null;
+            switch(this.getLM()){
+                case "h" -> {
+                    a = new Lance(this.getX(), this.getY()-1,10, this.getLM());
+                }
+                case "b" -> {
+                    a = new Lance(this.getX(), this.getY()+1,10, this.getLM());
+                }
+                case "g" -> {
+                    a = new Lance(this.getX()-1, this.getY(),10, this.getLM());
+                }
+                case "d" -> {
+                    a = new Lance(this.getX()+1, this.getY(),10, this.getLM());
+                }
+            }
+            this.armes.add(a);
+        }
+    }
+
+    public void removeArme(Arme a) {
+        this.armes.remove(a);
+    }
+
+    public Set<Arme> getArmes(){
+        return this.armes;
+    }
+
+    public void moveWeapon(){
+        for (Arme a : this.armes) {
+            if(a.getTTL()==0)this.removeArme(a);
+            else{
+                a.move();
+            }
+        }
     }
 }

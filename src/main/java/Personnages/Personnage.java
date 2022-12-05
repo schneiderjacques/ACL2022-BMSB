@@ -1,12 +1,20 @@
 package main.java.Personnages;
 
+import main.java.Armes.Arme;
+import main.java.Armes.Lance;
 import main.java.Engine.DrawingPanel;
 import main.java.Engine.GamePainter;
 import main.java.Cases.Case;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class représentant un personnage du jeu

@@ -76,22 +76,8 @@ public class ControllerMouvement implements GameController {
                 }
                 case KeyEvent.VK_C -> {
                     Heros h = this.jeu.getTour().getHeros();
-                    Arme a = null;
-                    switch (h.getLM()){
-                        case "h" -> {
-                            a = new Lance(h.getX(), h.getY()-1,10, h.getLM(), this.getJeu().getTour().getCurrentLevel());
-                        }
-                        case "b" -> {
-                            a = new Lance(h.getX(), h.getY()+1,10, h.getLM(), this.getJeu().getTour().getCurrentLevel());
-                        }
-                        case "g" -> {
-                            a = new Lance(h.getX()-1, h.getY(),10, h.getLM(), this.getJeu().getTour().getCurrentLevel());
-                        }
-                        case "d" -> {
-                            a = new Lance(h.getX()+1, h.getY(),10, h.getLM(), this.getJeu().getTour().getCurrentLevel());
-                        }
-                    }
-                    this.jeu.getTour().getCurrentLevel().addArme(a);
+                    h.jeterLance();
+                    this.jeu.getTour().getCurrentLevel().resetWeapon();
                 }
             }
         } else if (this.jeu.getGameState() == 0) {

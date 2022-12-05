@@ -129,7 +129,7 @@ public class Jeu implements Game {
 
     public void pauseJeu() {
         this.tour.getCurrentLevel().pauseMonstres();
-        this.tour.getCurrentLevel().pauseArmes();
+        this.tour.getCurrentLevel().pauseWeapon();
         this.setGameState(4);
     }
 

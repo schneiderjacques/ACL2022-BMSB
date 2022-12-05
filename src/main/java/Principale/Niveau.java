@@ -41,12 +41,9 @@ public class Niveau implements GamePainter {
     //Monstres du niveau
     private final Set<Monstre> monstres;
 
-    //Arme du niveau
-    private final Set<Arme> armes;
-
     private final HashMap<Monstre, ScheduledExecutorService> monstresThreads;
 
-    private final HashMap<Arme, ScheduledExecutorService> armesThreads;
+    private ScheduledExecutorService armesThreads;
 
     //Tour du jeu
     private final Tour tour;
@@ -66,9 +63,8 @@ public class Niveau implements GamePainter {
         this.lastLevel = false;
         this.tour = t;
         this.monstres = new HashSet<>();
-        this.armes = new HashSet<>();
         this.monstresThreads = new HashMap<>();
-        this.armesThreads = new HashMap<>();
+        this.armesThreads = null;
         // Chargement du fichier
         try {
             this.loadFile();
@@ -456,15 +452,14 @@ public class Niveau implements GamePainter {
             }
         }
 
-
+        for (Arme a : this.tour.getHeros().getArmes()) {
+            a.draw(image);
+        }
         for (Monstre m : this.monstres) {
             m.draw(image);
         }
-        for (Arme a : this.armes) {
-            a.draw(image);
-        }
-        this.getTour().getHeros().draw(image);
 
+        this.getTour().getHeros().draw(image);
     }
 
 
@@ -532,49 +527,51 @@ public class Niveau implements GamePainter {
         this.monstresThreads.clear();
     }
 
-    public void addArme(Arme a){
-        if(this.armes.size()<1){
-            this.armes.add(a);
-            Runnable move = a::move;
+    public void removeWeapon(Arme a){
+        this.tour.getHeros().removeArme(a);
+        this.armesThreads.shutdown();
+        this.armesThreads = null;
+    }
+
+    public void pauseWeapon(){
+        this.armesThreads.shutdown();
+        this.armesThreads = null;
+    }
+
+    public void resetWeapon(){
+        if(this.armesThreads==null){
+            Runnable move = this::moveOrAttackWeapon;
             long period = 5L;
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-            this.armesThreads.put(a, executor);
-            executor.scheduleAtFixedRate(move, period, 50, TimeUnit.MILLISECONDS);
+            this.armesThreads = executor;
+            executor.scheduleAtFixedRate(move, period, 30, TimeUnit.MILLISECONDS);
         }
     }
 
-    public void removeArme(Arme a) {
-        this.armes.remove(a);
-        this.armesThreads.get(a).shutdown();
-        this.armesThreads.remove(a);
-    }
-
-    public void pauseArmes() {
-        this.armesThreads.forEach((arme, executor) -> executor.shutdown());
-        this.armesThreads.clear();
-        System.out.println(this.armes);
-    }
-
-    public void resetArme() {
-        for (Arme a : this.armes) {
-            Runnable move = a::move;
-            long period = 5L;
-            ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-            this.armesThreads.put(a, executor);
-            executor.scheduleAtFixedRate(move, period, 50, TimeUnit.MILLISECONDS);
+    public void moveOrAttackWeapon(){
+        for (Arme a: this.tour.getHeros().getArmes()) {
+            Monstre m = this.getAttackWeapon(a);
+            if(m != null){
+                a.attaque(m);
+                if (!m.estVivant()){
+                    this.removeMonstre(m);
+                    this.removeWeapon(a);
+                }
+            }
         }
+        this.tour.getHeros().moveWeapon();
     }
 
-    public Monstre getAttackWeapon(Arme a){
+    private Monstre getAttackWeapon(Arme a){
         int targetX = a.getX()/Case.TAILLE_CASE;
         int targetY = a.getY()/Case.TAILLE_CASE;
 
-        switch (a.getDirection()) {
+        /**switch (a.getDirection()) {
             case "h" -> targetY -= 1;
             case "b" -> targetY += 1;
             case "g" -> targetX -= 1;
             case "d" -> targetX += 1;
-        }
+        }**/
 
         for (Monstre m : this.monstres) {
             if (m.getX() == targetX && m.getY() == targetY) {

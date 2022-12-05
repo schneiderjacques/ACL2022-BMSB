@@ -6,9 +6,11 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Button;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import main.java.Personnages.Goomba;
 import main.java.Personnages.Heros;
+import main.java.Principale.Niveau;
 import org.junit.*;
 
 import main.java.Controller.ControllerMouvement;
@@ -26,36 +28,15 @@ public class PersonnageTest {
      *
      */
     @Test
-    public void testAttaque(){
-        /** TODO
-        Heros p = new Heros(2,2,10,1);
-        Goomba h = new Goomba(2, 0);
-        Goomba d = new Goomba(4, 2);
-        Goomba b = new Goomba(2, 4);
-        Goomba g = new Goomba(0, 2);
-
-        p.move('X', 1);
-        p.attaque(d);
-        assertEquals("Le héro s'est deplacé à droite.", 3, p.getX());
-        assertEquals("Le monstre a perdu de points de vie.", 14, (int)d.getPDV());
-        p.move('X', -1);
-        p.move('X', -1);
-        p.attaque(g);
-        assertEquals("Le monstre a perdu de points de vie.", 14, (int)g.getPDV());
-        p.move('X', 1);
-        p.move('Y', -1);
-        p.attaque(h);
-        p.attaque(b);
-        assertEquals("Le monstre a perdu de points de vie.", 14, (int)h.getPDV());
-        assertEquals("Le monstre n'a pas perdu de points de vie.", 15, (int)b.getPDV());
-        p.move('Y', 1);
-        p.move('Y', 1);
-        p.attaque(b);
-        assertEquals("Le monstre a perdu de points de vie.", 14, (int)b.getPDV());
-        p.move('X', 1);
-        p.move('Y', -1);
-        p.attaque(d);
-        assertEquals("Le monstre n'a perdu de points de vie.", 14, (int)d.getPDV());**/
+    public void testAttaque() throws FileNotFoundException {
+        Jeu jeu = new Jeu();
+        ArrayList<Niveau> list = new ArrayList<Niveau>();
+        list.add(new Niveau(DegatTest.class.getResourceAsStream("/lab_test_1.txt"), jeu.getTour()));
+        jeu.getTour().loadNiveaux(list);
+        Heros h = jeu.getTour().getHeros();
+        //h.move('X', 1);
+        //h.move('X', 1);
+        //jeu.getTour().heroAttaque();
     }
     /**
      * Test de déplacement du personnage

@@ -20,8 +20,8 @@ public class Lance extends Arme{
      * @param pda : points d'attaque
      * @param dir : direction
      */
-    public Lance(int x, int y, double pda, String dir, Niveau n) {
-        super(x, y, pda, dir, n);
+    public Lance(int x, int y, double pda, String dir) {
+        super(x, y, pda, dir);
         image = Tools.getImageByName("/images/game/weapon/spear-"+dir);
 
     }

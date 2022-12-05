@@ -4,6 +4,7 @@ import main.java.Engine.DrawingPanel;
 import main.java.Engine.GamePainter;
 import main.java.Cases.Case;
 import main.java.Personnages.Monstre;
+import main.java.Principale.Jeu;
 import main.java.Principale.Niveau;
 import main.java.Principale.Tools;
 
@@ -30,9 +31,9 @@ public abstract class Arme implements GamePainter {
     //Direction de l'arme
     private String direction;
 
-    private final Niveau niveau;
-
     private int ttl = 20;
+
+    private boolean canAttack = true;
 
     /**
      * Constructeur du personnage
@@ -42,13 +43,12 @@ public abstract class Arme implements GamePainter {
      * @param pda : points d'attaque
      * @param dir : direction
      */
-    public Arme(int x, int y, double pda, String dir, Niveau niv) {
+    public Arme(int x, int y, double pda, String dir) {
         //Initialisation des attributs
         this.x = x*Case.TAILLE_CASE;
         this.y = y*Case.TAILLE_CASE;
         this.pda = pda;
         this.direction = dir;
-        this.niveau = niv;
     }
 
     /**
@@ -62,37 +62,30 @@ public abstract class Arme implements GamePainter {
      * Méthode permettant de déplacer l'arme
      */
     public void move() {
-        Monstre m = this.niveau.getAttackWeapon(this);
-        if(m != null){
-            attaque(m);
-            this.niveau.removeArme(this);
-        } else {
-            if(this.ttl!=0){
-                switch (this.direction){
-                    case "h" -> {
-                        this.y -= 12;
-                    }
-                    case "b" -> {
-                        this.y += 12;
-                    }
-                    case "g" -> {
-                        this.x -= 12;
-                    }
-                    case "d" -> {
-                        this.x += 12;
-                    }
-                }
-                this.ttl--;
-            } else {
-                this.niveau.removeArme(this);
+        switch (this.direction){
+            case "h" -> {
+                this.y -= 12;
+            }
+            case "b" -> {
+                this.y += 12;
+            }
+            case "g" -> {
+                this.x -= 12;
+            }
+            case "d" -> {
+                this.x += 12;
             }
         }
+        this.ttl--;
     }
 
     public void attaque(Monstre adv) {
-        adv.recevoirDegats(getPDA());
-        if (!adv.estVivant()){
-            this.niveau.removeMonstre(adv);
+        if(canAttack){
+            adv.recevoirDegats(getPDA());
+            this.ttl = 0;
+            canAttack = false;
+            Jeu.sound.setFile(0);
+            Jeu.sound.play();
         }
     }
 
@@ -130,6 +123,15 @@ public abstract class Arme implements GamePainter {
      */
     public String getDirection() {
         return direction;
+    }
+
+    /**
+     * getteur de la ttl de l'arme
+     *
+     * @return : ttl
+     */
+    public int getTTL() {
+        return ttl;
     }
 
     /**
