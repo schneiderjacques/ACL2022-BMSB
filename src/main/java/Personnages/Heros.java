@@ -61,6 +61,14 @@ public class Heros extends Personnage {
         this.armes = new HashSet<>();
     }
 
+    @Override
+    public void setLastMove(String lm) {
+        if (this.canMove) {
+            super.setLastMove(lm);
+            changeFrame();
+        }
+    }
+
     /**
      * Méthode permettant de changer les frames du monstre
      */
@@ -163,9 +171,12 @@ public class Heros extends Personnage {
             Jeu.sound.play();
             adv.recevoirDegats(getPDA());
             this.setCanAttack(false);
+            this.setCanMove(false);
             ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
             Runnable delayAttaque = () -> {this.setCanAttack(true);executor.shutdown();};
+            Runnable delayMove = () -> {this.setCanMove(true);};
             executor.scheduleAtFixedRate(delayAttaque, 1000, 100, TimeUnit.MILLISECONDS);
+            executor.scheduleAtFixedRate(delayMove, 500, 100, TimeUnit.MILLISECONDS);
             return true;
         }
         return false;
