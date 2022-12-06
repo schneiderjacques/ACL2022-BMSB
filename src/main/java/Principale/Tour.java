@@ -40,7 +40,7 @@ public class Tour {
 
         // Création des niveaux
         ArrayList<Niveau> list = new ArrayList<>();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 4; i++) {
             list.add(new Niveau(Main.class.getResourceAsStream("/level_"+ i +".txt"), this));
         }
 
