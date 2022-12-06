@@ -1,6 +1,7 @@
 package main.java.screen;
 
 import main.java.Engine.DrawingPanel;
+import main.java.Principale.Tools;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,6 +12,8 @@ public class UIScreen {
 
     private DrawingPanel dp;
     private BufferedImage keyImage;
+
+    private BufferedImage keyImageFound;
     private BufferedImage healthImage;
     private BufferedImage healthDecorationImage;
     private boolean imageChanged = false;
@@ -23,9 +26,10 @@ public class UIScreen {
      * */
     public UIScreen(DrawingPanel drawingPanel) {
         this.dp = drawingPanel;
-        keyImage = getImage("key_not_found");
-        healthImage = getImage("health_bar");
-        healthDecorationImage = getImage("health_bar_decoration");
+        keyImage = Tools.getImageByName("/images/ui/key_not_found");
+        keyImageFound = Tools.getImageByName("/images/ui/key_found");
+        healthImage = Tools.getImageByName("/images/ui/health_bar");
+        healthDecorationImage = Tools.getImageByName("/images/ui/health_bar_decoration");
         double divider = (this.dp.getJeu().getTour().getHeros().getPDV() / 10) * 100; // 10 max / 10      //10 max / 5
         this.healthBarWidth = (int) (divider * this.maxHealthWidth / 100);
 
@@ -52,10 +56,10 @@ public class UIScreen {
 
         //Si la clé est trouvée on change l'image affichée
         if (dp.getJeu().getTour().getCurrentLevel().isKeyFound() && !imageChanged){
-            changeImage();
+            g2.drawImage(keyImageFound, this.dp.getCamX() + (dp.getScreenWidth()-DrawingPanel.TILE_SIZE), this.dp.getCamY(), DrawingPanel.TILE_SIZE,DrawingPanel.TILE_SIZE , null);
+        } else {
+            g2.drawImage(keyImage, this.dp.getCamX() + (dp.getScreenWidth()-DrawingPanel.TILE_SIZE), this.dp.getCamY(), DrawingPanel.TILE_SIZE,DrawingPanel.TILE_SIZE , null);
         }
-        //affichage du nombre de clés
-        g2.drawImage(keyImage, this.dp.getCamX() + (dp.getScreenWidth()-DrawingPanel.TILE_SIZE), this.dp.getCamY(), DrawingPanel.TILE_SIZE,DrawingPanel.TILE_SIZE , null);
 
 
 
@@ -67,26 +71,5 @@ public class UIScreen {
         //affichage de la barre de vie
         g2.drawImage(healthDecorationImage, this.dp.getCamX() + dp.getScreenWidth()/2 - (60), this.dp.getCamY() + 5, 150,42 , null);
         g2.drawImage(healthImage, this.dp.getCamX() + dp.getScreenWidth()/2+20 - (maxHealthWidth/2-12), this.dp.getCamY() + 5, healthBarWidth,42 , null);
-    }
-    /**
-     * Change l'image de la clé lorsque la clé est trouvée
-     * */
-    public void changeImage(){
-        keyImage = getImage("key_found");
-        this.imageChanged = true;
-    }
-    /**
-     * Récupère une image en fonction de son nom dans le dossier main.java.resources
-     * @param name Nom de l'image
-     * @return BufferedImage
-     * */
-    public BufferedImage getImage(String name){
-        BufferedImage image = new BufferedImage(DrawingPanel.TILE_SIZE,DrawingPanel.TILE_SIZE,BufferedImage.TYPE_INT_ARGB);
-        try {
-            image = ImageIO.read(UIScreen.class.getResource("/images/ui/"+name+".png"));
-        } catch (IOException e){
-            System.out.println("Image not found");
-        }
-        return image;
     }
 }
