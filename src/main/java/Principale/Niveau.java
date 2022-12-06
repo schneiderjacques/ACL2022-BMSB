@@ -536,8 +536,10 @@ public class Niveau implements GamePainter {
     }
 
     public void pauseWeapon(){
-        this.armesThreads.shutdown();
-        this.armesThreads = null;
+        if(this.armesThreads != null){
+            this.armesThreads.shutdown();
+            this.armesThreads = null;
+        }
     }
 
     public void resetWeapon(){
