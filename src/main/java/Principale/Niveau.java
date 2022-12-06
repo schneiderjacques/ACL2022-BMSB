@@ -379,7 +379,9 @@ public class Niveau implements GamePainter {
     }
 
 
-
+    public Set<Monstre> getMonstres(){
+        return this.monstres;
+    }
 
 
     /**

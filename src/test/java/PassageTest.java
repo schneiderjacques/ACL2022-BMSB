@@ -14,21 +14,18 @@ public class PassageTest {
 
     @Test
     public void eventTest() throws FileNotFoundException {
-        /** TODO
         Jeu jeu = new Jeu();
         // Création des niveaux
         ArrayList<Niveau> list = new ArrayList<Niveau>();
-        list.add(new Niveau(DegatTest.class.getResourceAsStream("/lab_test_3.txt"), jeu.getTour()));
+        list.add(new Niveau(DegatTest.class.getResourceAsStream("/lab_test_7.txt"), jeu.getTour()));
         jeu.getTour().loadNiveaux(list);
+        jeu.demarreJeu();
         Heros h = jeu.getTour().getHeros();
-        h.moveX(2);
-        //Ouverture du passage
+        assertTrue(jeu.getTour().getCurrentLevel().getCaseObject(3,1).getCollision());
         jeu.getTour().moveHeros('X', 1);
-        assertFalse(jeu.getTour().getCurrentLevel().getCase(5, 1).getCollision());
-        //Sur le passage
+        assertFalse(jeu.getTour().getCurrentLevel().getCaseObject(3,1).getCollision());
         jeu.getTour().moveHeros('X', 1);
-        //Sors de passage, il se ferme
         jeu.getTour().moveHeros('X', 1);
-        assertTrue(jeu.getTour().getCurrentLevel().getCase(5, 1).getCollision());**/
+        assertTrue(jeu.getTour().getCurrentLevel().getCaseObject(3,1).getCollision());
     }
 }

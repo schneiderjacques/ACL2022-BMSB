@@ -1,8 +1,5 @@
 package test.java;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.awt.Button;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
@@ -10,12 +7,15 @@ import java.util.ArrayList;
 
 import main.java.Personnages.Goomba;
 import main.java.Personnages.Heros;
+import main.java.Personnages.Monstre;
 import main.java.Principale.Niveau;
 import org.junit.*;
 
 import main.java.Controller.ControllerMouvement;
 
 import main.java.Principale.Jeu;
+
+import static org.junit.Assert.*;
 
 /**
  * Class de test du labyrinthe
@@ -30,13 +30,27 @@ public class PersonnageTest {
     @Test
     public void testAttaque() throws FileNotFoundException {
         Jeu jeu = new Jeu();
+        // Création des niveaux
         ArrayList<Niveau> list = new ArrayList<Niveau>();
-        list.add(new Niveau(DegatTest.class.getResourceAsStream("/lab_test_1.txt"), jeu.getTour()));
+        list.add(new Niveau(DegatTest.class.getResourceAsStream("/lab_test_6.txt"), jeu.getTour()));
         jeu.getTour().loadNiveaux(list);
+        jeu.demarreJeu();
         Heros h = jeu.getTour().getHeros();
-        //h.move('X', 1);
-        //h.move('X', 1);
-        //jeu.getTour().heroAttaque();
+        h.moveY( 5);
+        h.move('X', 1);
+        h.move('X', 1);
+        Monstre m = jeu.getTour().getCurrentLevel().getMonsterInFront(h);
+        assertTrue(jeu.getTour().getCurrentLevel().getMonstres().contains(m));
+        h.setLm("b");
+        //pas de monstre devant lui
+        assertEquals(jeu.getTour().getCurrentLevel().getMonsterInFront(h), null);
+        h.setLm("d");
+        assertTrue(jeu.getTour().getCurrentLevel().getMonstres().contains(m));
+        h.attaque(m);
+        assertEquals((int)m.getPDV(), (int)5);
+        h.setCanAttack(true);
+        h.attaque(m);
+        assertEquals((int)m.getPDV(), (int)0);
     }
     /**
      * Test de déplacement du personnage
@@ -66,14 +80,16 @@ public class PersonnageTest {
      */
     @Test
     public void movePlayerInWall() throws FileNotFoundException {
-        /** TODO
         Jeu jeu = new Jeu();
-        ControllerMouvement cm = new ControllerMouvement(jeu);
-        Button a = new Button("click");
-        KeyEvent key = new KeyEvent(a, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
-        cm.keyPressed(key);
-        Assert.assertEquals(jeu.getTour().getHeros().getY(), 1); //Le héros doit rester en position 1 - 1 car au dessus de lui se trouve un mur
-        Assert.assertNotEquals(jeu.getTour().getHeros().getY(), 0);**/
+        // Création des niveaux
+        ArrayList<Niveau> list = new ArrayList<Niveau>();
+        list.add(new Niveau(DegatTest.class.getResourceAsStream("/lab_test_6.txt"), jeu.getTour()));
+        jeu.getTour().loadNiveaux(list);
+        jeu.demarreJeu();
+        Heros h = jeu.getTour().getHeros();
+        assertEquals(1, h.getX());
+        jeu.getTour().moveHeros('X', -1);
+        assertEquals(1, h.getX());
     }
 
 }

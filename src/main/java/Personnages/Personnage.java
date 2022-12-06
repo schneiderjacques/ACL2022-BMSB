@@ -33,7 +33,7 @@ public abstract class Personnage implements GamePainter {
     private double pdv;
 
     //Force du personnage
-    private final double pda;
+    private double pda;
 
     //Dernier mouvement du héros 
     private String lm;
@@ -443,4 +443,6 @@ public abstract class Personnage implements GamePainter {
     public void setY(int y) {
         this.y = y;
     }
+
+    public void setPda(double p){this.pda = p;}
 }
