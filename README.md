@@ -12,6 +12,11 @@ Réalisation d'un jeu mono-utilisateur.
 | Arthur MOITRIER   |
 | Jacques SCHNEIDER |
 
+# Commandes du jeu
+- Flèches directionnelles pour déplacer 
+- `C` pour lancer une lance
+- `echap` poour mettre le jeu en pose
+- `enter` pour sélectionner une option du menu
 # Exécution
 
 ## Prérequis
@@ -20,7 +25,7 @@ Nécessite Java 17.
 
 ## AutoBuild
 
-Pour générer un fichier jar exécutable, il suffit de lancer la commande suivante : \
+Pour générer un fichier jar exécutable, il suffit de lancer la commande suivante :
 
 `mvn clean package`
 
