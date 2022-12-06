@@ -73,6 +73,7 @@ public class Tour {
             this.currentLevel++;
             this.levelChanged = true;
             this.heros.reset();
+            this.getCurrentLevel().pauseWeapon();
             this.getCurrentLevel().demarreNiveau();
         } else {
             this.fini = true;

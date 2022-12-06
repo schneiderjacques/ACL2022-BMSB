@@ -553,17 +553,21 @@ public class Niveau implements GamePainter {
     }
 
     public void moveOrAttackWeapon(){
-        for (Arme a: this.tour.getHeros().getArmes()) {
-            Monstre m = this.getAttackWeapon(a);
-            if(m != null){
-                a.attaque(m);
-                if (!m.estVivant()){
-                    this.removeMonstre(m);
-                    this.removeWeapon(a);
+        if(this.tour.getHeros().getArmes().size()==0){
+            this.pauseWeapon();
+        }else{
+            for (Arme a: this.tour.getHeros().getArmes()) {
+                Monstre m = this.getAttackWeapon(a);
+                if(m != null){
+                    a.attaque(m);
+                    if (!m.estVivant()){
+                        this.removeMonstre(m);
+                        this.removeWeapon(a);
+                    }
                 }
             }
+            this.tour.getHeros().moveWeapon();
         }
-        this.tour.getHeros().moveWeapon();
     }
 
     private Monstre getAttackWeapon(Arme a){
